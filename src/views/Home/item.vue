@@ -66,7 +66,7 @@
 			img : function () {
 				if (this.data.photos.length > 0) {
 					return this.data.photos[0];
-				}else return '';
+				}else return '../static/imgs/house.jpg';
 				
 			}
 		},
