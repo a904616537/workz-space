@@ -2,7 +2,7 @@
 	<div class="card">
 		<div class="card-title">
 			<div class="card-logo">
-				<div class="logo-style" :style="'background-image: url('+data.logo+')'"></div>
+				<div class="logo-style" :style="'background-image: url('+logo+')'"></div>
 			</div>
 			<div class="card-infor">
 				<div class="infor-title">{{data.name}}</div>
@@ -67,7 +67,11 @@
 				if (this.data.photos.length > 0) {
 					return this.data.photos[0];
 				}else return '../static/imgs/house.jpg';
-				
+			},
+			logo : function() {
+				if (this.data.logo == '') {
+					return '../static/imgs/logo.jpg';
+				}else return data.logo
 			}
 		},
 		methods: {
