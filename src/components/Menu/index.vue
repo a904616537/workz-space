@@ -1,11 +1,9 @@
 <template>
 	<div class="footer-menu">
-		<div v-for="(item, index) in tabs" :key="index" :class="{'active' : index == 0}">
-			<div class="select">
-        		<!-- <img :src="current == index?item.selectedIconPath:item.iconPath"> -->
-        		<i class="el-icon-house icon-style"></i>
+		<div v-for="(item, index) in tabs" :key="index" class="select" :class="{'active' : index == current}" @click="current = index">
+				<i v-if="index == current" class="point"></i>
+        		<img :src="current == index?item.selectedIconPath:item.iconPath" class="icon-style">
         		<span><strong>{{item.text}}</strong></span>
-        	</div>
 		</div>
 	</div>
 </template>
@@ -15,7 +13,7 @@
 		name : 'footer-menu',
 		data() {
 			return {
-
+				current : 0
 			}
 		},
 		methods: {
@@ -27,26 +25,26 @@
 		computed: {
 			tabs() {
 	        	return [{
-		            pagePath         : "/",
-		            text             : "Home",
-		            // iconPath         : "/img/warehouse_def.png",
-		            // selectedIconPath : "/img/warehouse.png"
+					pagePath         : "/",
+					text             : "Home",
+					iconPath         : "/static/imgs/home.png",
+					selectedIconPath : "/static/imgs/home_select.png"
 		        },{
-		            pagePath         : "profile",
-		            text             : "Profile",
-		            // iconPath         : "/img/home_def.png",
-		            // selectedIconPath : "/img/home.png"
+					pagePath : "profile",
+					text     : "Profile",
+		            iconPath         : "/static/imgs/user.png",
+		            selectedIconPath : "/static/imgs/user_select.png"
 		        },{
 					pagePath         : "wishlist",
 					text             : "Wishlist",
-					// iconPath         : "/img/cart_def.png",
-					// selectedIconPath : "/img/cart.png",
+					iconPath         : "/static/imgs/wishlist.png",
+					selectedIconPath : "/static/imgs/wishlist_select.png",
 					// badge            : this.badge
 		        },{
 		            pagePath         : "more",
 		            text             : "More",
-		            // iconPath         : "/img/me_def.png",
-		            // selectedIconPath : "/img/me.png"
+		            iconPath         : "/static/imgs/more.png",
+		            selectedIconPath : "/static/imgs/more_select.png"
 		        }];
 	        }
 		},
@@ -68,13 +66,31 @@
 		justify-content  : space-around;
 		font-size        : 12px;
 		color            : #9eabb2;
+		border-radius: 30px;
+		.point {
+			width: 4px;
+			height: 4px;
+			border-radius: 50%;
+			background-color: #00aeef;
+			margin-bottom: 5px;
+		}
+		.select {
+			flex : 1;
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			flex-direction: column;
+		}
 		.icon-style{
-			font-size     : 30px;
+			width         :      30px;
+			height        : 30px;
 			display       : block;
 			margin-bottom : 5px;
 		}
 		.active{
 			color: #00aeef;
+			.icon-style{
+			}
 		}
 	}
 </style>
