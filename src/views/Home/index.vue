@@ -74,8 +74,8 @@
 		width: 100%;
 	}
 	.video-js .vjs-big-play-button {
-		top: auto;
-		bottom : 30px;
-		left: 10px;
+		top: auto !important;
+		bottom : 30px !important;
+		left: 10px !important;
 	}
 </style>
