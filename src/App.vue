@@ -22,5 +22,8 @@ export default {
   color: $font-color;
   background-color : $default;
   padding-bottom: 80px;
+  max-width: 720px;
+  margin-left: auto;
+margin-right: auto;
 }
 </style>

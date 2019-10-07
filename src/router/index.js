@@ -13,7 +13,13 @@ const router = new Router({
 	        meta: {
 	            title: 'Workz space'
 	        },
-  		}
+  		},{
+        path      : '/workspace',
+          component : (resolve) => require(['@/views/Workspace/index.vue'], resolve),
+          meta: {
+              title: 'Workz space'
+          },
+      }
   	]
 });
 

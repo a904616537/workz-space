@@ -4,6 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import { Button, Dropdown, DropdownMenu, DropdownItem, Icon, Input } from 'element-ui'
+import VueVideoPlayer from 'vue-video-player'
+import VueCarousel from 'vue-carousel';
+ 
+import 'video.js/dist/video-js.css'
+
 import './assets/base.scss'
 import './assets/style.scss'
 import Menu from '@/components/Menu'
@@ -14,8 +19,9 @@ Vue.use(DropdownMenu);
 Vue.use(DropdownItem);
 Vue.use(Icon);
 Vue.use(Input);
-
+Vue.use(VueVideoPlayer)
 Vue.component('v-menu', Menu);
+Vue.use(VueCarousel);
 
 Vue.config.productionTip = false
 

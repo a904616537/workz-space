@@ -6,11 +6,11 @@
 				<el-button type="primary" >
 				    Place Name<i class="el-icon-caret-bottom"></i>
 				</el-button>
-				<!-- <el-dropdown-menu slot="dropdown">
+				<el-dropdown-menu slot="dropdown">
 					<el-dropdown-item>Place Name One</el-dropdown-item>
 					<el-dropdown-item>Place Name Two</el-dropdown-item>
 					<el-dropdown-item>Place Name Three</el-dropdown-item>
-				</el-dropdown-menu> -->
+				</el-dropdown-menu>
 			</el-dropdown>
 		</div>
 		<v-item v-for="(item, index) in workspaces" :key="index" :data="item"/>
@@ -69,5 +69,13 @@
 			float               : right;
 			margin-left         : -17px;
 		}
+	}
+	.vjs-custom-skin > .video-js {
+		width: 100%;
+	}
+	.video-js .vjs-big-play-button {
+		top: auto;
+		bottom : 30px;
+		left: 10px;
 	}
 </style>

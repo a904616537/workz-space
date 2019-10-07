@@ -66,7 +66,11 @@
 		justify-content  : space-around;
 		font-size        : 12px;
 		color            : #9eabb2;
-		border-radius: 30px;
+		border-top-left-radius: 30px;
+		border-top-right-radius: 30px;
+		max-width: 720px;
+		margin-left: auto;
+		margin-right: auto;
 		.point {
 			width: 4px;
 			height: 4px;

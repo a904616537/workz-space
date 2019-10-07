@@ -34,8 +34,20 @@
 		margin-left : 70px;
 	}
 }
+.card {
+	.desc {
+		text-align: left;
+	}
+}
 .card-content{
 	padding : 10px 20px;
+	h3 {
+		text-align: left;
+	}
+	.views{
+		color      : #c5ccd0;
+		margin-top : 20px;
+	}
 	.icon-style{
 		font-size    : 30px;
 		margin-right : 10px;
@@ -50,6 +62,10 @@
 		border-left   : 15px solid #00aeef;
 		border-right  : 15px solid #00aeef;
 		border-bottom : 15px solid transparent;
+		&.red {
+			border-left   : 15px solid #D4122B;
+			border-right  : 15px solid #D4122B;
+		}
 	}
 	.focus{
 		margin    : 10px 0 20px;
@@ -82,6 +98,63 @@
 			font-weight : bold;
 		}
 	}
+	.item {
+		display: flex;
+		flex-direction: column;
+		padding: 0 30px;
+		h2 {
+			text-align: left;
+		}
+		.flag {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			span {
+				margin-right: 30px;
+			}
+			label {
+				font-size: 20px;
+				font-weight: bold;
+				margin-right: 10px;
+				color: #fff;
+			}
+			.triangle {
+				width         : 0px;
+				height        : 0px;
+				border-left   : 20px solid transparent;
+				border-right  : 20px solid #fff;
+				border-top: 20px solid transparent;
+				border-bottom : 20px solid transparent;
+			}
+			.ribbont {
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+				width  : 265px;
+				height : 40px;
+				background: -webkit-linear-gradient(to right,#00aeef, #139CE6); /* Safari 5.1 - 6.0 */
+				background: -o-linear-gradient(to right,#00aeef, #139CE6); /* Opera 11.1 - 12.0 */
+				background: -moz-linear-gradient(to right,#00aeef, #139CE6); /* Firefox 3.6 - 15 */
+				background: linear-gradient(to right,#00aeef, #139CE6);
+				border-top-left-radius: 3px;
+				border-bottom-left-radius: 3px;
+				color: #fff;
+				position: relative;
+				&.red {
+					background: -webkit-linear-gradient(to right,#D4122B, #B9000D); /* Safari 5.1 - 6.0 */
+					background: -o-linear-gradient(to right,#D4122B, #B9000D); /* Opera 11.1 - 12.0 */
+					background: -moz-linear-gradient(to right,#D4122B, #B9000D); /* Firefox 3.6 - 15 */
+					background: linear-gradient(to right,#D4122B, #B9000D);
+				}
+
+				.content {
+					position: absolute;
+					top: 7px;
+					left: 10px;
+				}
+			}
+		}
+	}
 }
 .comment{
 	padding    : 10px 0;
@@ -105,4 +178,36 @@
 		color      : #c5ccd0;
 		margin-top : 20px;
 	}
+}
+.reviews {
+	margin-top: 20px;
+	padding: 20px 0;
+	border-top: 1px solid #eee;
+	display: flex;
+	flex-direction: row;
+
+	.avatar{
+		width               : 40px;
+		height              : 40px;
+		background-color    : #f4f4f4;
+		border-radius       : 20px;
+		background-position : center;
+		background-size     : cover;
+	}
+	.content {
+		margin-left: 10px;
+		h4 {
+			display: flex;
+			margin-block-start: 0;
+			margin-block-end: 0;
+		}
+		p {
+			font-size: 12px;
+		}
+	}
+
+}
+.map {
+	height: 300px;
+	background-color: #eee;
 }
