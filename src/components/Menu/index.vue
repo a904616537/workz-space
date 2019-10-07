@@ -57,7 +57,6 @@
 <style lang="scss">
 	.footer-menu{
 		background-color : #fff;
-		padding          : 10px 0;
 		position         : fixed;
 		bottom           : 0;
 		left             : 0;
@@ -86,10 +85,9 @@
 			flex-direction: column;
 		}
 		.icon-style{
-			width         :      30px;
-			height        : 30px;
+			width: 25px;
+    		height: 25px;
 			display       : block;
-			margin-bottom : 5px;
 		}
 		.active{
 			color: #00aeef;

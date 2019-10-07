@@ -99,13 +99,15 @@ import {submitComment} from '../../api';
 				return {
 					height: '340',
 					autoplay: false,
+					aspectRatio : '16:9',
 					sources: [{
 						type: 'video/mp4',
 						src: this.data.video,
 						// type: 'video/x-flv',
       //       			src: 'http://fms.cntv.lxdns.com/live/flv/channel96.flv'
 					}],
-					language: 'zh-CN'
+					language: 'zh-CN',
+					poster: this.img
 				}
 			}
 		},

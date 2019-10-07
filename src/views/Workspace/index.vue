@@ -57,7 +57,7 @@
 		<div class="card">
 			<div class="card-content">
 				<h3>Reviews</h3>
-				<div class="dialog">
+				<div class="dialog" style="margin-bottom: 20px;">
 					<div class="head-img" style="background-image: url('../static/imgs/user.jpg')"></div>
 					<el-input v-model="input" placeholder="Write Your Comment"></el-input>
 					<span @click="submit">Post</span>
