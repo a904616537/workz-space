@@ -26,8 +26,8 @@
 					<div class="ribbon red"></div>
 				</div>
 			</div>
-			<div class="map">
-			</div>
+			<!-- <div class="map">
+			</div> -->
 			<div class="card-content desc">
 				<h3>Description</h3>
 				<p>

@@ -14,6 +14,7 @@
 				class="vjs-custom-skin"
 				ref="videoPlayer"
 				:options="playerOptions"
+				:playsinline="true"
 				customEventName="changed">
           	</video-player>
 		</div>
