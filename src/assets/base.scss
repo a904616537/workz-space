@@ -54,3 +54,13 @@ body{
 	}
 	
 }
+
+
+// public-btn
+.public-btn {
+	background-color : $main-color;
+	color            : $font-white;
+	border-radius    : 15px;
+	box-shadow       : 0 0 5px rgba(197,204,208,0.3);
+	padding          : 0 90px;
+}

@@ -211,3 +211,208 @@
 	height: 300px;
 	background-color: #eee;
 }
+
+
+
+// Profile
+.profile {
+	background-color : #f4f4f4;
+	position         : absolute;
+	left             : 0;
+	right            : 0;
+	height           : 100%;
+	.inner {
+		background-color : #fff;
+		border-radius    : 20px;
+		margin-top       : 10px;
+		box-shadow       : 0 5px 10px rgba(0,0,0,.1);
+		overflow         : hidden;
+	}
+	.header {
+		background-color : #333;
+		margin-bottom    : 70px;
+		height           : 140px;
+		position         : relative;
+	}
+	.headImg {
+		width            : 84px;
+		height           : 84px;
+		background-color : #f2f2f2;
+		border-radius    : 50%;
+		margin           : 0 auto;
+		position         : absolute;
+		bottom           : -40px;
+		left             : 0;
+		right            : 0;
+		z-index          : 9;
+		box-shadow       : 0 5px 5px rgba(0, 0, 0, 0.1);
+	}
+	.edit-icon {
+		background-color : #00aeef;
+		height           : 16px;
+		padding          : 3px;
+		border           : 3px solid #fff;
+		z-index          : 9;
+		border-radius    : 50px;
+		position         : absolute;
+		bottom           : -40px;
+		margin-left      : 16px;
+	}
+	.icon-style {
+		height       : 24px;
+		width        : 24px;
+		margin-right : 10px;
+	}
+	.default-icon {
+		opacity : 0;
+	}
+	.hr-style {
+		background-color : #E4E7ED;
+		height           : 1px;
+		border           : none;
+		margin: {
+			left  : 20px;
+			right : 20px;
+		}
+	}
+	.form-box {
+		padding : 10px 20px;
+		.item {
+			display       : flex;
+			align-items   : center;
+			margin-bottom : 14px;
+		}
+		.el-input__inner {
+			border-radius : 25px;
+		}
+	}
+	.footer {
+		font-weight     : bold;
+		display         : flex;
+		justify-content : space-around;
+		line-height     : 50px;
+		margin-top      : 50px;
+		padding         : 0 8px;
+		.btn-style {
+			background-color : #fff;
+			font-size        : 30px;
+			padding          : 0 20px;
+			border-radius    : 15px;
+			box-shadow       : 0 0 5px rgba(197,204,208,0.3);
+		}
+	}
+}
+
+
+// wish-page
+.wish-page {
+	background-color : #f4f4f4;
+	position         : absolute;
+	left             : 0;
+	right            : 0;
+	height           : 100%;
+	.inner {
+		padding : 10px;
+	}
+	.card {
+		margin-bottom : 10px;
+		box-shadow    : 0 5px 10px rgba(0,0,0,.1);
+	}
+	.card-infor {
+		flex : 1;
+		.span-style {
+			float : right;
+			color : #00aeef;
+		}
+		.tips {
+			color : #C5CCD0;
+		}
+		.desc {
+			color       : #C5CCD0;
+			line-height : 24px;
+		}
+	}
+	.desc-icon {
+		height         : 14px;
+		opacity        : 0.4;
+		vertical-align : middle;
+		margin-right   : 10px;
+	}
+	.del-icon {
+		color       : #F56C6C;
+		font-size   : 30px;
+		font-weight : bold;
+		line-height : 50px;
+	}
+	.footer {
+		line-height : 50px;
+		font-weight : bold;
+		margin      : 0 20px;
+		position    : fixed;
+		bottom      : 80px;
+	}
+}
+
+
+// follow
+.follow {
+	position         : absolute;
+	left             : 0;
+	right            : 0;
+	height           : 100%;
+	background-color : #f4f4f4;
+	.inner {
+		margin : 10px;
+	}
+	.card {
+		text-align  : center;
+		padding     : 10px 0 20px;
+		font-weight : bold;
+	}
+	.qr-style {
+		width            : 100px;
+		height           : 100px;
+		background-color : #f4f4f4;
+		margin           : 20px 0;
+	}
+	.link-style {
+		text-decoration : none;
+		color           : #00aeef;
+	}
+}
+
+
+// contact-page
+.contact-page {
+	position         : absolute;
+	left             : 0;
+	right            : 0;
+	height           : 100%;
+	background-color : #f4f4f4;
+	.box {
+		margin: 10px;
+		.title {
+			padding: 14px 0 0;
+			span {
+				color: #00aeef;
+			}
+		}
+		.send-btn {
+			background-color : #00aeef;
+			color            : #fff;
+			border-radius    : 15px;
+			box-shadow       : 0 0 5px rgba(197,204,208,0.3);
+			padding          : 0 50px;
+			display          : inline-block;
+			line-height      : 40px;
+			font-weight      : bold;
+			margin           : -14px 0 14px;
+		}
+		.qr-img {
+			width: 100px;
+			height: 100px;
+			background-color: #f4f4f4;
+			margin-bottom: 20px;
+		}
+	}
+}

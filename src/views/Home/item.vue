@@ -142,6 +142,3 @@ import {submitComment} from '../../api';
 	}
 </script>
 
-<style lang="scss">
-
-</style>

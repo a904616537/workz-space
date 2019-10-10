@@ -30,10 +30,10 @@
 					iconPath         : "/static/imgs/home.png",
 					selectedIconPath : "/static/imgs/home_select.png"
 		        },{
-					pagePath : "profile",
-					text     : "Profile",
-		            iconPath         : "/static/imgs/user.png",
-		            selectedIconPath : "/static/imgs/user_select.png"
+					pagePath         : "profile",
+					text             : "Profile",
+					iconPath         : "/static/imgs/user.png",
+					selectedIconPath : "/static/imgs/user_select.png"
 		        },{
 					pagePath         : "wishlist",
 					text             : "Wishlist",
