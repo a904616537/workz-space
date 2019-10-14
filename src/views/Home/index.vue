@@ -23,6 +23,7 @@
 	import Vue         from 'vue';
 	import {workspace} from '../../api';
 	import Item        from './item';
+	import { mapState, mapActions } from 'vuex'
 
 	export default{
 		name : 'home',
@@ -39,8 +40,8 @@
         	getData() {
         		workspace()
         		.then(workspace => {
-        			console.log('workspace', workspace)
         			this.workspaces = workspace
+        			this.$store.dispatch('workzspace/setWorkz', workspace)
         		})
         		.catch(err => {
         			console.log('err', err);

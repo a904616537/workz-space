@@ -26,7 +26,7 @@ const router = new Router({
               title: 'Workz space'
           }
       },{
-        path : '/wish',
+        path : '/wishlist',
           component : (resolve) => require(['@/views/Wish/index.vue'], resolve),
           meta: {
               title: 'Workz space'

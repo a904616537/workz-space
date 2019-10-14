@@ -1,74 +1,24 @@
 <template>
 	<div class="testimonials">
 		<div class="inner">
-			<div class="card">
-				<div class="text-style">
-					Wprkzspace.com supported us to find a right office space that Global-Sign to start up the sales in India, May 2012.<br/>
-					Even it was a right scheduling, they have smoothlyarranged site visit planning and dealt with the business venter for better terms & conditions.<br/> We highly appreciate for Kinoshita-san's effort.
-				</div>
-				<hr />
-				<div class="bottom">
-					<div class="img"><img class="img-style"></div>
-					<div class="infor">
-						<div class="title"><strong>Global-Sign</strong><i>(Reiji Oishi)</i></div>
-						<div class="tips"><i class="el-icon-location icon-style"></i> Japan</div>
-					</div>
-				</div>
-			</div>
-			<div class="card">
-				<div class="text-style">
-					Wprkzspace.com supported us to find a right office space that Global-Sign to start up the sales in India, May 2012.<br/>
-					Even it was a right scheduling, they have smoothlyarranged site visit planning and dealt with the business venter for better terms & conditions.<br/> We highly appreciate for Kinoshita-san's effort.
-				</div>
-				<hr />
-				<div class="bottom">
-					<div class="img"><img class="img-style"></div>
-					<div class="infor">
-						<div class="title"><strong>Global-Sign</strong><i>(Reiji Oishi)</i></div>
-						<div class="tips"><i class="el-icon-location icon-style"></i> Japan</div>
-					</div>
-				</div>
-			</div>
-			<div class="card">
-				<div class="text-style">
-					Wprkzspace.com supported us to find a right office space that Global-Sign to start up the sales in India, May 2012.<br/>
-					Even it was a right scheduling, they have smoothlyarranged site visit planning and dealt with the business venter for better terms & conditions.<br/> We highly appreciate for Kinoshita-san's effort.
-				</div>
-				<hr />
-				<div class="bottom">
-					<div class="img"><img class="img-style"></div>
-					<div class="infor">
-						<div class="title"><strong>Global-Sign</strong><i>(Reiji Oishi)</i></div>
-						<div class="tips"><i class="el-icon-location icon-style"></i> Japan</div>
-					</div>
-				</div>
-			</div>
-			<div class="card">
-				<div class="text-style">
-					Wprkzspace.com supported us to find a right office space that Global-Sign to start up the sales in India, May 2012.<br/>
-					Even it was a right scheduling, they have smoothlyarranged site visit planning and dealt with the business venter for better terms & conditions.<br/> We highly appreciate for Kinoshita-san's effort.
-				</div>
-				<hr />
-				<div class="bottom">
-					<div class="img"><img class="img-style"></div>
-					<div class="infor">
-						<div class="title"><strong>Global-Sign</strong><i>(Reiji Oishi)</i></div>
-						<div class="tips"><i class="el-icon-location icon-style"></i> Japan</div>
-					</div>
-				</div>
-			</div>
+
+			<v-item v-for="(item,index) in list" :key="index" />
 		</div>
 		<v-menu />
 	</div>
 </template>
 
 <script>
+	import Item from './item';
 	export default {
 		data() {
 			return {
-
+				list : [0,0,0]
 			}
-		}
+		},
+		components : {
+			'v-item' : Item
+		},
 	}
 </script>
 

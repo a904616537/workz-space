@@ -9,14 +9,16 @@
 				<div><i class="el-icon-location icon-style"></i>{{data.address_en}}</div>
 			</div>
 		</div>
-		<div class="card-img" :style="'background-image: url('+img+')'">
+		<div class="card-img" :class="{img : !data.video}" :style="'background-image: url('+img+')'">
 			<video-player
+				v-if="data.video"
 				class="vjs-custom-skin"
 				ref="videoPlayer"
 				:options="playerOptions"
 				:playsinline="true"
 				customEventName="changed">
           	</video-player>
+          	<div v-else @click="toWorkspace" style="height: 100%;width: 100%;"></div>
 		</div>
 		<div class="card-content">
 			<div class="icon-box">

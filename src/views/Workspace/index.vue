@@ -10,9 +10,9 @@
 					<div><i class="el-icon-location icon-style"></i>{{data.address_en}}</div>
 				</div>
 			</div>
-			<carousel :per-page="1" :mouse-drag="true" :paginationEnabled="false">
+			<carousel :per-page="1" :mouse-drag="true" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="5000" :loop="true">
 				<slide v-for="(item, index) in data.photos" :key="index">
-					<div class="card-img" :style="'background-image: url('+item+')'"></div>
+					<div class="card-img img" :style="'background-image: url('+item+')'"></div>
 				</slide>
 			</carousel>
 		</div>

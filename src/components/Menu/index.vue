@@ -1,6 +1,6 @@
 <template>
 	<div class="footer-menu">
-		<div v-for="(item, index) in tabs" :key="index" class="select" :class="{'active' : index == current}" @click="current = index">
+		<div v-for="(item, index) in tabs" :key="index" class="select" :class="{'active' : index == current}" @click="() => toPath(index, item.pagePath)">
 				<i v-if="index == current" class="point"></i>
         		<img :src="current == index?item.selectedIconPath:item.iconPath" class="icon-style">
         		<span><strong>{{item.text}}</strong></span>
@@ -18,7 +18,7 @@
 		},
 		methods: {
 			toPath(index, path) {
-	            // this.setCurrent(index)
+				this.current = index;
 	    		this.$router.push({path})
 	    	}
 		},
@@ -30,18 +30,18 @@
 					iconPath         : "/static/imgs/home.png",
 					selectedIconPath : "/static/imgs/home_select.png"
 		        },{
-					pagePath         : "profile",
+					pagePath         : "/profile",
 					text             : "Profile",
 					iconPath         : "/static/imgs/user.png",
 					selectedIconPath : "/static/imgs/user_select.png"
 		        },{
-					pagePath         : "wishlist",
+					pagePath         : "/wishlist",
 					text             : "Wishlist",
 					iconPath         : "/static/imgs/wishlist.png",
 					selectedIconPath : "/static/imgs/wishlist_select.png",
 					// badge            : this.badge
 		        },{
-		            pagePath         : "more",
+		            pagePath         : "/contact",
 		            text             : "More",
 		            iconPath         : "/static/imgs/more.png",
 		            selectedIconPath : "/static/imgs/more_select.png"
@@ -83,6 +83,7 @@
 			align-items: center;
 			justify-content: flex-end;
 			flex-direction: column;
+			z-index: 99999;
 		}
 		.icon-style{
 			width: 25px;

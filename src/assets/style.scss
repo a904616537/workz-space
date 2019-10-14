@@ -217,14 +217,14 @@
 // Profile
 .profile {
 	// background-color : #f4f4f4;
-	position         : absolute;
-	left             : 0;
-	right            : 0;
-	height           : 100%;
+	// position         : absolute;
+	// left             : 0;
+	// right            : 0;
+	// height           : 100%;
 	.inner {
 		background-color : #fff;
 		border-radius    : 20px;
-		margin-top       : 10px;
+		margin-top       : 5px;
 		box-shadow       : 0 5px 10px rgba(0,0,0,.1);
 		overflow         : hidden;
 	}
@@ -233,6 +233,8 @@
 		margin-bottom    : 70px;
 		height           : 140px;
 		position         : relative;
+		background-position: center;
+		background-size: cover;
 	}
 	.headImg {
 		width            : 84px;
@@ -246,6 +248,8 @@
 		right            : 0;
 		z-index          : 9;
 		box-shadow       : 0 5px 5px rgba(0, 0, 0, 0.1);
+		background-position: center;
+		background-size: cover;
 	}
 	.edit-icon {
 		background-color : #00aeef;
@@ -347,9 +351,9 @@
 	.footer {
 		line-height : 50px;
 		font-weight : bold;
-		margin      : 0 20px;
 		position    : fixed;
 		bottom      : 80px;
+		width: 100%;
 	}
 }
 
@@ -384,10 +388,7 @@
 
 // contact-page
 .contact-page {
-	position         : absolute;
-	left             : 0;
-	right            : 0;
-	height           : 100%;
+	// padding-bottom: 20px;
 	// background-color : #f4f4f4;
 	.box {
 		margin: 10px;

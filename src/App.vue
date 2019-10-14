@@ -5,8 +5,33 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+import {getuser} from './api';
 export default {
-  name: 'App'
+    name    : 'App',
+    methods : {
+        onWechatLogin() {
+            if(process.env.NODE_ENV == "development") {
+                // window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Ftest.h-fish.cn&response_type=code&scope=snsapi_userinfo&state="+state+"#wechat_redirect";
+            } else {
+                window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx06c82c3cbb012752&redirect_uri=http%3A%2F%2Ffiltration.hansgrohe.com.cn&response_type=code&scope=snsapi_userinfo&state="+state+"#wechat_redirect";
+            }
+        },
+        getUser() {
+            getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
+            .then(user => {
+                console.log('user', user)
+                this.$store.dispatch('user/login', user)
+            })
+            .catch(err => {
+                console.log('获取失败', err)
+            })
+        }
+    },
+    created() {
+        this.getUser();
+        // this.onWechatLogin();
+    }
 }
 </script>
 
