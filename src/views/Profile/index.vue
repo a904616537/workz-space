@@ -25,11 +25,11 @@
 			<div class="form-box">
 				<div class="item">
 					<img src="/static/imgs/profile.png" class="icon-style" />
-					<el-input v-model="name.first" placeholder="First Name"></el-input>
+					<el-input v-model="data.name.first" placeholder="First Name"></el-input>
 				</div>
 				<div class="item">
 					<img src="/static/imgs/profile.png" class="icon-style default-icon" />
-					<el-input v-model="name.last" placeholder="Last Name"></el-input>
+					<el-input v-model="data.name.last" placeholder="Last Name"></el-input>
 				</div>
 				<div class="item">
 					<img src="/static/imgs/company.png" class="icon-style" />
@@ -80,10 +80,6 @@
 		},
 		computed : mapState({
             user : state => state.user.user,
-            name : function () {
-            	if(this.user.name) return this.user.name;
-            	else return {first : '', last : ''}
-            }
         }),
 		components: {
 			'v-upload' : Upload,
