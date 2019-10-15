@@ -93,15 +93,12 @@
 			},
 			onSubmit() {
 				const model = Object.assign({
-					name : {
-						first : this.data.first_name,
-						last  : this.data.last_name,
-					},
-					headimgurl     : this.data.headimgurl,
+					name       : this.data.name,
+					headimgurl : this.data.headimgurl,
 					company    : this.data.company,
 					phone      : this.data.phone,
 					email      : this.data.email,
-					number     : this.number,
+					number     : this.data.number,
 				}, this.user);
 				updateuser(model)
 				.then(result => {
