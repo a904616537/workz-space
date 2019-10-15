@@ -25,11 +25,11 @@
 			<div class="form-box">
 				<div class="item">
 					<img src="/static/imgs/profile.png" class="icon-style" />
-					<el-input v-model="data.first_name" placeholder="First Name"></el-input>
+					<el-input v-model="name.first" placeholder="First Name"></el-input>
 				</div>
 				<div class="item">
 					<img src="/static/imgs/profile.png" class="icon-style default-icon" />
-					<el-input v-model="data.last_name" placeholder="Last Name"></el-input>
+					<el-input v-model="name.last" placeholder="Last Name"></el-input>
 				</div>
 				<div class="item">
 					<img src="/static/imgs/company.png" class="icon-style" />
@@ -51,7 +51,7 @@
 		</div>
 		<div class="footer">
 			<div class="btn-style" @click="goBack"><i class="el-icon-arrow-left"></i></div>
-			<el-button class="public-btn">Update Info</el-button>
+			<el-button class="public-btn" @click="onSubmit">Update Info</el-button>
 		</div>
 	</div>
 </template>
@@ -59,14 +59,18 @@
 <script>
 	import { mapState } from 'vuex'
 	import Upload from './upload';
+	import {updateuser} from '../../api';
+	import { Message } from 'element-ui';
 	export default {
 		name : 'profile',
 		data() {
 			return {
 				data : {
 					headimgurl     : '../static/imgs/user.jpg',
-					first_name : '',
-					last_name  : '',
+					name : {
+						first : '',
+						last  : '',
+					},
 					company    : '',
 					phone      : '',
 					email      : '',
@@ -76,6 +80,10 @@
 		},
 		computed : mapState({
             user : state => state.user.user,
+            name : function () {
+            	if(this.user.name) return this.user.name;
+            	else return {first : '', last : ''}
+            }
         }),
 		components: {
 			'v-upload' : Upload,
@@ -86,10 +94,30 @@
 			},
 			goBack() {
 				this.$router.go(-1)
+			},
+			onSubmit() {
+				const model = Object.assign({
+					name : {
+						first : this.data.first_name,
+						last  : this.data.last_name,
+					},
+					headimgurl     : this.data.headimgurl,
+					company    : this.data.company,
+					phone      : this.data.phone,
+					email      : this.data.email,
+					number     : this.number,
+				}, this.user);
+				updateuser(model)
+				.then(result => {
+					this.$store.dispatch('user/edit', result)
+					Message.success('success!')
+				})
+				.catch(err => {
+					Message.error('edit error!')
+				})
 			}
 		},
 		beforeMount() {
-			console.log('this.user', this.user)
 			this.data = this.user
 		}
 	}

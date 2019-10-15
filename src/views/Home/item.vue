@@ -11,30 +11,30 @@
 		</div>
 		<div class="card-img" :class="{img : !data.video}" :style="'background-image: url('+img+')'">
 			<video-player
-				v-if="data.video"
+				v-if="data.video && showVideo"
 				class="vjs-custom-skin"
 				ref="videoPlayer"
 				:options="playerOptions"
 				:playsinline="true"
+				@error="onPlayerLoadeddata($event)" 
 				customEventName="changed">
+
           	</video-player>
           	<div v-else @click="toWorkspace" style="height: 100%;width: 100%;"></div>
 		</div>
 		<div class="card-content">
 			<div class="icon-box">
 				<div>
-					<i class="el-icon-star-off icon-style"></i>
+					<i class="el-icon-star-off icon-style" :class="{active : isPraise, ['el-icon-star-on'] : isPraise}" @click="praise"></i>
 					<i class="el-icon-position icon-style"></i>
 				</div>
-				<div class="ribbon"></div>
+				<div class="ribbon" :class="{red : isWishlist}" @click="wishlist"></div>
 			</div>
-			<div class="focus">
+			<div v-if="praiseCount > 0" class="focus">
 				<div class="img-style">
-					<div class="img-item" style="background-image: url('../static/imgs/user.jpg')"></div>
-					<div class="img-item" style="background-image: url('../static/imgs/user.jpg')"></div>
-					<div class="img-item" style="background-image: url('../static/imgs/user.jpg')"></div>
+					<div v-for="(item, index) in data.praises" :key="index" class="img-item" :style="'background-image: url('+item.user.headimgurl+')'"></div>
 				</div>
-				<div class="text-style">liked by <strong>Fann Wong</strong> and <strong>1,520</strong> others.</div>
+				<div class="text-style">liked by <strong>{{lastPraise.user.nickname}}</strong> and <strong>{{praiseCount}}</strong> others.</div>
 			</div>
 			<div class="dialog">
 				<div class="head-img" style="background-image: url('../static/imgs/user.jpg')"></div>
@@ -56,13 +56,14 @@
 
 <script>
 import moment from 'moment';
-import {submitComment} from '../../api';
+import {mapState} from 'vuex';
+import {submitComment, submitPraise, submitWishlist} from '../../api';
 	export default{
 		name : 'home-item',
 		data() {
 			return {
 				input : '',
-				
+				showVideo : true
 			}
 		},
 		props : {
@@ -73,12 +74,38 @@ import {submitComment} from '../../api';
 				})
 			}
 		},
-		computed : {
-			commentCount : function() {
+		computed : mapState({
+            user : state => state.user.user,
+            commentCount : function() {
 				if(!this.data.comments) return 0;
 				if(this.data.comments.length > 0) return this.data.comments.length + 1;
 				else if(this.comment) return 1;
 				else return 0;
+			},
+			isWishlist : function() {
+				if(!this.user._id) return false;
+				if(!this.data.wishlist) return false;
+
+				const bo = this.data.wishlist.find(v => v.user == this.user._id);
+				if(bo) return true;
+				return false;
+			},
+			isPraise : function() {
+				if(!this.user._id) return false;
+				if(!this.data.praises) return false;
+				const praise = this.data.praises.find(v => v.user._id == this.user._id);
+				if(praise) return true;
+				return false;
+			},
+			praiseCount : function() {
+				if(!this.data.praises)return 0;
+				return this.data.praises.length
+			},
+			lastPraise : function() {
+				const praise = this.data.praises.pop();
+				// console.log('last', praise)
+				this.data.praises.push(praise);
+				return praise;
 			},
 			comment : function() {
 				if(!this.data.comments) return null;
@@ -112,8 +139,11 @@ import {submitComment} from '../../api';
 					poster: this.img
 				}
 			}
-		},
+        }),
 		methods: {
+			onPlayerLoadeddata(e) {
+				this.showVideo = false
+			},
 			fromNow(date) {
 				return moment(date).fromNow();
 			},
@@ -137,6 +167,30 @@ import {submitComment} from '../../api';
 					this.data.comments.push(model.comment)
 				})
 				.catch(err => {})
+			},
+			praise() {
+				if(!this.user._id) return;
+				const model = {
+					_id : this.data._id,
+					user : this.user._id,
+				};
+
+                this.$store.dispatch('workzspace/praise', model)
+                .then(result => {
+                })
+                .catch(err => {})
+			},
+			wishlist() {
+				if(!this.user._id) return;
+				const model = {
+					_id : this.data._id,
+					user : this.user._id,
+				};
+
+                this.$store.dispatch('workzspace/wishlist', model)
+                .then(result => {
+                })
+                .catch(err => {})
 			}
 		},
 		beforeMount() {

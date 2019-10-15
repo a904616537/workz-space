@@ -14,8 +14,6 @@
 			</el-dropdown>
 		</div>
 		<v-item v-for="(item, index) in workspaces" :key="index" :data="item"/>
-		
-		<v-menu />
 	</div>
 </template>
 
@@ -29,18 +27,19 @@
 		name : 'home',
 		data() {
 			return {
-				workspaces : [],
 				input : '',
 			}
 		},
 		components : {
 			'v-item' : Item
 		},
+		computed : mapState({
+			workspaces : state => state.workzspace.workzs
+		}),
 		methods: {
         	getData() {
         		workspace()
         		.then(workspace => {
-        			this.workspaces = workspace
         			this.$store.dispatch('workzspace/setWorkz', workspace)
         		})
         		.catch(err => {
@@ -56,9 +55,6 @@
 
 <style lang="scss">
 	.img-style{
-		position : absolute;
-		left     : 15px;
-		top      : -10px;
 		.img-item{
 			width               : 32px;
 			height              : 32px;

@@ -10,22 +10,55 @@
 
 
 import * as types  from '../mutation-types'
+import {workspace, submitPraise, submitWishlist} from '../../api';
 
 const state = {
 	workzs : [],	// 仓库
+
 }
 
 const actions = {
 	setWorkz({commit}, data) {
 		commit(types.SET_WORK, data);
+	},
+	praise({commit}, data) {
+		return new Promise((resolve, reject) => {
+            submitPraise(data)
+            .then(response => {
+            	console.log('response', response)
+                commit(types.PRAISE, response);
+                resolve()
+            }).catch(error => {
+                console.log('error', error)
+                reject('提交出错')
+            })
+        })
+	},
+	wishlist({commit}, data) {
+		return new Promise((resolve, reject) => {
+            submitWishlist(data)
+            .then(response => {
+            	console.log('response', response)
+                commit(types.PRAISE, response);
+                resolve()
+            }).catch(error => {
+                console.log('error', error)
+                reject('提交出错')
+            })
+        })
 	}
 }
 
 // mutations
 const mutations = {
 	[types.SET_WORK] (state, data) {
-		console.log('data??', data);
 		state.workzs = data;
+	},
+	[types.PRAISE] (state, data) {
+		const workzIndex = state.workzs.findIndex(v => v._id == data._id);
+		console.log('workzIndex', workzIndex, data._id)
+		state.workzs.splice(workzIndex, 1, data);
+		state.workzs = [...state.workzs]
 	}
 }
 

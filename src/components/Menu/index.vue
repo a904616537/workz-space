@@ -1,6 +1,6 @@
 <template>
 	<div class="footer-menu">
-		<div v-for="(item, index) in tabs" :key="index" class="select" :class="{'active' : index == current}" @click="() => toPath(index, item.pagePath)">
+		<div v-for="(item, index) in tabs" :key="index" class="select" :class="{'active' : index == current}" @click="() => toPath(index, item)">
 				<i v-if="index == current" class="point"></i>
         		<img :src="current == index?item.selectedIconPath:item.iconPath" class="icon-style">
         		<span><strong>{{item.text}}</strong></span>
@@ -9,45 +9,56 @@
 </template>
 
 <script>
+	import {mapState} from 'vuex';
+	import {Message}  from 'element-ui';
 	export default{
 		name : 'footer-menu',
 		data() {
 			return {
-				current : 0
 			}
 		},
 		methods: {
-			toPath(index, path) {
-				this.current = index;
-	    		this.$router.push({path})
+			toPath(index, item) {
+				if(item.islogin && !this.user._id) {
+					Message.error('请先关注 WorkzSpace 公众号')
+				} else {
+					this.$store.dispatch('user/setCurrent', index)
+					this.$router.push({path : item.pagePath})
+				}
 	    	}
 		},
-		computed: {
-			tabs() {
+		computed : mapState({
+			current : state => state.user.current,
+			user    : state => state.user.user,
+            tabs() {
 	        	return [{
 					pagePath         : "/",
 					text             : "Home",
 					iconPath         : "/static/imgs/home.png",
-					selectedIconPath : "/static/imgs/home_select.png"
+					selectedIconPath : "/static/imgs/home_select.png",
+					islogin : false
 		        },{
 					pagePath         : "/profile",
 					text             : "Profile",
 					iconPath         : "/static/imgs/user.png",
-					selectedIconPath : "/static/imgs/user_select.png"
+					selectedIconPath : "/static/imgs/user_select.png",
+					islogin : true
 		        },{
 					pagePath         : "/wishlist",
 					text             : "Wishlist",
-					iconPath         : "/static/imgs/wishlist.png",
-					selectedIconPath : "/static/imgs/wishlist_select.png",
+					iconPath         : "/static/imgs/tag.png",
+					selectedIconPath : "/static/imgs/tag_select.png",
+					islogin : true
 					// badge            : this.badge
 		        },{
 		            pagePath         : "/contact",
 		            text             : "More",
 		            iconPath         : "/static/imgs/more.png",
-		            selectedIconPath : "/static/imgs/more_select.png"
+		            selectedIconPath : "/static/imgs/more_select.png",
+					islogin : false
 		        }];
 	        }
-		},
+        }),
 		created() {
 	        document.title = 'Workz Space';
 	    }

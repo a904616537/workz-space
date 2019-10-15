@@ -1,4 +1,5 @@
 // Home.page
+@import "./hot.scss";
 .banner{
 	background-color    : #f4f4f4;
 	background-position : center;
@@ -51,6 +52,9 @@
 	.icon-style{
 		font-size    : 30px;
 		margin-right : 10px;
+		&.active {
+			color : $main-color;
+		}
 	}
 	.icon-box{
 		display         : flex;
@@ -68,16 +72,18 @@
 		}
 	}
 	.focus{
-		margin    : 10px 0 20px;
-		position  : relative;
+		margin      : 10px 0 20px;
+		position    : relative;
+		display     : flex;
+		align-items : center;
 		font-size : 14px;
 		.text-style{
-			margin-left : 74px;
 		}
 	}
 	.dialog{
 		display         : flex;
 		justify-content : space-between;
+		align-items: center;
 		.head-img{
 			width               : 40px;
 			height              : 40px;
@@ -91,6 +97,7 @@
 		}
 		.el-input__inner{
 			border-radius : 25px;
+			height: 30px;
 		}
 		span{
 			color       : #00aeef;
@@ -265,7 +272,6 @@
 	.icon-style {
 		height       : 24px;
 		width        : 24px;
-		margin-right : 10px;
 	}
 	.default-icon {
 		opacity : 0;
@@ -288,6 +294,7 @@
 		}
 		.el-input__inner {
 			border-radius : 25px;
+			margin-left: 10px;
 		}
 	}
 	.footer {
@@ -311,10 +318,6 @@
 // wish-page
 .wish-page {
 	// background-color : #f4f4f4;
-	position         : absolute;
-	left             : 0;
-	right            : 0;
-	height           : 100%;
 	.inner {
 		padding : 10px;
 	}
@@ -351,8 +354,6 @@
 	.footer {
 		line-height : 50px;
 		font-weight : bold;
-		position    : fixed;
-		bottom      : 80px;
 		width: 100%;
 	}
 }
