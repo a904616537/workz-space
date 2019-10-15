@@ -1,2 +1,0 @@
-webpackJsonp([7],{esMn:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r={render:function(){var e=this.$createElement,n=this._self._c||e;return n("div",[n("router-view"),this._v(" "),n("v-menu")],1)},staticRenderFns:[]};var u=t("VU/8")({name:"BottomBar",methods:{},created:function(){}},r,!1,function(e){t("njXA")},null,null);n.default=u.exports},njXA:function(e,n){}});
-//# sourceMappingURL=7.661416c27761911429cb.js.map

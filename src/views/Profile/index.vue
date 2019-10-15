@@ -118,7 +118,9 @@
 			}
 		},
 		beforeMount() {
-			this.data = this.user
+			if(this.user._id) {
+				this.data =Object.assgin({},this.user)
+			}
 		}
 	}
 </script>

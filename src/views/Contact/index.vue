@@ -91,7 +91,7 @@
 		},
 		beforeMount() {
 			if(this.user._id) {
-				this.data = this.user
+				this.data =Object.assgin({},this.user)
 			}
 		}
 	}
