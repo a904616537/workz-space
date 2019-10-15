@@ -37,7 +37,7 @@
 				<div class="text-style">liked by <strong>{{lastPraise.user.nickname}}</strong> and <strong>{{praiseCount}}</strong> others.</div>
 			</div>
 			<div class="dialog">
-				<div class="head-img" style="background-image: url('../static/imgs/user.jpg')"></div>
+				<div class="head-img" :style="'background-image: url('+comment_img+')'"></div>
 				<el-input v-model="input" placeholder="Write Your Comment"></el-input>
 				<span @click="submit">Post</span>
 			</div>
@@ -123,6 +123,11 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 				if (this.data.provider && this.data.provider.avatar == '') {
 					return '../static/imgs/logo.jpg';
 				}else return this.data.provider.avatar
+			},
+			comment_img : function() {
+				if (this.user._id) {
+					return this.user.headimgurl;
+				}else return '../static/imgs/user.jpg';
 			},
 			playerOptions: function() {
 				return {

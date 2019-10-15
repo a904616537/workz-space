@@ -43,7 +43,7 @@
 		computed : mapState({
 			user   : state => state.user.user,
 			name : function () {
-				if(this.user.name) {
+				if(this.user.name && this.user.name.first && this.user.name.last) {
 					return `${this.user.name.first} ${this.user.name.last}`
 				} else return this.user.nickname
 			},
