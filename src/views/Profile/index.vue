@@ -25,11 +25,11 @@
 			<div class="form-box">
 				<div class="item">
 					<img src="/static/imgs/profile.png" class="icon-style" />
-					<el-input v-model="data.name.first" placeholder="First Name"></el-input>
+					<el-input v-model="data.first_name" placeholder="First Name"></el-input>
 				</div>
 				<div class="item">
 					<img src="/static/imgs/profile.png" class="icon-style default-icon" />
-					<el-input v-model="data.name.last" placeholder="Last Name"></el-input>
+					<el-input v-model="data.last_name" placeholder="Last Name"></el-input>
 				</div>
 				<div class="item">
 					<img src="/static/imgs/company.png" class="icon-style" />
@@ -66,11 +66,9 @@
 		data() {
 			return {
 				data : {
-					headimgurl     : '../static/imgs/user.jpg',
-					name : {
-						first : '',
-						last  : '',
-					},
+					headimgurl : '../static/imgs/user.jpg',
+					first_name : '',
+					last_name  : '',
 					company    : '',
 					phone      : '',
 					email      : '',
@@ -92,17 +90,11 @@
 				this.$router.go(-1)
 			},
 			onSubmit() {
-				const model = Object.assign({
-					name       : this.data.name,
-					headimgurl : this.data.headimgurl,
-					company    : this.data.company,
-					phone      : this.data.phone,
-					email      : this.data.email,
-					number     : this.data.number,
-				}, this.user);
+				const model = Object.assign({}, this.user, this.data);
+				console.log('model', model)
 				updateuser(model)
 				.then(result => {
-					// this.$store.dispatch('user/edit', result)
+					this.$store.dispatch('user/edit', model)
 					Message.success('success!')
 				})
 				.catch(err => {
@@ -113,10 +105,6 @@
 		beforeMount() {
 			if(this.user._id) {
 				this.data =Object.assign({},this.user)
-				if(!this.data.name.first) this.data.name = {
-						first : '',
-						last  : '',
-					}
 			}
 		}
 	}

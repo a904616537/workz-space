@@ -66,6 +66,7 @@ export default {
     },
     created() {
     	this.onInit();
+    	// this.getUser()
     }
 }
 </script>

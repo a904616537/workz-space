@@ -6,11 +6,11 @@
 				<div class="form-box">
 					<div class="item">
 						<img src="/static/imgs/profile.png" class="icon-style" />
-						<el-input v-model="data.name.first" placeholder="First Name"></el-input>
+						<el-input v-model="data.first_name" placeholder="First Name"></el-input>
 					</div>
 					<div class="item">
 						<img src="/static/imgs/profile.png" class="icon-style default-icon" />
-						<el-input v-model="data.name.last" placeholder="Last Name"></el-input>
+						<el-input v-model="data.last_name" placeholder="Last Name"></el-input>
 					</div>
 					<div class="item">
 						<img src="/static/imgs/company.png" class="icon-style" />
@@ -50,11 +50,9 @@
 		data() {
 			return {
 				data : {
-					headimgurl     : '../static/imgs/user.jpg',
-					name : {
-						first : '',
-						last  : '',
-					},
+					headimgurl : '../static/imgs/user.jpg',
+					first_name : '',
+					last_name  : '',
 					company    : '',
 					phone      : '',
 					email      : '',
