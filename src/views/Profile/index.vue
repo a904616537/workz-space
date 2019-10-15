@@ -116,6 +116,10 @@
 		beforeMount() {
 			if(this.user._id) {
 				this.data =Object.assign({},this.user)
+				if(!this.data.name.first) this.data.name = {
+						first : '',
+						last  : '',
+					}
 			}
 		}
 	}
