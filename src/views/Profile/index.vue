@@ -115,7 +115,7 @@
 		},
 		beforeMount() {
 			if(this.user._id) {
-				this.data =Object.assgin({},this.user)
+				this.data =Object.assign({},this.user)
 			}
 		}
 	}
