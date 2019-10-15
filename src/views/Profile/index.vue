@@ -105,7 +105,7 @@
 				}, this.user);
 				updateuser(model)
 				.then(result => {
-					this.$store.dispatch('user/edit', result)
+					// this.$store.dispatch('user/edit', result)
 					Message.success('success!')
 				})
 				.catch(err => {
