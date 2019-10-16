@@ -74,22 +74,20 @@
 				contactEmail(this.data)
 				.then(data => {
 					Message.success('邮件发送成功！')
-					this.$nextTick(() => {
-						loadingInstance.close();
-					});
 				})
 				.catch(err => {
 					Message.error('邮件发送失败！')
+				})
+				.finally(err => {
+					this.$nextTick(() => {
+						loadingInstance.close();
+					});
 				})
 			}
 		},
 		beforeMount() {
 			if(this.user._id) {
 				this.data = Object.assign({},this.user)
-				if(!this.data.name.first) this.data.name = {
-						first : '',
-						last  : '',
-					}
 			}
 		}
 	}
