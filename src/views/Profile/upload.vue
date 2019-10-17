@@ -15,7 +15,7 @@
 	export default {
 		data() {
 			return {
-				url : 'http://127.0.0.1:8481/upload'
+				url : 'http://service.workspace.h-fish.vip/upload'
 			}
 		},
 		props: {

@@ -6,7 +6,7 @@
 			</div>
 			<div class="card-infor">
 				<div class="infor-title">{{data.name}}</div>
-				<div><i class="el-icon-location icon-style"></i>{{data.address_en}}</div>
+				<div class="tworow"><i class="el-icon-location icon-style"></i>{{`${data.area||''}${data.address_en}`}}</div>
 			</div>
 		</div>
 		<div class="card-img" :class="{img : !data.video}" :style="'background-image: url('+img+')'">
@@ -26,28 +26,32 @@
 			<div class="icon-box">
 				<div>
 					<i class="el-icon-star-off icon-style" :class="{active : isPraise, ['el-icon-star-on'] : isPraise}" @click="praise"></i>
+					<i class="el-icon-chat-line-round icon-style" @click="toWorkspace"></i>
 					<i class="el-icon-position icon-style"></i>
 				</div>
 				<div class="ribbon" :class="{red : isWishlist}" @click="wishlist"></div>
 			</div>
+
 			<div v-if="praiseCount > 0" class="focus">
 				<div class="img-style">
 					<div v-for="(item, index) in data.praises" :key="index" class="img-item" :style="'background-image: url('+item.user.headimgurl+')'"></div>
 				</div>
 				<div class="text-style">liked by <strong>{{lastPraise.user.nickname}}</strong> and <strong>{{praiseCount}}</strong> others.</div>
 			</div>
-			<div class="dialog">
+			<!-- <div class="dialog">
 				<div class="head-img" :style="'background-image: url('+comment_img+')'"></div>
 				<el-input v-model="input" placeholder="Write Your Comment"></el-input>
 				<span @click="submit">Post</span>
-			</div>
-			<div class="comment" v-if="comment">
-				<div class="comment-title">
-					<span class="title-style"><strong>{{comment.name}}</strong></span>
-					<span>{{fromNow(comment.createTime)}}</span>
+			</div> -->
+			<div class="comment" v-if="commentCount>0">
+				<div v-for="(item, index) in data.comments" :key="index" style="margin-bottom: 10px;">
+					<div class="comment-title">
+						<span class="title-style"><strong>{{item.name}}</strong></span>
+						<span>{{fromNow(item.createTime)}}</span>
+					</div>
+					<div class="comment-style" @click="toWorkspace">{{item.text}}<span class="more-style"><strong>More...</strong></span>
+					</div>
 				</div>
-				<div class="comment-style" @click="toWorkspace">{{comment.text}}<span class="more-style"><strong>More...</strong></span>
-				</div>	
 				<div class="views" @click="toWorkspace"><strong>View all {{commentCount}} Comments</strong></div>
 			</div>
 		</div>
@@ -78,9 +82,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
             user : state => state.user.user,
             commentCount : function() {
 				if(!this.data.comments) return 0;
-				if(this.data.comments.length > 0) return this.data.comments.length + 1;
-				else if(this.comment) return 1;
-				else return 0;
+				return this.data.comments.length
 			},
 			isWishlist : function() {
 				if(!this.user._id) return false;
@@ -106,10 +108,6 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 				// console.log('last', praise)
 				this.data.praises.push(praise);
 				return praise;
-			},
-			comment : function() {
-				if(!this.data.comments) return null;
-				return this.data.comments.pop();
 			},
 			player : function() {
 				return this.$refs.videoPlayer.player

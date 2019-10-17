@@ -106,6 +106,9 @@
 					company   : this.user.company,
 					name      : this.user.name,
 					number    : this.user.number,
+					address    : this.user.address,
+					budget     : this.user.budget,
+					other      : this.user.other,
 					workspace : this.workzs.map(v => v._id)
 	    		}
 	    		postWishlist(model)

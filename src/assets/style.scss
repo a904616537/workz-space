@@ -1,13 +1,34 @@
 // Home.page
 @import "./hot.scss";
+.bannerview {
+	position: relative;
+	.nav {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		.row {
+			padding: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			.logo {
+				margin-right: 10px;
+				display: flex;
+				justify-content: center;
+			}
+			input {
+				border-radius: 20px;
+			}
+		}
+	}
+}
 .banner{
 	background-color    : #f4f4f4;
 	background-position : center;
 	background-size     : cover;
-	height              : 230px;
+	height              : 240px;
 	width               : 100%;
 	margin-bottom       : 20px;
-	padding             : 20px 0;
 	position            : relative;
 	box-shadow          : 0 0 5px rgba(197,204,208,0.3);
 	.logo{
@@ -50,7 +71,7 @@
 		margin-top : 20px;
 	}
 	.icon-style{
-		font-size    : 30px;
+		font-size    : 26px;
 		margin-right : 10px;
 		&.active {
 			color : $main-color;
@@ -98,6 +119,7 @@
 		.el-input__inner{
 			border-radius : 25px;
 			height: 30px;
+			line-height: 30px;
 		}
 		span{
 			color       : #00aeef;
@@ -116,7 +138,8 @@
 			align-items: center;
 			justify-content: flex-end;
 			span {
-				margin-right: 30px;
+				margin-right: 20px;
+				font-size: 12px;
 			}
 			label {
 				font-size: 20px;
@@ -136,7 +159,7 @@
 				display: flex;
 				align-items: center;
 				justify-content: flex-end;
-				width  : 265px;
+				width  : 200px;
 				height : 40px;
 				background: -webkit-linear-gradient(to right,#00aeef, #139CE6); /* Safari 5.1 - 6.0 */
 				background: -o-linear-gradient(to right,#00aeef, #139CE6); /* Opera 11.1 - 12.0 */
@@ -156,7 +179,8 @@
 				.content {
 					position: absolute;
 					top: 7px;
-					left: 10px;
+					left: 5px;
+					font-size: 10px;
 				}
 			}
 		}
@@ -215,6 +239,7 @@
 
 }
 .map {
+	width: 100%;
 	height: 300px;
 	background-color: #eee;
 }
@@ -337,6 +362,10 @@
 		.desc {
 			color       : #C5CCD0;
 			line-height : 24px;
+		}
+		.address {
+			color       : #C5CCD0;
+			line-height : 16px;
 		}
 	}
 	.desc-icon {

@@ -6,7 +6,7 @@
 			</div>
 			<div class="card-infor">
 				<div class="infor-title">{{data.name}}</div>
-				<div class="desc"><i class="el-icon-location icon-style"></i>{{data.address_en}}</div>
+				<div class="address"><i class="el-icon-location icon-style"></i>{{data.address_en}}</div>
 			</div>
 			<i class="el-icon-circle-close del-icon" @click="$emit('onRemove')"></i>
 		</div>

@@ -3,13 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import { Button, Dropdown, DropdownMenu, DropdownItem, Icon, Input, Upload } from 'element-ui'
+import { Button, Dropdown, DropdownMenu, DropdownItem, Icon, Input, Upload, Avatar, Autocomplete } from 'element-ui'
 import VueVideoPlayer     from 'vue-video-player'
 import VueCarousel        from 'vue-carousel';
 import VueParticles       from 'vue-particles'
+import BaiduMap from 'vue-baidu-map'
 import Vuex from 'vuex'
 import store from './store'
-
 
 import 'video.js/dist/video-js.css'
 
@@ -23,10 +23,17 @@ Vue.use(DropdownItem);
 Vue.use(Icon);
 Vue.use(Input);
 Vue.use(Upload);
+Vue.use(Avatar);
+Vue.use(Autocomplete);
 Vue.use(VueVideoPlayer)
 Vue.component('v-menu', Menu);
 Vue.use(VueCarousel);
 Vue.use(VueParticles)
+
+Vue.use(BaiduMap, {
+  ak: 'pEd1kn65vhQmV7RfE7ueGKf7'
+})
+
 
 Vue.config.productionTip = false
 

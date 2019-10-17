@@ -20,14 +20,16 @@
 			<div class="card-content">
 				<div class="icon-box">
 					<div>
-						<i class="el-icon-star-off icon-style"></i>
+						<i class="el-icon-star-off icon-style" :class="{active : isPraise, ['el-icon-star-on'] : isPraise}" @click="praise"></i>
 						<i class="el-icon-position icon-style"></i>
 					</div>
 					<div class="ribbon red"></div>
 				</div>
 			</div>
-			<!-- <div class="map">
-			</div> -->
+
+			<baidu-map class="map"  :zoom="15" center="上海市">
+				<bm-local-search v-show="false" :keyword="data.address_zh||'东方明珠'" :auto-viewport="true" :location="data.area||'黄浦区'"></bm-local-search>
+  			</baidu-map>
 			<div class="card-content desc">
 				<h3>Description</h3>
 				<p>
@@ -83,6 +85,7 @@
 
 <script>
 	import Vue                           from 'vue';
+	import {mapState}                    from 'vuex';
 	import {getWorkspace, submitComment} from '../../api';
 
 	export default{
@@ -94,13 +97,16 @@
 					photos : [],
 					provider : {
 						avatar : ''
-					}
+					},
+					address_zh : '',
+					area : ''
 				}
 			}
 		},
 		components : {
 		},
-		computed : {
+		computed : mapState({
+            user : state => state.user.user,
 			commentCount : function() {
 				if(!this.data.comments) return 0;
 				return this.data.comments.length
@@ -114,8 +120,15 @@
 				if (this.data.provider && this.data.provider.avatar == '') {
 					return '../static/imgs/logo.jpg';
 				}else return this.data.provider.avatar
-			}
-		},
+			},
+			isPraise : function() {
+				if(!this.user._id) return false;
+				if(!this.data.praises) return false;
+				const praise = this.data.praises.find(v => v.user._id == this.user._id);
+				if(praise) return true;
+				return false;
+			},
+		}),
 		methods: {
         	getData(_id) {
         		getWorkspace({_id})
@@ -145,7 +158,20 @@
 					this.data.comments.push(model.comment)
 				})
 				.catch(err => {})
-			}
+			},
+			praise() {
+				console.log('praise', this.user)
+				if(!this.user._id) return;
+				const model = {
+					_id : this.data._id,
+					user : this.user._id,
+				};
+
+                this.$store.dispatch('workzspace/praise', model)
+                .then(result => {
+                })
+                .catch(err => {})
+			},
 		},
 		beforeMount() {
 			const _id = this.$route.query._id;
