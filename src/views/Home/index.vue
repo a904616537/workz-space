@@ -23,18 +23,6 @@
 				</div>
 			</div>
 		</div>
-<!-- 		<div class="banner" style="background-image: url('../static/imgs/banner.jpg')">
-			<el-dropdown class="dropdown-position">
-				<el-button type="primary" >
-				    Place Name<i class="el-icon-caret-bottom"></i>
-				</el-button>
-				<el-dropdown-menu slot="dropdown">
-					<el-dropdown-item>Place Name One</el-dropdown-item>
-					<el-dropdown-item>Place Name Two</el-dropdown-item>
-					<el-dropdown-item>Place Name Three</el-dropdown-item>
-				</el-dropdown-menu>
-			</el-dropdown>
-		</div> -->
 		<v-item v-for="(item, index) in listData" :key="index" :data="item"/>
 	</div>
 </template>

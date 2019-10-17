@@ -25,11 +25,9 @@ const actions = {
 		return new Promise((resolve, reject) => {
             submitPraise(data)
             .then(response => {
-            	console.log('response', response)
                 commit(types.PRAISE, response);
                 resolve()
             }).catch(error => {
-                console.log('error', error)
                 reject('提交出错')
             })
         })
@@ -38,11 +36,9 @@ const actions = {
 		return new Promise((resolve, reject) => {
             submitWishlist(data)
             .then(response => {
-            	console.log('response', response)
                 commit(types.PRAISE, response);
                 resolve()
             }).catch(error => {
-                console.log('error', error)
                 reject('提交出错')
             })
         })
@@ -56,7 +52,6 @@ const mutations = {
 	},
 	[types.PRAISE] (state, data) {
 		const workzIndex = state.workzs.findIndex(v => v._id == data._id);
-		console.log('workzIndex', workzIndex, data._id)
 		state.workzs.splice(workzIndex, 1, data);
 		state.workzs = [...state.workzs]
 	}

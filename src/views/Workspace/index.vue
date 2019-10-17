@@ -160,7 +160,6 @@
 				.catch(err => {})
 			},
 			praise() {
-				console.log('praise', this.user)
 				if(!this.user._id) return;
 				const model = {
 					_id : this.data._id,
@@ -169,6 +168,7 @@
 
                 this.$store.dispatch('workzspace/praise', model)
                 .then(result => {
+                	this.getData(this.data._id);
                 })
                 .catch(err => {})
 			},
