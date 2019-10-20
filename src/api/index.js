@@ -16,3 +16,4 @@ export const contactEmail = (data) => request.post('/contact', data);
 
 
 export const getcode = (data) => request.get('/wechat/oauth/login', data);
+export const getconfig = () => request.get('/wechat/config');
