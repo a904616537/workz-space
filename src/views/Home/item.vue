@@ -233,10 +233,16 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 						const reactObj = div.getBoundingClientRect();
 						if(this.play && reactObj.y < 240 && reactObj.y > 0) {
 							this.play = false
-							this.player.play();
+							document.addEventListener("WeixinJSBridgeReady", () => {
+								this.player.play();
+							}, false);
+							
 						} else if(!this.play && ((reactObj.y * -1) > 240 || reactObj.y > window.innerHeight - reactObj.height)){
 							this.play = true
 							this.player.pause();
+							document.addEventListener("WeixinJSBridgeReady", () => {
+								this.player.pause();
+							}, false);
 						}
 					}
 				}
