@@ -49,8 +49,8 @@ export default {
             }  
         },
         getUser(openid) {
-            // getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
-            getuser({openid})
+            getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
+            // getuser({openid})
             .then(user => {
                 console.log('user', user)
                 if(user) this.$store.dispatch('user/login', user);
@@ -65,8 +65,8 @@ export default {
         }
     },
     created() {
-    	this.onInit();
-    	// this.getUser()
+    	// this.onInit();
+    	this.getUser()
     }
 }
 </script>

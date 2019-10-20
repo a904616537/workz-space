@@ -13,6 +13,9 @@
 			<carousel :per-page="1" :mouse-drag="true" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="5000" :loop="true">
 				<slide v-for="(item, index) in data.photos" :key="index">
 					<div class="card-img img" :style="'background-image: url('+item+')'"></div>
+					<!--  照片数量显示  -->
+					<span class="img-number">1/1</span> 
+
 				</slide>
 			</carousel>
 		</div>
@@ -42,12 +45,13 @@
 			<div class="card-content">
 
 				<div v-for="(item, index) in data.pricing" :key="index" class="item">
-					<h2>{{item.name}}</h2>
+					<h3>{{item.name}}</h3>
 					<div class="flag">
 						<span>Starting at</span>
 						<div class="ribbont" :class="{red : index%2==1}">
 							<div class="content">
-								<label>{{item.price}}</label>RMB/month per person
+								<label>{{item.price}}</label>
+								<span>RMB/month per person</span>
 							</div>
 							<div class="triangle"></div>
 						</div>
@@ -185,6 +189,8 @@
 
 <style lang="scss">
 .workspace {
-
+	.img-number {
+		
+	}
 }
 </style>

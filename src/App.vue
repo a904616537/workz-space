@@ -39,4 +39,7 @@ body {
 .vjs-modal-dialog .vjs-modal-dialog-content {
     z-index: 0;
 }
+.popper-class {
+  width: 120px !important;
+}
 </style>

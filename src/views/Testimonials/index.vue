@@ -1,8 +1,7 @@
 <template>
 	<div class="testimonials">
 		<div class="inner">
-
-			<v-item v-for="(item,index) in list" :key="index" />
+			<v-item v-for="(item,index) in list" :key="index"/>
 		</div>
 		<v-menu />
 	</div>

@@ -1,12 +1,15 @@
 <template>
 	<div class="card">
 		<div class="card-title" @click="toWorkspace">
-			<div class="card-logo">
+			<div class="card-logo" :class="{vip : data.recommend}">
 				<div class="logo-style" :style="'background-image: url('+logo+')'"></div>
 			</div>
 			<div class="card-infor">
 				<div class="infor-title">{{data.name}}</div>
-				<div class="tworow"><i class="el-icon-location icon-style"></i>{{`${data.area||''}${data.address_en}`}}</div>
+				<div class="tworow">
+					<p><i class="el-icon-location icon-style"></i>{{`${data.area||''}${data.address_en}`}}</p>
+					<span v-if="data.recommend">Premium Workspaces</span>
+				</div>
 			</div>
 		</div>
 		<div class="card-img" :class="{img : !data.video}" :style="'background-image: url('+img+')'">
@@ -31,7 +34,11 @@
 				</div>
 				<div class="ribbon" :class="{red : isWishlist}" @click="wishlist"></div>
 			</div>
-
+			<div class="comment-style" @click="toWorkspace">
+				<p>{{data.desc_en}}</p>
+				<span class="more-style"><strong>More...</strong></span>
+			</div>
+			
 			<div v-if="praiseCount > 0" class="focus">
 				<div class="img-style">
 					<div v-for="(item, index) in data.praises" :key="index" class="img-item" :style="'background-image: url('+item.user.headimgurl+')'"></div>
@@ -71,6 +78,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 			}
 		},
 		props : {
+			index : 0,
 			data : {
 				type    : Object,
 				default : () => ({
@@ -197,6 +205,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 			}
 		},
 		beforeMount() {
+			console.log('data', this.data)
 		}
 	}
 </script>

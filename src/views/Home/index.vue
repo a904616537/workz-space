@@ -15,6 +15,8 @@
 					class="searchinput"
 					placeholder="Search Area"
 					prefix-icon="el-icon-search"
+					popper-class="popper-class"
+					:clearable="true"
 					:fetch-suggestions="querySearch"
 					@select="handleSelect"
 					:select-when-unmatched="true"
@@ -23,7 +25,13 @@
 				</div>
 			</div>
 		</div>
-		<v-item v-for="(item, index) in listData" :key="index" :data="item"/>
+		<div v-for="(item, index) in listData" :key="index" >
+			<v-item :data="item"/>
+			<div v-if="index == 2" class="link">
+				<p>没有时间嘛？<el-button type="text" @click="$router.push({path : 'contact'})">立即查询</el-button></p>
+			</div>
+		</div>
+		
 	</div>
 </template>
 

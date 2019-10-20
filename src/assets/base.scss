@@ -4,13 +4,33 @@
 body{
 	margin: 0;
 }
+h3 {
+	margin-block-start: 5px;
+    margin-block-end: 5px;
+}
+p {
+	font-size: 14px;
+	margin-block-start: 5px;
+    margin-block-end: 5px;
+}
 .tworow {
 	width: 270px;
-	overflow:hidden;
-	text-overflow:ellipsis;
-	display:-webkit-box;
-	-webkit-box-orient:vertical;
-	-webkit-line-clamp:2;
+	
+	p{
+		margin: 0;
+		overflow:hidden;
+		text-overflow:ellipsis;
+		display:-webkit-box;
+		-webkit-box-orient:vertical;
+		-webkit-line-clamp:2;
+	}
+	span {
+		color: #fff;
+		background-color: $red-color;
+		padding: 0 5px;
+		border : 1px solid $red-color;
+		border-radius: 9px;
+	}
 }
 // card-style
 .card{
@@ -40,6 +60,9 @@ body{
 		border-radius       : 50px;
 		padding             : 3px;
 		margin-right        : 10px;
+		&.vip {
+			border-color : $red-color;
+		}
 		.logo-style{
 			width               : 46px;
 			height              : 46px;
@@ -58,7 +81,6 @@ body{
 			height:240px;
 		}
 	}
-	
 }
 
 
