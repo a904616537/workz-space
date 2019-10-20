@@ -10,11 +10,18 @@
 					<div><i class="el-icon-location icon-style"></i>{{data.address_en}}</div>
 				</div>
 			</div>
-			<carousel :per-page="1" :mouse-drag="true" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="5000" :loop="true">
+			<carousel
+			:per-page="1"
+			:mouse-drag="true"
+			:paginationEnabled="false"
+			:autoplay="true"
+			:autoplayTimeout="5000"
+			:loop="true"
+			v-model="slideValue">
 				<slide v-for="(item, index) in data.photos" :key="index">
 					<div class="card-img img" :style="'background-image: url('+item+')'">
 						<!--  照片数量显示  -->
-						<span class="img-number">1 / 1</span> 
+						<span class="img-number">{{slideValue + 1}} / {{data.photos.length}}</span> 
 					</div>
 				</slide>
 			</carousel>
@@ -109,6 +116,7 @@
 		name : 'workspace',
 		data() {
 			return {
+				slideValue : 0,
 				input : '',
 				dialogVisible: false,
 				data : {
@@ -148,6 +156,9 @@
 			},
 		}),
 		methods: {
+			onSlide(item) {
+				console.log('slide item', item)
+			},
         	getData(_id) {
         		getWorkspace({_id})
         		.then(workspace => {

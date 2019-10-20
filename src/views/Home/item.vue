@@ -23,9 +23,23 @@
 				customEventName="changed">
 				
           	</video-player>
-          	<div v-else @click="toWorkspace" style="height: 100%;width: 100%;"></div>
-          	<!-- 轮播图数量 -->
-          	<span v-if="!data.video" class="img-number">1 / 1</span>
+          	<div v-else @click="toWorkspace">
+          		<carousel
+				:per-page="1"
+				:mouse-drag="true"
+				:paginationEnabled="false"
+				:autoplay="true"
+				:autoplayTimeout="5000"
+				:loop="true"
+				v-model="slideValue">
+					<slide v-for="(item, index) in data.photos" :key="index">
+						<div class="card-img img" :style="'background-image: url('+item+')'">
+							<!--  照片数量显示  -->
+							<span class="img-number">{{slideValue + 1}} / {{data.photos.length}}</span> 
+						</div>
+					</slide>
+				</carousel>
+          	</div>
 		</div>
 		<div class="card-content">
 			<div class="icon-box">
@@ -75,6 +89,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 		name : 'home-item',
 		data() {
 			return {
+				slideValue : 0,
 				input : '',
 				showVideo : true
 			}
