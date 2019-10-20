@@ -1,5 +1,5 @@
 <template>
-	<div :id="`parent${index}`" class="card">
+	<div class="card">
 		<div class="card-title" @click="toWorkspace">
 			<div class="card-logo" :class="{vip : data.recommend}">
 				<div class="logo-style" :style="'background-image: url('+logo+')'"></div>
@@ -14,6 +14,7 @@
 		</div>
 		<div  class="card-img" :class="{img : !data.video}" :style="'background-image: url('+img+')'">
 			<video-player
+				:id="forId(index)" 
 				v-if="data.video && showVideo"
 				class="vjs-custom-skin"
 				ref="videoPlayer"
@@ -89,6 +90,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 		name : 'home-item',
 		data() {
 			return {
+				play : true,
 				slideValue : 0,
 				input : '',
 				showVideo : true
@@ -139,8 +141,8 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 				return praise;
 			},
 			player : function() {
-				console.log('this.player', this.$refs.videoPlayer.player)
-				return this.$refs.videoPlayer.player
+				if(this.$refs.videoPlayer) return this.$refs.videoPlayer.player;
+				else return null;
 			},
 			img : function () {
 				if (this.data.photos.length > 0) {
@@ -159,14 +161,14 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 			},
 			playerOptions: function() {
 				return {
-					height: '340',
-					autoplay: false,
+					height      : '340',
+					autoplay    : false,
+					muted       : true,
 					aspectRatio : '16:9',
-					sources: [{
+					sources     : [{
 						type: 'video/mp4',
 						src: this.data.video,
 						// type: 'video/x-flv',
-      //       			src: 'http://fms.cntv.lxdns.com/live/flv/channel96.flv'
 					}],
 					language: 'zh-CN',
 					poster: this.img
@@ -216,33 +218,37 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 			wishlist() {
 				if(!this.user._id) return;
 				const model = {
-					_id : this.data._id,
+					_id  : this.data._id,
 					user : this.user._id,
 				};
 
                 this.$store.dispatch('workzspace/wishlist', model)
-                .then(result => {
-                	console.log('result')
-                })
+                .then(result => {})
                 .catch(err => {})
 			},
 			handleScroll () {
-				console.log(window.scrollY)
+				if(this.player) {
+					const div = document.getElementById(`parent${this.index}`);
+					if(div) {
+						const reactObj = div.getBoundingClientRect();
+						if(this.play && reactObj.y < 240 && reactObj.y > 0) {
+							this.play = false
+							this.player.play();
+						} else if(!this.play && ((reactObj.y * -1) > 240 || reactObj.y > window.innerHeight - reactObj.height)){
+							this.play = true
+							this.player.pause();
+						}
+					}
+				}
+			},
+			forId(id) {
+				return `parent${id}`;
 			}
 		},
 		beforeMount() {
-			var div = document.getElementById(`parent${this.index}`);
-			this.$nextTick(function () {
-				console.log('div', div)
-
-			})
-			if(div) {
-				const reactObj = div.getBoundingClientRect();
-				console.log(reactObj);
-			}
 		},
 		mounted () {
-			// window.addEventListener('scroll', this.handleScroll)
+			window.addEventListener('scroll', this.handleScroll)
 		}
 	}
 </script>

@@ -16,6 +16,7 @@
 					placeholder="Search Area"
 					prefix-icon="el-icon-search"
 					popper-class="popper-class"
+					@focus="blur"
 					:clearable="true"
 					:fetch-suggestions="querySearch"
 					@select="handleSelect"
@@ -136,7 +137,9 @@
         		.catch(err => {
         			console.log('err', err);
         		})
-        	}	
+        	},
+        	blur() {
+        	}
 		},
 		beforeMount() {
 			this.getData();
