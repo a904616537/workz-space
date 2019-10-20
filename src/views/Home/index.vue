@@ -9,7 +9,7 @@
 			<div class="nav">
 				<div class="row">
 					<div class="logo">
-						<el-avatar :size="40" src="/static/imgs/logo.jpg"></el-avatar>
+						<el-avatar :size="40" src="/static/imgs/logo.png"></el-avatar>
 					</div>
 					<el-autocomplete
 					class="searchinput"
@@ -26,7 +26,7 @@
 			</div>
 		</div>
 		<div v-for="(item, index) in listData" :key="index" >
-			<v-item :data="item"/>
+			<v-item :data="item" :index="index"/>
 			<div v-if="index == 2" class="link">
 				<p>没有时间嘛？<el-button type="text" @click="$router.push({path : 'contact'})">立即查询</el-button></p>
 			</div>

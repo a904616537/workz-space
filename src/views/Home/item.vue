@@ -12,7 +12,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="card-img" :class="{img : !data.video}" :style="'background-image: url('+img+')'">
+		<div :id="`parent${index}`" class="card-img" :class="{img : !data.video}" :style="'background-image: url('+img+')'">
 			<video-player
 				v-if="data.video && showVideo"
 				class="vjs-custom-skin"
@@ -118,6 +118,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 				return praise;
 			},
 			player : function() {
+				console.log('this.player', this.$refs.videoPlayer.player)
 				return this.$refs.videoPlayer.player
 			},
 			img : function () {
@@ -202,10 +203,23 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
                 .then(result => {
                 })
                 .catch(err => {})
+			},
+			handleScroll () {
+				console.log(window.scrollY)
 			}
 		},
 		beforeMount() {
-			console.log('data', this.data)
+			var div = document.getElementById(`parent${this.index}`);
+			this.$nextTick(function () {
+				console.log('div', div)
+			})
+			if(div) {
+				var reactObj = div.getBoundingClientRect();
+				console.log(reactObj);
+			}
+		},
+		mounted () {
+			window.addEventListener('scroll', this.handleScroll)
 		}
 	}
 </script>
