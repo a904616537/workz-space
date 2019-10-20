@@ -9,7 +9,7 @@
 			<div class="nav">
 				<div class="row">
 					<div class="logo">
-						<el-avatar :size="40" src="/static/imgs/logo.png"></el-avatar>
+						<el-avatar style="background:#000;" :size="40" src="/static/imgs/logo.png"></el-avatar>
 					</div>
 					<el-autocomplete
 					class="searchinput"

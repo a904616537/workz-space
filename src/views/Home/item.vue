@@ -1,5 +1,5 @@
 <template>
-	<div class="card">
+	<div :id="`parent${index}`" class="card">
 		<div class="card-title" @click="toWorkspace">
 			<div class="card-logo" :class="{vip : data.recommend}">
 				<div class="logo-style" :style="'background-image: url('+logo+')'"></div>
@@ -12,7 +12,7 @@
 				</div>
 			</div>
 		</div>
-		<div :id="`parent${index}`" class="card-img" :class="{img : !data.video}" :style="'background-image: url('+img+')'">
+		<div  class="card-img" :class="{img : !data.video}" :style="'background-image: url('+img+')'">
 			<video-player
 				v-if="data.video && showVideo"
 				class="vjs-custom-skin"
@@ -53,7 +53,7 @@
 				<span @click="submit">Post</span>
 			</div> -->
 			<div class="comment" v-if="commentCount>0">
-				<div v-for="(item, index) in data.comments" :key="index" style="margin-bottom: 10px;">
+				<div v-for="(item, index) in commentList" :key="index" style="margin-bottom: 10px;">
 					<div class="comment-title">
 						<span class="title-style"><strong>{{item.name}}</strong></span>
 						<span>{{fromNow(item.createTime)}}</span>
@@ -93,6 +93,10 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
             commentCount : function() {
 				if(!this.data.comments) return 0;
 				return this.data.comments.length
+			},
+			commentList : function() {
+				if(this.commentCount > 0) return [];
+				return this.data.slice(0, 3);
 			},
 			isWishlist : function() {
 				if(!this.user._id) return false;
@@ -203,6 +207,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 
                 this.$store.dispatch('workzspace/wishlist', model)
                 .then(result => {
+                	console.log('result')
                 })
                 .catch(err => {})
 			},
@@ -214,14 +219,15 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 			var div = document.getElementById(`parent${this.index}`);
 			this.$nextTick(function () {
 				console.log('div', div)
+
 			})
 			if(div) {
-				var reactObj = div.getBoundingClientRect();
+				const reactObj = div.getBoundingClientRect();
 				console.log(reactObj);
 			}
 		},
 		mounted () {
-			window.addEventListener('scroll', this.handleScroll)
+			// window.addEventListener('scroll', this.handleScroll)
 		}
 	}
 </script>
