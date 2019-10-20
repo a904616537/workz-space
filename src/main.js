@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import { Button, Dropdown, DropdownMenu, DropdownItem, Icon, Input, Upload, Avatar, Autocomplete, Dialog } from 'element-ui'
+import { Button, Dropdown, DropdownMenu, DropdownItem, Popover, Icon, Input, Upload, Avatar, Autocomplete, Dialog } from 'element-ui'
 import VueVideoPlayer     from 'vue-video-player'
 import VueCarousel        from 'vue-carousel';
 import VueParticles       from 'vue-particles'
@@ -30,6 +30,7 @@ Vue.component('v-menu', Menu);
 Vue.use(VueCarousel);
 Vue.use(VueParticles);
 Vue.use(Dialog);
+Vue.use(Popover);
 
 Vue.use(BaiduMap, {
   ak: 'pEd1kn65vhQmV7RfE7ueGKf7'
