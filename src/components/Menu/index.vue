@@ -1,9 +1,25 @@
 <template>
 	<div class="footer-menu">
-		<div v-for="(item, index) in tabs" :key="index" class="select" :class="{'active' : index == current}" @click="() => toPath(index, item)">
+		<div v-for="(item, index) in tabs" :key="index" class="select" :class="{'active' : index == current}">
 				<i v-if="index == current" class="point"></i>
-        		<img :src="current == index?item.selectedIconPath:item.iconPath" class="icon-style">
-        		<span><strong>{{item.text}}</strong></span>
+				<div v-if="item.click">
+					<el-popover
+					  placement="top"
+					  width="50"
+					  trigger="click">
+					  <p @click="() => toPage(index, '/contact')">Contact Us</p>
+					  <p @click="() => toPage(index, '/testimonials')">Testimonials</p>
+					  <div class="select" slot="reference">
+							<img :src="current == index?item.selectedIconPath:item.iconPath" class="icon-style">
+							<span><strong>{{item.text}}</strong></span>
+					  </div>
+					</el-popover>
+        		
+        		</div>
+        		<div v-else class="select" @click="() => toPath(index, item)">
+        			<img :src="current == index?item.selectedIconPath:item.iconPath" class="icon-style">
+        			<span><strong>{{item.text}}</strong></span>
+        		</div>
 		</div>
 	</div>
 </template>
@@ -18,6 +34,10 @@
 			}
 		},
 		methods: {
+			toPage(index, path) {
+				this.$store.dispatch('user/setCurrent', index)
+				this.$router.push({path})
+			},
 			toPath(index, item) {
 				if(item.islogin && !this.user._id) {
 					Message.error('请先关注 WorkzSpace 公众号')
@@ -55,7 +75,8 @@
 		            text             : "More",
 		            iconPath         : "/static/imgs/more.png",
 		            selectedIconPath : "/static/imgs/more_select.png",
-					islogin : false
+					islogin : false,
+					click : true
 		        }];
 	        }
         }),
