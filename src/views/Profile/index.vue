@@ -49,14 +49,14 @@
 				</div>
 				<div class="item">
 					<img src="/static/imgs/local.png" class="icon-style" />
-					<el-input v-model="data.address" placeholder="Expect region"></el-input>
+					<el-input v-model="data.address" placeholder="Preferred Areas"></el-input>
 				</div>
 				<div class="item">
 					<img src="/static/imgs/money.png" class="icon-style" />
-					<el-input type="number" v-model="data.budget" placeholder="Your budget"></el-input>
+					<el-input type="number" v-model="data.budget" placeholder="Budget"></el-input>
 				</div>
 				<div class="item">
-					<el-input type="textarea" v-model="data.other" placeholder="Your other requirements"></el-input>
+					<el-input type="textarea" v-model="data.other" placeholder="Other Requirements"></el-input>
 				</div>
 			</div>
 		</div>
