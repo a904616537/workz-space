@@ -12,10 +12,10 @@
 			</div>
 			<carousel :per-page="1" :mouse-drag="true" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="5000" :loop="true">
 				<slide v-for="(item, index) in data.photos" :key="index">
-					<div class="card-img img" :style="'background-image: url('+item+')'"></div>
-					<!--  照片数量显示  -->
-					<span class="img-number">1/1</span> 
-
+					<div class="card-img img" :style="'background-image: url('+item+')'">
+						<!--  照片数量显示  -->
+						<span class="img-number">1 / 1</span> 
+					</div>
 				</slide>
 			</carousel>
 		</div>
@@ -59,7 +59,12 @@
 				</div>
 			</div>
 		</div>
-
+		<div class="card">
+			<div class="card-content">
+				<h3>More Questions?</h3>
+				<div class="btn-style" @click="$router.push({path : 'contact'})">Contact Us</div>
+			</div>
+		</div>
 		<div class="card">
 			<div class="card-content">
 				<h3>Reviews</h3>
@@ -83,6 +88,14 @@
 			</div>
 		</div>
 		
+		<!-- post评论后弹出对话框 -->
+		<el-dialog
+		  	:visible.sync="dialogVisible"
+		  	width="80%"
+		  	:before-close="handleClose">
+		  	<span>Thanks for you review! Once your opinion has been reviewed it will be posted.<br/> 感谢您的评论！ 审核您的意见后，它将被发布。</span><br/>
+		    <el-button type="primary" @click="dialogVisible = false" style="margin-top: 20px;">确 定</el-button>
+		</el-dialog>
 
 	</div>
 </template>
@@ -93,10 +106,11 @@
 	import {getWorkspace, submitComment} from '../../api';
 
 	export default{
-		name : 'home',
+		name : 'workspace',
 		data() {
 			return {
 				input : '',
+				dialogVisible: false,
 				data : {
 					photos : [],
 					provider : {
@@ -144,7 +158,6 @@
         			console.log('err', err);
         		})
         	},
-        	
         	submit() {
 				const model = {
 					_id : this.data._id,
@@ -160,6 +173,7 @@
 					this.input = '';
 					if(!this.data.comments) this.data.comments = [];
 					this.data.comments.push(model.comment)
+					this.dialogVisible = true;
 				})
 				.catch(err => {})
 			},
@@ -176,6 +190,13 @@
                 })
                 .catch(err => {})
 			},
+			handleClose(done) {
+		        this.$confirm('确认关闭？')
+		          	.then(_ => {
+		            	done();
+		          	})
+		        .catch(_ => {});
+		    }
 		},
 		beforeMount() {
 			const _id = this.$route.query._id;
@@ -189,8 +210,16 @@
 
 <style lang="scss">
 .workspace {
-	.img-number {
-		
+	.btn-style {
+		background-color : #00aeef;
+		color            : #fff;
+		border-radius    : 15px;
+		box-shadow       : 0 0 5px rgba(197,204,208,0.3);
+		padding          : 0 50px;
+		display          : inline-block;
+		line-height      : 40px;
+		font-weight      : bold;
+		margin           : 0 0 10px;
 	}
 }
 </style>

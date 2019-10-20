@@ -21,9 +21,11 @@
 				:playsinline="true"
 				@error="onPlayerLoadeddata($event)" 
 				customEventName="changed">
-
+				
           	</video-player>
           	<div v-else @click="toWorkspace" style="height: 100%;width: 100%;"></div>
+          	<!-- 轮播图数量 -->
+          	<span v-if="!data.video" class="img-number">1 / 1</span>
 		</div>
 		<div class="card-content">
 			<div class="icon-box">

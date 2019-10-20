@@ -23,6 +23,23 @@
 				<el-button class="submit" @click="submitWishlist">Submit Wishlist</el-button>
 			</div>
 		</div>
+
+		<!-- 信息提交后弹出框 -->
+		<el-dialog
+		  	:visible.sync="dialogVisible"
+		  	width="80%"
+		  	:before-close="handleClose">
+		  	<div v-if="!this.validation">
+		  		<span>你的个人信息不完整，请先完善<br/>Please fill in all required info first and submit again<br/></span>
+				<el-button type="primary" @click="dialogVisible = false" style="margin-top: 20px;">确 定</el-button>
+			</div>
+			<div v-else>
+				<span>愿望清单已成功提交。我们会尽快与您联系！<br/>Wishlist successfully submitted. We'll be in touch with you shortly!<br/></span>
+				<el-button type="primary" @click="dialogVisible = false" style="margin-top: 20px;">确 定</el-button>
+			</div>
+		</el-dialog>
+
+
 	</div>
 </template>
 
@@ -34,7 +51,8 @@
 	export default {
 		data() {
 			return {
-				workzs : []
+				workzs : [],
+				dialogVisible: false
 			}
 		},
 		components: {
@@ -96,7 +114,7 @@
 	    	},
 	    	submitWishlist() {
 	    		if(!this.validation) {
-	    			Message.error('您的信息不完整，请先完善！');
+	    			this.dialogVisible = true
 	    			return;
 	    		}
 	    		const model = {
@@ -113,7 +131,7 @@
 	    		}
 	    		postWishlist(model)
 	    		.then(result => {
-	    			Message.success('已经提交您的心愿单，请等待管理员联系！')
+	    			this.dialogVisible = true
 	    			this.workzs = [];
 	    		})
 	    		.catch(err => {
