@@ -234,14 +234,14 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 						if(this.play && reactObj.y < 240 && reactObj.y > 0) {
 							this.play = false
 							document.addEventListener("WeixinJSBridgeReady", () => {
-								this.player.play();
+								this.$refs.videoPlayer.player.play();
 							}, false);
 							
 						} else if(!this.play && ((reactObj.y * -1) > 240 || reactObj.y > window.innerHeight - reactObj.height)){
 							this.play = true
 							this.player.pause();
 							document.addEventListener("WeixinJSBridgeReady", () => {
-								this.player.pause();
+								this.$refs.videoPlayer.player.pause();
 							}, false);
 						}
 					}
