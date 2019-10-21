@@ -179,7 +179,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 						remainingTimeDisplay: false,
 						fullscreenToggle: true  //全屏按钮
 					},
-					// poster: this.img
+					poster: this.img
 				}
 			}
         }),
