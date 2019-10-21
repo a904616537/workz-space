@@ -179,6 +179,40 @@
         		.then(workspace => {
         			console.log('workspace', workspace)
         			this.data = workspace
+        			wx.onMenuShareAppMessage({
+						title   : this.data.name, // 分享标题
+						desc    : this.data.desc_en, // 分享描述
+						link    : `http://store.workspace.h-fish.vip?workspace=${this.data._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+						imgUrl  : 'http://store.workspace.h-fish.vip/static/imgs/logo.png', // 分享图标
+						type    : 'link', // 分享类型,music、video或link，不填默认为link
+						success : () => {
+					    	console.log('分享给朋友成功')
+							Message.success('分享给朋友成功!')
+						},
+						cancel(res) {
+							// alert('取消分享'+JSON.stringify(res))
+						},
+						fail(res) {
+							// alert('分享失败'+JSON.stringify(res))
+						}
+					});
+					wx.onMenuShareTimeline({
+						title   : this.data.name, // 分享标题
+						desc    : this.data.desc_en, // 分享描述
+						link    : `http://store.workspace.h-fish.vip?workspace=${this.data._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+						imgUrl  : 'http://store.workspace.h-fish.vip/static/imgs/logo.png', // 分享图标
+						success : () => {
+							Message.success('分享成功啦！!')
+						},
+						cancel(res) {
+							// alert('取消分享'+JSON.stringify(res))
+						},
+						fail(res) {
+							// alert('分享失败'+JSON.stringify(res))
+						}
+					})
+
+
         		})
         		.catch(err => {
         			console.log('err', err);
@@ -224,38 +258,6 @@
 		    }
 		},
 		mounted() {
-			wx.onMenuShareAppMessage({
-				title   : this.data.name, // 分享标题
-				desc    : this.data.desc_en, // 分享描述
-				link    : `http://store.workspace.h-fish.vip?workspace=${this.data._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-				imgUrl  : '/static/imgs/logo.png', // 分享图标
-				type    : 'link', // 分享类型,music、video或link，不填默认为link
-				success : () => {
-			    	console.log('分享给朋友成功')
-					Message.success('分享给朋友成功!')
-				},
-				cancel(res) {
-					// alert('取消分享'+JSON.stringify(res))
-				},
-				fail(res) {
-					// alert('分享失败'+JSON.stringify(res))
-				}
-			});
-			wx.onMenuShareTimeline({
-				title   : this.data.name, // 分享标题
-				desc    : this.data.desc_en, // 分享描述
-				link    : `http://store.workspace.h-fish.vip?workspace=${this.data._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-				imgUrl  : '/static/imgs/logo.png', // 分享图标
-				success : () => {
-					Message.success('分享成功啦！!')
-				},
-				cancel(res) {
-					// alert('取消分享'+JSON.stringify(res))
-				},
-				fail(res) {
-					// alert('分享失败'+JSON.stringify(res))
-				}
-			})
 		},
 		beforeMount() {
 			const _id = this.$route.query._id;
