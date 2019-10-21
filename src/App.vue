@@ -37,7 +37,7 @@ export default {
               })
           })
           .catch(err => {
-            console.log('初始化微信SDK失败', error);
+            console.log('初始化微信SDK失败', err);
           })
         },
         getUrlParam(name) {
