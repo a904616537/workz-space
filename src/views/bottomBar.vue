@@ -25,7 +25,7 @@ export default {
             if(workspace_id) {
                 window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
             } else {
-                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip?workspace=${workspace_id}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect`;
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip/&response_type=code&scope=snsapi_userinfo&state=${workspace_id}#wechat_redirect`;
             }
             // }
         },
@@ -45,21 +45,22 @@ export default {
                 getcode({code})
                 .then(result => {
                     const {openid} = result;
-                    this.getUser(openid, workspace_id);
+                    this.getUser(openid);
                 })
                 .catch(err => {console.log('error', err)});
             } else {
                 this.onWechatLogin(workspace_id);
             }  
         },
-        getUser(openid, workspace_id) {
+        getUser(openid) {
             // getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
             getuser({openid})
             .then(user => {
                 console.log('user', user)
                 if(user) {
                     this.$store.dispatch('user/login', user);
-                    if(workspace_id) this.$router.push({ path: 'workspace', query : {_id : workspace_id}})
+                    const workspace_id = this.getUrlParam('state');
+                    if(workspace_id != '123') this.$router.push({ path: 'workspace', query : {_id : workspace_id}})
                 } else {
                     Message.error('请先关注 WorkzSpace 公众号')
                 }
