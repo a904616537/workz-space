@@ -40,7 +40,13 @@
 			},
 			toPath(index, item) {
 				if(item.islogin && !this.user._id) {
-					Message.error('请先关注 WorkzSpace 公众号')
+					Message({
+						message : '请先登录 WorkzSpace',
+						type    : 'error',
+						onClose : () => {
+							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+						}
+					})
 				} else {
 					this.$store.dispatch('user/setCurrent', index)
 					this.$router.push({path : item.pagePath})

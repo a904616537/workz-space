@@ -193,24 +193,6 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 			toWorkspace() {
         		this.$router.push({ path: 'workspace', query : {_id : this.data._id}})
         	},
-			submit() {
-				const model = {
-					_id : this.data._id,
-					comment : {
-						name   : 'Anonymous',
-						avatar : 'http://store.workspace.h-fish.vip/static/imgs/user.jpg',
-						text   : this.input
-					}
-				};
-				submitComment(model)
-				.then(result => {
-					console.log('result', result);
-					this.input = '';
-					if(!this.data.comments) this.data.comments = [];
-					this.data.comments.push(model.comment)
-				})
-				.catch(err => {})
-			},
 			praise() {
 				if(!this.user._id) return;
 				const model = {
@@ -250,7 +232,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 							this.play = true
 							this.player.pause();
 							// document.addEventListener("WeixinJSBridgeReady", () => {
-								this.$refs.videoPlayer.player.pause();
+								// this.$refs.videoPlayer.player.pause();
 							// }, false);
 						}
 					}

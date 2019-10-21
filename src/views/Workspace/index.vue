@@ -177,12 +177,11 @@
         	getData(_id) {
         		getWorkspace({_id})
         		.then(workspace => {
-        			console.log('workspace', workspace)
         			this.data = workspace
-        			wx.onMenuShareAppMessage({
-						title   : this.data.name, // 分享标题
-						desc    : this.data.desc_en, // 分享描述
-						link    : `http://store.workspace.h-fish.vip?workspace=${this.data._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        			wx.updateAppMessageShareData({
+						title   : workspace.name, // 分享标题
+						desc    : workspace.desc_en, // 分享描述
+						link    : `http://store.workspace.h-fish.vip?workspace=${workspace._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 						imgUrl  : 'http://store.workspace.h-fish.vip/static/imgs/logo.png', // 分享图标
 						type    : 'link', // 分享类型,music、video或link，不填默认为link
 						success : () => {
@@ -196,10 +195,10 @@
 							// alert('分享失败'+JSON.stringify(res))
 						}
 					});
-					wx.onMenuShareTimeline({
-						title   : this.data.name, // 分享标题
-						desc    : this.data.desc_en, // 分享描述
-						link    : `http://store.workspace.h-fish.vip?workspace=${this.data._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+					wx.updateTimelineShareData({
+						title   : workspace.name, // 分享标题
+						desc    : workspace.desc_en, // 分享描述
+						link    : `http://store.workspace.h-fish.vip?workspace=${workspace._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 						imgUrl  : 'http://store.workspace.h-fish.vip/static/imgs/logo.png', // 分享图标
 						success : () => {
 							Message.success('分享成功啦！!')
@@ -222,6 +221,16 @@
         		if(this.disabled) {
         			return;
         		}
+        		if(!this.user._id) {
+					Message({
+						message : '请先登录 WorkzSpace',
+						type    : 'error',
+						onClose : () => {
+							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+						}
+					})
+					return;
+				}
 				const model = {
 					_id : this.data._id,
 					comment : {
