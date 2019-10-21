@@ -61,7 +61,7 @@ export default {
                     this.$store.dispatch('user/login', user);
                     const workspace_id = this.getUrlParam('state');
                     alert(`workspace_id=${workspace_id}`)
-                    if(workspace_id != '123') this.$router.push({ path: 'workspace', query : {_id : workspace_id}})
+                    if(workspace_id && workspace_id != '123') this.$router.push({ path: 'workspace', query : {_id : workspace_id}})
                 } else {
                     Message.error('请先关注 WorkzSpace 公众号')
                 }
