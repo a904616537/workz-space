@@ -49,9 +49,9 @@ export default {
             }  
         },
         getUser(openid) {
-            // getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
-            getuser({openid})
-            .then(user => {
+            const func = process.env.NODE_ENV == "development"?getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'}):getuser({openid})
+
+            func.then(user => {
                 console.log('user', user)
                 if(user) this.$store.dispatch('user/login', user);
                 else {
@@ -65,8 +65,11 @@ export default {
         }
     },
     created() {
-    	this.onInit();
-    	// this.getUser()
+        if(process.env.NODE_ENV == "development") {
+            this.getUser()
+        } else {
+            this.onInit(); 
+        }
     }
 }
 </script>

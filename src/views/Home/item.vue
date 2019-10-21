@@ -165,13 +165,21 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 					autoplay    : false,
 					muted       : true,
 					aspectRatio : '16:9',
+					preload: 'auto',
 					sources     : [{
 						type: 'video/mp4',
 						src: this.data.video,
 						// type: 'video/x-flv',
 					}],
 					language: 'zh-CN',
-					poster: this.img
+					notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
+					controlBar: {
+						timeDivider: true,
+						durationDisplay: true,
+						remainingTimeDisplay: false,
+						fullscreenToggle: true  //全屏按钮
+					}
+					// poster: this.img
 				}
 			}
         }),
