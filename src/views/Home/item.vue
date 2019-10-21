@@ -165,7 +165,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 					autoplay    : false,
 					muted       : true,
 					aspectRatio : '16:9',
-					preload: 'auto',
+					preload: 'metadata',
 					sources     : [{
 						type: 'video/mp4',
 						src: this.data.video,
@@ -178,7 +178,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 						durationDisplay: true,
 						remainingTimeDisplay: false,
 						fullscreenToggle: true  //全屏按钮
-					}
+					},
 					// poster: this.img
 				}
 			}
