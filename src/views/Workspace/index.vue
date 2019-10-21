@@ -31,7 +31,7 @@
 				<div class="icon-box">
 					<div>
 						<i class="el-icon-star-off icon-style" :class="{active : isPraise, ['el-icon-star-on'] : isPraise}" @click="praise"></i>
-						<i class="el-icon-position icon-style"></i>
+						<i class="el-icon-position icon-style" @click="onShare"></i>
 					</div>
 					<div class="ribbon red"></div>
 				</div>
@@ -76,11 +76,10 @@
 			<div class="card-content">
 				<h3>Reviews</h3>
 				<div class="dialog" style="margin-bottom: 20px;">
-					<div class="head-img" style="background-image: url('../static/imgs/user.jpg')"></div>
+					<div class="head-img" :style="'background-image: url('+this.user.headimgurl+')'"></div>
 					<el-input v-model="input" placeholder="Write Your Comment"></el-input>
 					<span @click="submit">Post</span>
 				</div>
-
 				<div v-for="(item, index) in data.comments" class="reviews">
 					<div class="avatar" :style="'background-image: url('+item.avatar+')'"></div>
 					<div class="content">
@@ -103,7 +102,14 @@
 		  	<span>Thanks for you review! Once your opinion has been reviewed it will be posted.<br/> 感谢您的评论！ 审核您的意见后，它将被发布。</span><br/>
 		    <el-button type="primary" @click="dialogVisible = false" style="margin-top: 20px;">确 定</el-button>
 		</el-dialog>
-
+		<el-dialog
+			:show-close="false"
+		  	:visible.sync="dialogShare"
+		  	width="80%"
+		  	:before-close="handleClose">
+		  	<span>Please click the button in the top right corner of WeChat to share.<br/> 请点击微信右上角的按钮分享哦。</span><br/>
+		    <el-button type="primary" @click="dialogShare = false" style="margin-top: 20px;">确 定</el-button>
+		</el-dialog>
 	</div>
 </template>
 
@@ -111,6 +117,7 @@
 	import Vue                           from 'vue';
 	import {mapState}                    from 'vuex';
 	import {getWorkspace, submitComment} from '../../api';
+	import { Message } from 'element-ui';
 
 	export default{
 		name : 'workspace',
@@ -118,6 +125,7 @@
 			return {
 				slideValue : 0,
 				input : '',
+				dialogShare : false,
 				dialogVisible: false,
 				data : {
 					photos : [],
@@ -154,8 +162,15 @@
 				if(praise) return true;
 				return false;
 			},
+			disabled : function() {
+        		if(this.input.trim() == '') return true;
+        		else return false;
+			}
 		}),
 		methods: {
+			onShare() {
+				this.dialogShare = true;
+			},
 			onSlide(item) {
 				console.log('slide item', item)
 			},
@@ -170,21 +185,24 @@
         		})
         	},
         	submit() {
+        		if(this.disabled) {
+        			return;
+        		}
 				const model = {
 					_id : this.data._id,
 					comment : {
-						name   : 'Anonymous',
-						avatar : 'http://store.workspace.h-fish.vip/static/imgs/user.jpg',
+						name   : this.user.name,
+						avatar : this.user.headimgurl,
 						text   : this.input
 					}
 				};
 				submitComment(model)
 				.then(result => {
-					console.log('result', result);
 					this.input = '';
 					if(!this.data.comments) this.data.comments = [];
 					this.data.comments.push(model.comment)
 					this.dialogVisible = true;
+					Message.success()
 				})
 				.catch(err => {})
 			},
@@ -202,19 +220,48 @@
                 .catch(err => {})
 			},
 			handleClose(done) {
-		        this.$confirm('确认关闭？')
-		          	.then(_ => {
-		            	done();
-		          	})
-		        .catch(_ => {});
+				done();
 		    }
+		},
+		mounted() {
+			wx.onMenuShareAppMessage({
+				title   : this.data.name, // 分享标题
+				desc    : this.data.desc_en, // 分享描述
+				link    : `http://store.workspace.h-fish.vip?workspace=${this.data._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+				imgUrl  : '/static/imgs/logo.png', // 分享图标
+				type    : 'link', // 分享类型,music、video或link，不填默认为link
+				success : () => {
+			    	console.log('分享给朋友成功')
+					Message.success('分享给朋友成功!')
+				},
+				cancel(res) {
+					// alert('取消分享'+JSON.stringify(res))
+				},
+				fail(res) {
+					// alert('分享失败'+JSON.stringify(res))
+				}
+			});
+			wx.onMenuShareTimeline({
+				title   : this.data.name, // 分享标题
+				desc    : this.data.desc_en, // 分享描述
+				link    : `http://store.workspace.h-fish.vip?workspace=${this.data._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+				imgUrl  : '/static/imgs/logo.png', // 分享图标
+				success : () => {
+					Message.success('分享成功啦！!')
+				},
+				cancel(res) {
+					// alert('取消分享'+JSON.stringify(res))
+				},
+				fail(res) {
+					// alert('分享失败'+JSON.stringify(res))
+				}
+			})
 		},
 		beforeMount() {
 			const _id = this.$route.query._id;
 			if(_id) {
 				this.getData(_id);
 			} else this.$router.go(-1)
-			
 		}
 	}
 </script>

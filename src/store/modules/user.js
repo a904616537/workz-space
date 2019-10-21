@@ -11,7 +11,6 @@ const mutations = {
     state.token = token
   },
   SET_USER: (state, user) => {
-    console.log('user--->', user)
     state.user = user
   },
   SET_MENU : (state, current) => {

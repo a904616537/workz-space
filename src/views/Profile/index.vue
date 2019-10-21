@@ -105,7 +105,6 @@
 			},
 			onSubmit() {
 				const model = Object.assign({}, this.user, this.data);
-				console.log('model', model)
 				updateuser(model)
 				.then(result => {
 					this.$store.dispatch('user/edit', model)

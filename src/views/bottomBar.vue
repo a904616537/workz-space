@@ -18,11 +18,15 @@ export default {
             const r = window.location.search.substr(1).match(reg);
             if (r != null) return unescape(r[2]); return null;
         },
-        onWechatLogin() {
+        onWechatLogin(workspace_id) {
             // if(process.env.NODE_ENV == "development") {
                 // window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Ftest.h-fish.cn&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
             // } else {
+            if(workspace_id) {
                 window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+            } else {
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip?workspace=${workspace_id}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect`;
+            }
             // }
         },
         toWechat() {
@@ -35,26 +39,28 @@ export default {
             }
         },
         onInit() {
+            const workspace_id = this.getUrlParam('workspace');
             const code = this.getUrlParam('code');
             if(code) {
                 getcode({code})
                 .then(result => {
-                    console.log('get code', result);
                     const {openid} = result;
-                    this.getUser(openid);
+                    this.getUser(openid, workspace_id);
                 })
                 .catch(err => {console.log('error', err)});
             } else {
-                this.onWechatLogin();
+                this.onWechatLogin(workspace_id);
             }  
         },
-        getUser(openid) {
+        getUser(openid, workspace_id) {
             // getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
             getuser({openid})
             .then(user => {
                 console.log('user', user)
-                if(user) this.$store.dispatch('user/login', user);
-                else {
+                if(user) {
+                    this.$store.dispatch('user/login', user);
+                    if(workspace_id) this.$router.push({ path: 'workspace', query : {_id : workspace_id}})
+                } else {
                     Message.error('请先关注 WorkzSpace 公众号')
                 }
             })

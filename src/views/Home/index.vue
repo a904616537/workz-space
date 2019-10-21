@@ -166,8 +166,8 @@
 	}
 	.video-js .vjs-big-play-button {
 		top: auto !important;
-		bottom : 30px !important;
-		left: 10px !important;
+		bottom : 50px !important;
+		left: 110px !important;
 	}
 	.searchinput {
 		flex : 1;
