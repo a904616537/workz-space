@@ -47,7 +47,7 @@
 				<div>
 					<i class="el-icon-star-off icon-style" :class="{active : isPraise, ['el-icon-star-on'] : isPraise}" @click="praise"></i>
 					<i class="el-icon-chat-line-round icon-style" @click="toWorkspace"></i>
-					<i class="el-icon-position icon-style"></i>
+					<i class="el-icon-position icon-style" @click="toWorkspace"></i>
 				</div>
 				<div class="ribbon" :class="{red : isWishlist}" @click="wishlist"></div>
 			</div>
