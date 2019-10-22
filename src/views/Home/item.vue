@@ -241,6 +241,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 							wx.ready(() => {
 								player.pause();
 							});
+							
 						}	
 					}
 				})
