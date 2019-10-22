@@ -42,6 +42,7 @@
 				</carousel>
           	</div>
 		</div>
+		<p>{{play?'暂停':'播放'}} ---- y轴： {{y}}</p>
 		<div class="card-content">
 			<div class="icon-box">
 				<div>
@@ -91,8 +92,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 		data() {
 			return {
 				play : true,
-				player : null,
-				reactObj : null,
+				y : 0,
 				slideValue : 0,
 				input : '',
 				showVideo : true
@@ -225,6 +225,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 						player = this.$refs[`videoPlayer${this.index}`].player;
 					}
 					if(player && reactObj) {
+						this.y = reactObj.y;
 						if(this.play && reactObj.y < 240 && reactObj.y > 0) {
 							this.play = false
 							console.log('加载资源, 开始播放', this.index)
