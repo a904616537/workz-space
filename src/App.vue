@@ -111,7 +111,7 @@ export default {
       this.onInitWechatSDK();
 
         // this.getUser()
-        this.onInit();
+        this.onInit(); 
     }
 }
 </script>

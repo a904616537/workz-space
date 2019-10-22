@@ -92,7 +92,8 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 		data() {
 			return {
 				play : true,
-				y : 0,
+				reactObj : null,
+				player : null,
 				slideValue : 0,
 				input : '',
 				showVideo : true
@@ -219,26 +220,23 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 			},
 			handleScroll () {
 				this.$nextTick(() => {
-					let reactObj = null, player = null;
 					const div = document.getElementById(`parent${this.index}`);
 					if(div){
-						reactObj = div.getBoundingClientRect();
+						this.reactObj = div.getBoundingClientRect();
 					}
 					if(this.$refs[`videoPlayer${this.index}`]) {
-						player = this.$refs[`videoPlayer${this.index}`].player;
+						this.player = this.$refs[`videoPlayer${this.index}`].player;
 					}
-					if(player && reactObj) {
-						this.y = reactObj.y;
-						if(this.play && reactObj.y < 240 && reactObj.y > 0) {
+					if(this.player && this.reactObj) {
+						if(this.play && this.reactObj.y < 240 && this.reactObj.y > 0) {
 							this.play = false
 							console.log('加载资源, 开始播放', this.index)
-							player.play();
+							this.player.play();
 							
-						} else if(!this.play && ((reactObj.y * -1) > 240 || reactObj.y > window.innerHeight - reactObj.height)){
+						} else if(!this.play && ((this.reactObj.y * -1) > 240 || this.reactObj.y > window.innerHeight - this.reactObj.height)){
 							this.play = true
 							console.log('暂停播放', this.index)
-							player.pause();
-							
+							this.player.pause();
 						}	
 					}
 				})
