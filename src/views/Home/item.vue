@@ -217,23 +217,18 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
                 .catch(err => {})
 			},
 			handleScroll () {
-				if(this.player) {
+				if(this.$refs.videoPlayer && this.$refs.videoPlayer.player) {
 					const div = document.getElementById(`parent${this.index}`);
 					if(div) {
 						const reactObj = div.getBoundingClientRect();
 						if(this.play && reactObj.y < 240 && reactObj.y > 0) {
 							this.play = false
-							// document.addEventListener("WeixinJSBridgeReady", () => {
 								console.log('加载微信资源, 开始播放')
 								this.$refs.videoPlayer.player.play();
-							// }, false);
 							
 						} else if(!this.play && ((reactObj.y * -1) > 240 || reactObj.y > window.innerHeight - reactObj.height)){
 							this.play = true
-							this.player.pause();
-							// document.addEventListener("WeixinJSBridgeReady", () => {
-								// this.$refs.videoPlayer.player.pause();
-							// }, false);
+							this.$refs.videoPlayer.player.pause();
 						}
 					}
 				}
