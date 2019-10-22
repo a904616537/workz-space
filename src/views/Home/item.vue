@@ -14,10 +14,10 @@
 		</div>
 		<div  class="card-img" :class="{img : !data.video}" :style="'background-image: url('+img+')'">
 			<video-player
-				:id="forId(index)" 
+				:id="`parent${index}`" 
 				v-if="data.video && showVideo"
 				class="vjs-custom-skin"
-				ref="videoPlayer"
+				:ref="`videoPlayer${index}`"
 				:options="playerOptions"
 				:playsinline="true"
 				@error="onPlayerLoadeddata($event)" 
@@ -91,6 +91,8 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 		data() {
 			return {
 				play : true,
+				player : null,
+				reactObj : null,
 				slideValue : 0,
 				input : '',
 				showVideo : true
@@ -139,10 +141,6 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 				// console.log('last', praise)
 				this.data.praises.push(praise);
 				return praise;
-			},
-			player : function() {
-				if(this.$refs.videoPlayer) return this.$refs.videoPlayer.player;
-				else return null;
 			},
 			img : function () {
 				if (this.data.photos.length > 0) {
@@ -217,30 +215,51 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
                 .catch(err => {})
 			},
 			handleScroll () {
-				if(this.$refs.videoPlayer && this.$refs.videoPlayer.player) {
+				this.$nextTick(() => {
+					let reactObj = null, player = null;
 					const div = document.getElementById(`parent${this.index}`);
-					if(div) {
-						const reactObj = div.getBoundingClientRect();
+					if(div){
+						reactObj = div.getBoundingClientRect();
+					}
+					if(this.$refs[`videoPlayer${this.index}`]) {
+						player = this.$refs[`videoPlayer${this.index}`].player;
+					}
+					if(player && reactObj) {
 						if(this.play && reactObj.y < 240 && reactObj.y > 0) {
 							this.play = false
-								console.log('加载微信资源, 开始播放')
-								this.$refs.videoPlayer.player.play();
+							console.log('加载资源, 开始播放', this.index)
+							player.play();
 							
 						} else if(!this.play && ((reactObj.y * -1) > 240 || reactObj.y > window.innerHeight - reactObj.height)){
 							this.play = true
-							this.$refs.videoPlayer.player.pause();
-						}
+							console.log('暂停播放', this.index)
+							player.pause();
+						}	
 					}
-				}
-			},
-			forId(id) {
-				return `parent${id}`;
+				})
+				
+				// if(this.$refs.videoPlayer && this.$refs.videoPlayer.player) {
+				// 	const div = document.getElementById(`parent${this.index}`);
+				// 	if(div) {
+				// 		const reactObj = div.getBoundingClientRect();
+				// 		if(this.play && reactObj.y < 240 && reactObj.y > 0) {
+				// 			this.play = false
+				// 				console.log('加载微信资源, 开始播放')
+				// 				this.$refs.videoPlayer.player.play();
+							
+				// 		} else if(!this.play && ((reactObj.y * -1) > 240 || reactObj.y > window.innerHeight - reactObj.height)){
+				// 			this.play = true
+				// 			this.$refs.videoPlayer.player.pause();
+				// 		}
+				// 	}
+				// }
 			}
 		},
-		mounted () {
+		beforeMount () {
 			window.addEventListener('scroll', this.handleScroll, true);
 		},
 		destroyed() {
+			console.log('销毁dom');
 			window.removeEventListener('scroll', this.handleScroll);
 		}
 	}
