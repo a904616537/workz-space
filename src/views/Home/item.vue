@@ -159,6 +159,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 			},
 			playerOptions: function() {
 				return {
+					id : `player${this.index}`,
 					height      : '340',
 					autoplay    : false,
 					muted       : true,
@@ -222,19 +223,24 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 						reactObj = div.getBoundingClientRect();
 					}
 					if(this.$refs[`videoPlayer${this.index}`]) {
-						player = this.$refs[`videoPlayer${this.index}`].player;
+						// player = this.$refs[`videoPlayer${this.index}`].player;
+						player = document.getElementById(`player${this.index}_html5_api`);
 					}
 					if(player && reactObj) {
 						this.y = reactObj.y;
 						if(this.play && reactObj.y < 240 && reactObj.y > 0) {
 							this.play = false
 							console.log('加载资源, 开始播放', this.index)
-							player.play();
+							wx.ready(() => {
+								player.play();
+							});
 							
 						} else if(!this.play && ((reactObj.y * -1) > 240 || reactObj.y > window.innerHeight - reactObj.height)){
 							this.play = true
 							console.log('暂停播放', this.index)
-							player.pause();
+							wx.ready(() => {
+								player.pause();
+							});
 						}	
 					}
 				})
