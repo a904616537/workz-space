@@ -14,7 +14,7 @@
 		</div>
 		<div  class="card-img" :class="{img : !data.video}" :style="'background-image: url('+img+')'">
 			<video-player
-				:id="forId(index)" 
+				:id="`parent${id}`" 
 				v-if="data.video && showVideo"
 				class="vjs-custom-skin"
 				ref="videoPlayer"
@@ -237,15 +237,12 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 						}
 					}
 				}
-			},
-			forId(id) {
-				return `parent${id}`;
 			}
 		},
 		beforeMount() {
-		},
-		mounted () {
-			window.addEventListener('scroll', this.handleScroll)
+			this.$nextTick(() => {
+				window.addEventListener('scroll', this.handleScroll)
+			})
 		}
 	}
 </script>
