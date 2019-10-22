@@ -169,6 +169,10 @@
 		bottom : 40% !important;
 		left: 40% !important;
 	}
+	.vjs-poster, .vjs-poster img {
+	    background-position: center !important;
+	    background-size: cover !important;
+	}
 	.searchinput {
 		flex : 1;
 	}

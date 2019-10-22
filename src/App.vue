@@ -14,22 +14,36 @@ export default {
     name    : 'App',
     methods : {
         onInitWechatSDK() {
-          getconfig()
-          .then(result => {
-            const config = {
-                  debug     : false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                  appId     : result.appId, // 必填，公众号的唯一标识
-                  timestamp : result.timestamp, // 必填，生成签名的时间戳
-                  nonceStr  : result.nonceStr, // 必填，生成签名的随机串
-                  signature : result.signature,// 必填，签名
-                  jsApiList : result.jsApiList
-              };
+            getconfig()
+            .then(result => {
+                const config = result.data;
+                console.log('jssdk config', config);
+                wx.config(config);
 
-              wx.config(config);
-              
-              wx.error((res) => {
-                  console.log('微信验证失败！', res)
-              })
+                wx.ready(() => {
+
+                    wx.onMenuShareAppMessage({
+                        title   : 'Workz Space', // 分享标题
+                        desc    : 'Workz Soace Desc', // 分享描述
+                        link    : `http://store.workspace.h-fish.vip`,
+                        imgUrl  : 'http://store.workspace.h-fish.vip/static/imgs/logo.png',
+                        success : () => {
+                            this.$toast.center('分享成功！');
+                        }
+                    });
+                    wx.onMenuShareTimeline({
+                        title   : 'Workz Space', // 分享标题
+                        desc    : 'Workz Soace Desc', // 分享描述
+                        link    : `http://store.workspace.h-fish.vip`,
+                        imgUrl  : 'http://store.workspace.h-fish.vip/static/imgs/logo.png',
+                        success : () => {
+                            this.$toast.center('分享成功！');
+                        }
+                    })
+                });
+                wx.error((res) => {
+                    console.log('接口处理失败', res)
+                });
           })
           .catch(err => {
             console.log('初始化微信SDK失败', err);
