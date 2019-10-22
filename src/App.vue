@@ -89,8 +89,8 @@ export default {
             }  
         },
         getUser(openid) {
-            getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
-            // getuser({openid})
+            // getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
+            getuser({openid})
             .then(user => {
                 console.log('user', user)
                 if(user) {
@@ -110,8 +110,8 @@ export default {
     created() {
       this.onInitWechatSDK();
 
-        this.getUser()
-        // this.onInit();
+        // this.getUser()
+        this.onInit();
     }
 }
 </script>

@@ -42,7 +42,6 @@
 				</carousel>
           	</div>
 		</div>
-		<p>{{play?'暂停':'播放'}} ---- y轴： {{y}}</p>
 		<div class="card-content">
 			<div class="icon-box">
 				<div>
@@ -84,6 +83,7 @@
 </template>
 
 <script>
+	import Vue from 'vue';
 import moment from 'moment';
 import {mapState} from 'vuex';
 import {submitComment, submitPraise, submitWishlist} from '../../api';
@@ -158,7 +158,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 				}else return '../static/imgs/user.jpg';
 			},
 			playerOptions: function() {
-				return {
+				const option = {
 					id : `player${this.index}`,
 					height      : '340',
 					autoplay    : false,
@@ -177,9 +177,12 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 						durationDisplay: true,
 						remainingTimeDisplay: false,
 						fullscreenToggle: true  //全屏按钮
-					},
-					poster: this.img
+					}
 				}
+				if(Vue.config.isWechat) {
+					option.poster = this.img;
+				}
+				return option
 			}
         }),
 		methods: {
@@ -223,52 +226,34 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 						reactObj = div.getBoundingClientRect();
 					}
 					if(this.$refs[`videoPlayer${this.index}`]) {
-						// player = this.$refs[`videoPlayer${this.index}`].player;
-						player = document.getElementById(`player${this.index}_html5_api`);
+						player = this.$refs[`videoPlayer${this.index}`].player;
 					}
 					if(player && reactObj) {
 						this.y = reactObj.y;
 						if(this.play && reactObj.y < 240 && reactObj.y > 0) {
 							this.play = false
 							console.log('加载资源, 开始播放', this.index)
-							wx.ready(() => {
-								player.play();
-							});
+							player.play();
 							
 						} else if(!this.play && ((reactObj.y * -1) > 240 || reactObj.y > window.innerHeight - reactObj.height)){
 							this.play = true
 							console.log('暂停播放', this.index)
-							wx.ready(() => {
-								player.pause();
-							});
+							player.pause();
 							
 						}	
 					}
 				})
-				
-				// if(this.$refs.videoPlayer && this.$refs.videoPlayer.player) {
-				// 	const div = document.getElementById(`parent${this.index}`);
-				// 	if(div) {
-				// 		const reactObj = div.getBoundingClientRect();
-				// 		if(this.play && reactObj.y < 240 && reactObj.y > 0) {
-				// 			this.play = false
-				// 				console.log('加载微信资源, 开始播放')
-				// 				this.$refs.videoPlayer.player.play();
-							
-				// 		} else if(!this.play && ((reactObj.y * -1) > 240 || reactObj.y > window.innerHeight - reactObj.height)){
-				// 			this.play = true
-				// 			this.$refs.videoPlayer.player.pause();
-				// 		}
-				// 	}
-				// }
 			}
 		},
 		beforeMount () {
-			window.addEventListener('scroll', this.handleScroll, true);
+			if(!Vue.config.isWechat) {
+				window.addEventListener('scroll', this.handleScroll, true);
+			}
 		},
 		destroyed() {
-			console.log('销毁dom');
-			window.removeEventListener('scroll', this.handleScroll);
+			if(!Vue.config.isWechat) {
+				window.removeEventListener('scroll', this.handleScroll);
+			}
 		}
 	}
 </script>
