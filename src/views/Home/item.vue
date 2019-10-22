@@ -159,7 +159,6 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 			},
 			playerOptions: function() {
 				const option = {
-					id : `player${this.index}`,
 					height      : '340',
 					autoplay    : false,
 					muted       : true,
