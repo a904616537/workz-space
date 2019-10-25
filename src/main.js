@@ -10,6 +10,9 @@ import VueParticles       from 'vue-particles'
 import BaiduMap from 'vue-baidu-map'
 import Vuex from 'vuex'
 import store from './store'
+import i18n from './i18n'
+// import enLocale from 'element-ui/lib/locale/lang/en'
+// import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 
 import 'video.js/dist/video-js.css'
 
@@ -31,6 +34,11 @@ Vue.use(VueCarousel);
 Vue.use(VueParticles);
 Vue.use(Dialog);
 Vue.use(Popover);
+
+
+// Vue.config.lang = 'en'
+// Vue.locale('zh-cn', zh)
+// Vue.locale('en', en)
 
 Vue.use(BaiduMap, {
   ak: 'pEd1kn65vhQmV7RfE7ueGKf7'
@@ -71,6 +79,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  i18n,
   router,
   store,
   components: { App },
