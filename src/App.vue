@@ -5,11 +5,11 @@
 </template>
 
 <script>
-
-getconfig
+import { I18n } from './i18n';
 import { mapState, mapActions } from 'vuex'
 import { Message } from 'element-ui';
 import {getconfig, getuser, getcode} from './api';
+
 export default {
     name    : 'App',
     methods : {
@@ -89,8 +89,8 @@ export default {
             }  
         },
         getUser(openid) {
-            // getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
-            getuser({openid})
+            getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
+            // getuser({openid})
             .then(user => {
                 console.log('user', user)
                 if(user) {
@@ -108,10 +108,10 @@ export default {
         }
     },
     created() {
-      this.onInitWechatSDK();
+        this.onInitWechatSDK();
 
-        // this.getUser()
-        this.onInit(); 
+        this.getUser()
+        // this.onInit(); 
     }
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
 	<div class="home">
+
 		<div class="bannerview">
 			<carousel :per-page="1" :mouse-drag="true" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="5000" :loop="true">
 				<slide v-for="(item, index) in banners" :key="index">
@@ -41,7 +42,7 @@
 	import {workspace} from '../../api';
 	import Item        from './item';
 	import { mapState, mapActions } from 'vuex'
-
+	import i18n from '../../i18n';
 	export default{
 		name : 'home',
 		data() {
@@ -139,6 +140,9 @@
         		})
         	},
         	blur() {
+        	},
+        	onSwitch() {
+        		i18n.locale = 'zh';
         	}
 		},
 		beforeMount() {
