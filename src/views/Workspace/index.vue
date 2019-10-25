@@ -260,7 +260,16 @@
 				.catch(err => {})
 			},
 			wishlist() {
-				if(!this.user._id) return;
+				if(!this.user._id) {
+					Message({
+						message : '请先关注并登录 WorkzSpace',
+						type    : 'error',
+						onClose : () => {
+							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+						}
+					})
+					return;
+				}
 				const model = {
 					_id  : this.data._id,
 					user : this.user._id,
@@ -284,7 +293,16 @@
 	    		})
 	    	},
 			praise() {
-				if(!this.user._id) return;
+				if(!this.user._id) {
+					Message({
+						message : '请先关注并登录 WorkzSpace',
+						type    : 'error',
+						onClose : () => {
+							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+						}
+					})
+					return;
+				}
 				const model = {
 					_id : this.data._id,
 					user : this.user._id,

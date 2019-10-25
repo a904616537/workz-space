@@ -103,7 +103,6 @@ export default {
             // getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
             getuser({openid})
             .then(user => {
-                console.log('user', user)
                 if(user) {
                     this.$store.dispatch('user/login', user);
                     const workspace_id = this.getUrlParam('state');

@@ -63,64 +63,9 @@
 	export default{
 		name : 'home',
 		data() {
-			
-			const langs = [{
-					label : this.$t('area.all'),
-					value : ''
-				},{
-					label : this.$t('area.huangpu'),
-					value : this.$t('area.huangpu')
-				},{
-					label : this.$t('area.xuhui'),
-					value : this.$t('area.xuhui')
-				},{
-					label : this.$t('area.changning'),
-					value : this.$t('area.changning')
-				},{
-					label : this.$t('area.jingan'),
-					value : this.$t('area.jingan')
-				},{
-					label : this.$t('area.putuo'),
-					value : this.$t('area.putuo')
-				},{
-					label : this.$t('area.hongkou'),
-					value : this.$t('area.hongkou')
-				},{
-					label : this.$t('area.yangpu'),
-					value : this.$t('area.yangpu')
-				},{
-					label : this.$t('area.minhang'),
-					value : this.$t('area.minhang')
-				},{
-					label : this.$t('area.baoshan'),
-					value : this.$t('area.baoshan')
-				},{
-					label : this.$t('area.jiading'),
-					value : this.$t('area.jiading')
-				},{
-					label : this.$t('area.pudong'),
-					value : this.$t('area.pudong')
-				},{
-					label : this.$t('area.jinshan'),
-					value : this.$t('area.jinshan')
-				},{
-					label : this.$t('area.songjiang'),
-					value : this.$t('area.songjiang')
-				},{
-					label : this.$t('area.qingpu'),
-					value : this.$t('area.qingpu')
-				},{
-					label : this.$t('area.fengxian'),
-					value : this.$t('area.fengxian')
-				},{
-					label : this.$t('area.chongming'),
-					value : this.$t('area.chongming')
-				}]
-
 			return {
 				selectValue : '',
-				input : '',
-				restaurants : langs
+				input : ''
 			}
 		},
 		components : {
@@ -134,6 +79,60 @@
 					`../static/imgs/banner_2_${i18n.locale}.jpg`,
 					`../static/imgs/banner_3_${i18n.locale}.jpg`
 				]
+			},
+			restaurants : function() {
+				return [{
+					label : this.$t('area.all'),
+					value : ''
+				},{
+					label : this.$t('area.huangpu'),
+					value : '黄浦区'
+				},{
+					label : this.$t('area.xuhui'),
+					value : '徐汇区'
+				},{
+					label : this.$t('area.changning'),
+					value : '长宁区'
+				},{
+					label : this.$t('area.jingan'),
+					value : '静安区'
+				},{
+					label : this.$t('area.putuo'),
+					value : '普陀区'
+				},{
+					label : this.$t('area.hongkou'),
+					value : '虹口区'
+				},{
+					label : this.$t('area.yangpu'),
+					value : '杨浦区'
+				},{
+					label : this.$t('area.minhang'),
+					value : '闵行区'
+				},{
+					label : this.$t('area.baoshan'),
+					value : '宝山区'
+				},{
+					label : this.$t('area.jiading'),
+					value : '嘉定区'
+				},{
+					label : this.$t('area.pudong'),
+					value : '浦东新区'
+				},{
+					label : this.$t('area.jinshan'),
+					value : '金山区'
+				},{
+					label : this.$t('area.songjiang'),
+					value : '松江区'
+				},{
+					label : this.$t('area.qingpu'),
+					value : '青浦区'
+				},{
+					label : this.$t('area.fengxian'),
+					value : '奉贤区'
+				},{
+					label : this.$t('area.chongming'),
+					value : '崇明区'
+				}]
 			},
 			locale : function() {
 				return i18n.locale;
