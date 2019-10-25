@@ -12,7 +12,7 @@
 					<div class="logo">
 						<el-avatar style="background:#000;" :size="40" src="/static/imgs/logo.png"></el-avatar>
 					</div>
-					<el-autocomplete
+					<!-- <el-autocomplete
 					class="searchinput"
 					placeholder="Search Area"
 					prefix-icon="el-icon-search"
@@ -23,7 +23,24 @@
 					@select="handleSelect"
 					:select-when-unmatched="true"
 					v-model="input">
-					</el-autocomplete>
+					</el-autocomplete> -->
+					<el-select
+					class="searchinput"
+					popper-class="popper-class"
+					v-model="input" placeholder="" :clearable="true">
+						
+						<template slot="prefix">
+							<div class="seach-class">
+								<i class="el-icon-search"></i>
+							</div>
+						</template>
+						<el-option
+						v-for="item in restaurants"
+						:key="item.value"
+						:label="item.label"
+						:value="item.value">
+						</el-option>
+					</el-select>
 				</div>
 			</div>
 		</div>
@@ -46,13 +63,16 @@
 	export default{
 		name : 'home',
 		data() {
+			console.log('banners', i18n.locale)
+			const banners = [
+				`../static/imgs/banner_1_${i18n.locale}.jpg`,
+				`../static/imgs/banner_2_${i18n.locale}.jpg`,
+				`../static/imgs/banner_3_${i18n.locale}.jpg`
+			]
+
 			return {
-				listData : [],
-				banners : [
-				'../static/imgs/banner.jpg',
-				'../static/imgs/banner.jpg',
-				'../static/imgs/banner.jpg'
-				],
+				selectValue : '',
+				banners : banners,
 				input : '',
 				restaurants : [{
 					label : 'All',
@@ -112,7 +132,14 @@
 			'v-item' : Item
 		},
 		computed : mapState({
-			workspaces : state => state.workzspace.workzs
+			workspaces : state => state.workzspace.workzs,
+			listData : function () {
+				if(this.input == '') {
+					return this.workspaces;
+				} else {
+					return this.workspaces.filter(v => v.area == this.input || v.address_zh.includes(this.input) || v.address_en.includes(this.input));
+				}
+			}
 		}),
 		methods: {
 			querySearch(queryString, cb) {
@@ -126,14 +153,12 @@
 				};
 			},
 			handleSelect(item) {
-				if(item.value == '') this.listData = this.workspaces;
-				else this.listData = this.workspaces.filter(v => v.area == item.value || v.address_zh.includes(item.value) || v.address_en.includes(item.value));
+				this.selectValue = item.value;
 			},
         	getData() {
         		workspace()
         		.then(workspace => {
         			this.$store.dispatch('workzspace/setWorkz', workspace)
-        			this.listData = workspace;
         		})
         		.catch(err => {
         			console.log('err', err);

@@ -6,18 +6,20 @@
 					<el-popover
 					  placement="top"
 					  width="50"
-					  trigger="click">
-					  <p @click="() => toPage(index, '/contact')">Contact Us</p>
-					  <p @click="() => toPage(index, '/testimonials')">Testimonials</p>
+					  trigger="click"
+					  popper-class="popper-class">
+					  <p class="item" @click="() => toPage(index, '/contact')">Contact Us</p>
+					  <p class="item" @click="() => toPage(index, '/testimonials')">Testimonials</p>
 					  <div class="select" slot="reference">
 							<img :src="current == index?item.selectedIconPath:item.iconPath" class="icon-style">
 							<span><strong>{{item.text}}</strong></span>
 					  </div>
 					</el-popover>
-        		
         		</div>
         		<div v-else class="select" @click="() => toPath(index, item)">
-        			<img :src="current == index?item.selectedIconPath:item.iconPath" class="icon-style">
+        			<el-badge :hidden="!item.badge" :value="item.badge">
+        				<img :src="current == index?item.selectedIconPath:item.iconPath" class="icon-style">
+        			</el-badge>
         			<span><strong>{{item.text}}</strong></span>
         		</div>
 		</div>
@@ -56,6 +58,7 @@
 		computed : mapState({
 			current : state => state.user.current,
 			user    : state => state.user.user,
+			badge : state => state.workzspace.workzs.length,
             tabs() {
 	        	return [{
 					pagePath         : "/",
@@ -74,8 +77,8 @@
 					text             : "Wishlist",
 					iconPath         : "/static/imgs/tag.png",
 					selectedIconPath : "/static/imgs/tag_select.png",
-					islogin : true
-					// badge            : this.badge
+					islogin : true,
+					badge            : this.badge
 		        },{
 		            pagePath         : "/contact",
 		            text             : "More",
@@ -133,5 +136,16 @@
 			.icon-style{
 			}
 		}
+		
+	}
+	.el-popper {
+		.item {
+			padding: 10px 0;
+			text-align: center;
+		}
+	}
+
+	.popper-class {
+		width: 120px !important;
 	}
 </style>

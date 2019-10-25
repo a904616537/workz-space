@@ -7,7 +7,7 @@
 				</div>
 				<div class="card-infor">
 					<div class="infor-title">{{data.name}}</div>
-					<div><i class="el-icon-location icon-style"></i>{{data.address_en}}</div>
+					<div><i class="el-icon-location icon-style"></i>{{data.address_en}}{{data.addresses_en||''}}</div>
 				</div>
 			</div>
 			<carousel

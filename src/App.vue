@@ -5,6 +5,7 @@
 </template>
 
 <script>
+    import Vue from 'vue'
 import { I18n } from './i18n';
 import { mapState, mapActions } from 'vuex'
 import { Message } from 'element-ui';
@@ -89,6 +90,7 @@ export default {
             }  
         },
         getUser(openid) {
+
             getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
             // getuser({openid})
             .then(user => {
@@ -108,10 +110,12 @@ export default {
         }
     },
     created() {
-        this.onInitWechatSDK();
-
-        this.getUser()
-        // this.onInit(); 
+        if(Vue.config.isWechat) {
+            console.log('微信打开')
+            this.onInitWechatSDK();
+            this.getUser()
+            // this.onInit(); 
+        }
     }
 }
 </script>
@@ -141,5 +145,11 @@ body {
 }
 .popper-class {
   width: 120px !important;
+  min-width: 120px !important;
+}
+.seach-class {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
 }
 </style>

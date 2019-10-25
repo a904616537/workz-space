@@ -11,7 +11,7 @@
 			<div class="img"><img class="img-style"></div>
 			<div class="infor">
 				<div class="title"><strong>Global-Sign</strong><i>(Reiji Oishi)</i></div>
-				<div class="tips"><i class="el-icon-location icon-style"></i> Japan</div>
+				<div class="tips"><i class="el-icon-location icons"></i>Japan</div>
 			</div>
 		</div>
 	</div>
@@ -31,6 +31,10 @@
 <style lang="scss" scoped>
 .text-style {
 	position: relative;
+}
+.icons {
+	width: 30px;
+	height: 30px;
 }
 .icon-style {
 	position: absolute;

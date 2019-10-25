@@ -7,7 +7,7 @@
 			<div class="card-infor">
 				<div class="infor-title">{{data.name}}</div>
 				<div class="tworow">
-					<p><i class="el-icon-location icon-style"></i>{{`${data.area||''}${data.address_en}`}}</p>
+					<p><i class="el-icon-location icon-style"></i>{{`${data.area||''}${data.address_en}${data.addresses_en||''}`}}</p>
 					<span v-if="data.recommend">Premium Workspaces</span>
 				</div>
 			</div>

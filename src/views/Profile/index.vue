@@ -92,6 +92,12 @@
 		},
 		computed : mapState({
             user : state => state.user.user,
+            validation : function() {
+				if(this.data.address == '') return false;
+				if(this.data.budget == '') return false;
+				if(this.data.number == '') return false;
+				return true;
+			}
         }),
 		components: {
 			'v-upload' : Upload,
@@ -104,6 +110,11 @@
 				this.$router.go(-1)
 			},
 			onSubmit() {
+				console.log('this.validation', this.validation)
+				if(!this.validation) {
+					Message.error('"Preferred Areas,Number of Seats,Budget"，Must fill in the!')
+					return;
+				}
 				const model = Object.assign({}, this.user, this.data);
 				updateuser(model)
 				.then(result => {

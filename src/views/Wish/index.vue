@@ -27,8 +27,7 @@
 		<!-- 信息提交后弹出框 -->
 		<el-dialog
 		  	:visible.sync="dialogVisible"
-		  	width="80%"
-		  	:before-close="handleClose">
+		  	width="80%">
 		  	<div v-if="!this.validation">
 		  		<span>你的个人信息不完整，请先完善<br/>Please fill in all required info first and submit again<br/></span>
 				<el-button type="primary" @click="dialogVisible = false" style="margin-top: 20px;">确 定</el-button>
@@ -87,7 +86,7 @@
 				if(this.user.phone == '') return false;
 				if(this.user.email == '') return false;
 				if(this.user.company == '') return false;
-				if(!this.user.name) return false;
+				if(!this.user.first_name || !this.user.last_name) return false;
 				return true;
 			}
         }),

@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import { Button, Dropdown, DropdownMenu, DropdownItem, Popover, Icon, Input, Upload, Avatar, Autocomplete, Dialog } from 'element-ui'
+import { Button, Dropdown, DropdownMenu, DropdownItem, Popover, Icon, Input, Upload, Avatar, Autocomplete, Dialog, Select, Option, Badge } from 'element-ui'
 import VueVideoPlayer     from 'vue-video-player'
 import VueCarousel        from 'vue-carousel';
 import VueParticles       from 'vue-particles'
@@ -34,6 +34,9 @@ Vue.use(VueCarousel);
 Vue.use(VueParticles);
 Vue.use(Dialog);
 Vue.use(Popover);
+Vue.use(Select);
+Vue.use(Option);
+Vue.use(Badge);
 
 
 // Vue.config.lang = 'en'
