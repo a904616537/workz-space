@@ -7,7 +7,7 @@
 				</div>
 				<div class="card-infor">
 					<div class="infor-title">{{data.name}}</div>
-					<div><i class="el-icon-location icon-style"></i>{{data.address_en}}{{data.addresses_en||''}}</div>
+					<div><i class="el-icon-location icon-style"></i>{{`${data.area||''}`}} {{data[`address_${locale}`]}}{{data[`addresses_${locale}`]||''}}</div>
 				</div>
 			</div>
 			<carousel
@@ -33,7 +33,7 @@
 						<i class="el-icon-star-off icon-style" :class="{active : isPraise, ['el-icon-star-on'] : isPraise}" @click="praise"></i>
 						<i class="el-icon-position icon-style" @click="onShare"></i>
 					</div>
-					<div class="ribbon red"></div>
+					<div class="ribbon" :class="{red : isWishlist}" @click="wishlist"></div>
 				</div>
 			</div>
 
@@ -41,9 +41,9 @@
 				<bm-local-search v-show="false" :keyword="data.address_zh||'东方明珠'" :auto-viewport="true" :location="data.area||'黄浦区'"></bm-local-search>
   			</baidu-map>
 			<div class="card-content desc">
-				<h3>Description</h3>
+				<h3>{{$t('desc')}}</h3>
 				<p>
-					{{data.desc_en}}
+					{{data[`desc_${locale}`]}}
 				</p>
 			</div>
 		</div>
@@ -54,11 +54,11 @@
 				<div v-for="(item, index) in data.pricing" :key="index" class="item">
 					<h3>{{item.name}}</h3>
 					<div class="flag">
-						<span>Starting at</span>
+						<span>{{$t('start')}}</span>
 						<div class="ribbont" :class="{red : index%2==1}">
 							<div class="content">
 								<label>{{item.price}}</label>
-								<span>RMB/month per person</span>
+								<span>{{$t('price')}}</span>
 							</div>
 							<div class="triangle"></div>
 						</div>
@@ -68,8 +68,8 @@
 		</div>
 		<div class="card">
 			<div class="card-content">
-				<h3>More Questions?</h3>
-				<div class="btn-style" @click="$router.push({path : 'contact'})">Contact Us</div>
+				<h3>{{$t('question')}}</h3>
+				<div class="btn-style" @click="$router.push({path : 'contact'})">{{$t('button.contact')}}</div>
 			</div>
 		</div>
 		<div class="card">
@@ -78,7 +78,7 @@
 				<div class="dialog" style="margin-bottom: 20px;">
 					<div class="head-img" :style="'background-image: url('+this.user.headimgurl+')'"></div>
 					<el-input v-model="input" placeholder="Write Your Comment"></el-input>
-					<span @click="submit">Post</span>
+					<span @click="submit">{{$t('post')}}</span>
 				</div>
 				<div v-for="(item, index) in data.comments" class="reviews">
 					<div class="avatar" :style="'background-image: url('+item.avatar+')'"></div>
@@ -90,7 +90,7 @@
 					</div>
 				</div>
 
-				<div class="views"><strong>View all {{commentCount}} Comments</strong></div>
+				<div class="views"><strong>{{$t('view')}} {{commentCount}} {{$t('comments')}}</strong></div>
 			</div>
 		</div>
 		
@@ -100,7 +100,7 @@
 		  	width="80%"
 		  	:before-close="handleClose">
 		  	<span>Thanks for you review! Once your opinion has been reviewed it will be posted.<br/> 感谢您的评论！ 审核您的意见后，它将被发布。</span><br/>
-		    <el-button type="primary" @click="dialogVisible = false" style="margin-top: 20px;">确 定</el-button>
+		    <el-button type="primary" @click="dialogVisible = false" style="margin-top: 20px;"></el-button>
 		</el-dialog>
 		<el-dialog
 			:show-close="false"
@@ -108,7 +108,7 @@
 		  	width="80%"
 		  	:before-close="handleClose">
 		  	<span>Please click the button in the top right corner of WeChat to share.<br/> 请点击微信右上角的按钮分享哦。</span><br/>
-		    <el-button type="primary" @click="dialogShare = false" style="margin-top: 20px;">确 定</el-button>
+		    <el-button type="primary" @click="dialogShare = false" style="margin-top: 20px;">{{$t('button.enter')}}</el-button>
 		</el-dialog>
 	</div>
 </template>
@@ -116,7 +116,8 @@
 <script>
 	import Vue                           from 'vue';
 	import {mapState}                    from 'vuex';
-	import {getWorkspace, submitComment} from '../../api';
+	import {getWorkspace, submitComment, getWishlist} from '../../api';
+	import I18n from '../../i18n';
 	import { Message } from 'element-ui';
 
 	export default{
@@ -141,6 +142,17 @@
 		},
 		computed : mapState({
             user : state => state.user.user,
+            locale : function() {
+            	return I18n.locale;
+            },
+            isWishlist : function() {
+				if(!this.user._id) return false;
+				if(!this.data.wishlist) return false;
+
+				const bo = this.data.wishlist.find(v => v.user == this.user._id);
+				if(bo) return true;
+				return false;
+			},
 			commentCount : function() {
 				if(!this.data.comments) return 0;
 				return this.data.comments.length
@@ -247,6 +259,30 @@
 				})
 				.catch(err => {})
 			},
+			wishlist() {
+				if(!this.user._id) return;
+				const model = {
+					_id  : this.data._id,
+					user : this.user._id,
+				};
+
+                this.$store.dispatch('workzspace/wishlist', model)
+                .then(result => {
+                	this.getUserWish();
+                })
+                .catch(err => {})
+			},
+			getUserWish() {
+	    		getWishlist({user_id : this.user._id})
+	    		.then(data => {
+	    			this.workzs = data;
+	    			this.$store.dispatch('workzspace/setUserCount', this.workzs)
+	    			this.getData(this.data._id);
+	    		})
+	    		.catch(err => {
+	    			console.log('err', err);
+	    		})
+	    	},
 			praise() {
 				if(!this.user._id) return;
 				const model = {

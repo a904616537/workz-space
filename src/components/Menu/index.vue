@@ -8,8 +8,9 @@
 					  width="50"
 					  trigger="click"
 					  popper-class="popper-class">
-					  <p class="item" @click="() => toPage(index, '/contact')">Contact Us</p>
-					  <p class="item" @click="() => toPage(index, '/testimonials')">Testimonials</p>
+					  <p class="item" @click="() => toPage(index, '/contact')">{{$t('menu.contact')}}</p>
+					  <p class="item" @click="() => toPage(index, '/testimonials')">{{$t('menu.testimonials')}}</p>
+
 					  <div class="select" slot="reference">
 							<img :src="current == index?item.selectedIconPath:item.iconPath" class="icon-style">
 							<span><strong>{{item.text}}</strong></span>
@@ -58,30 +59,30 @@
 		computed : mapState({
 			current : state => state.user.current,
 			user    : state => state.user.user,
-			badge : state => state.workzspace.workzs.length,
+			badge   : state => state.workzspace.user_workz.length,
             tabs() {
 	        	return [{
 					pagePath         : "/",
-					text             : "Home",
+					text             : this.$t('menu.home'),
 					iconPath         : "/static/imgs/home.png",
 					selectedIconPath : "/static/imgs/home_select.png",
 					islogin : false
 		        },{
 					pagePath         : "/profile",
-					text             : "Profile",
+					text             : this.$t('menu.profile'),
 					iconPath         : "/static/imgs/user.png",
 					selectedIconPath : "/static/imgs/user_select.png",
 					islogin : true
 		        },{
 					pagePath         : "/wishlist",
-					text             : "Wishlist",
+					text             : this.$t('menu.wishlist'),
 					iconPath         : "/static/imgs/tag.png",
 					selectedIconPath : "/static/imgs/tag_select.png",
 					islogin : true,
 					badge            : this.badge
 		        },{
 		            pagePath         : "/contact",
-		            text             : "More",
+		            text             : this.$t('menu.more'),
 		            iconPath         : "/static/imgs/more.png",
 		            selectedIconPath : "/static/imgs/more_select.png",
 					islogin : false,

@@ -25,44 +25,44 @@
 			<div class="form-box">
 				<div class="item">
 					<img src="/static/imgs/profile.png" class="icon-style" />
-					<el-input v-model="data.first_name" placeholder="First Name"></el-input>
+					<el-input v-model="data.first_name" :placeholder="$t('first')"></el-input>
 				</div>
 				<div class="item">
 					<img src="/static/imgs/profile.png" class="icon-style default-icon" />
-					<el-input v-model="data.last_name" placeholder="Last Name"></el-input>
+					<el-input v-model="data.last_name" :placeholder="$t('last')"></el-input>
 				</div>
 				<div class="item">
 					<img src="/static/imgs/company.png" class="icon-style" />
-					<el-input v-model="data.company" placeholder="Company Name"></el-input>
+					<el-input v-model="data.company" :placeholder="$t('company')"></el-input>
 				</div>
 				<div class="item">
 					<img src="/static/imgs/phone.png" class="icon-style" />
-					<el-input v-model="data.phone" placeholder="Contact Number"></el-input>
+					<el-input v-model="data.phone" :placeholder="$t('phone')"></el-input>
 				</div>
 				<div class="item">
 					<img src="/static/imgs/email.png" class="icon-style" />
-					<el-input v-model="data.email" placeholder="Email"></el-input>
+					<el-input v-model="data.email" :placeholder="$t('email')"></el-input>
 				</div>
 				<div class="item">
 					<img src="/static/imgs/users.png" class="icon-style" />
-					<el-input type="number" v-model="data.number" placeholder="Number of Seats Required"></el-input>
+					<el-input type="number" v-model="data.number" :placeholder="$t('seats')"></el-input>
 				</div>
 				<div class="item">
 					<img src="/static/imgs/local.png" class="icon-style" />
-					<el-input v-model="data.address" placeholder="Preferred Areas"></el-input>
+					<el-input v-model="data.address" :placeholder="$t('preferred')"></el-input>
 				</div>
 				<div class="item">
 					<img src="/static/imgs/money.png" class="icon-style" />
-					<el-input type="number" v-model="data.budget" placeholder="Budget"></el-input>
+					<el-input type="number" v-model="data.budget" :placeholder="$t('budget')"></el-input>
 				</div>
 				<div class="item">
-					<el-input type="textarea" v-model="data.other" placeholder="Other Requirements"></el-input>
+					<el-input type="textarea" v-model="data.other" :placeholder="$t('requirements')"></el-input>
 				</div>
 			</div>
 		</div>
 		<div class="footer">
 			<div class="btn-style" @click="goBack"><i class="el-icon-arrow-left"></i></div>
-			<el-button class="public-btn" @click="onSubmit">Update Info</el-button>
+			<el-button class="public-btn" @click="onSubmit">{{$t('update')}}</el-button>
 		</div>
 	</div>
 </template>
@@ -119,10 +119,10 @@
 				updateuser(model)
 				.then(result => {
 					this.$store.dispatch('user/edit', model)
-					Message.success('success!')
+					Message.success(this.$t('success'))
 				})
 				.catch(err => {
-					Message.error('edit error!')
+					Message.error(this.$t('error'))
 				})
 			}
 		},

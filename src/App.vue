@@ -6,10 +6,9 @@
 
 <script>
     import Vue from 'vue'
-import { I18n } from './i18n';
 import { mapState, mapActions } from 'vuex'
 import { Message } from 'element-ui';
-import {getconfig, getuser, getcode} from './api';
+import {getconfig, getuser, getcode, getWishlist} from './api';
 
 export default {
     name    : 'App',
@@ -49,6 +48,16 @@ export default {
           .catch(err => {
             console.log('初始化微信SDK失败', err);
           })
+        },
+        getUserWish(_id) {
+            console.log('user_id', _id);
+            getWishlist({user_id : _id})
+            .then(data => {
+                this.$store.dispatch('workzspace/setUserCount', data)
+            })
+            .catch(err => {
+                console.log('err', err);
+            })
         },
         getUrlParam(name) {
             const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -91,13 +100,14 @@ export default {
         },
         getUser(openid) {
 
-            getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
-            // getuser({openid})
+            // getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
+            getuser({openid})
             .then(user => {
                 console.log('user', user)
                 if(user) {
                     this.$store.dispatch('user/login', user);
                     const workspace_id = this.getUrlParam('state');
+                    this.getUserWish(user._id);
                     if(workspace_id && workspace_id != '123'&& workspace_id != 'null') this.$router.push({ path: 'workspace', query : {_id : workspace_id}})
                 } else {
                     Message.error('请先关注 WorkzSpace 公众号')
@@ -113,8 +123,8 @@ export default {
         if(Vue.config.isWechat) {
             console.log('微信打开')
             this.onInitWechatSDK();
-            this.getUser()
-            // this.onInit(); 
+            // this.getUser()
+            this.onInit(); 
         }
     }
 }

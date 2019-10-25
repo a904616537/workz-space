@@ -13,11 +13,17 @@ import * as types  from '../mutation-types'
 import {workspace, submitPraise, submitWishlist} from '../../api';
 
 const state = {
-	workzs : [],	// 仓库
-
+	workzs     : [],	// 仓库
+	user_workz : []
 }
 
 const actions = {
+	setUserCount({commit}, data) {
+		commit(types.SET_USER_WORKZ, data);
+	},
+	pushUserWorkz({commit}, data) {
+		commit(types.PUSH_USER_WORKZ, data);
+	},
 	setWorkz({commit}, data) {
 		commit(types.SET_WORK, data);
 	},
@@ -54,6 +60,12 @@ const mutations = {
 		const workzIndex = state.workzs.findIndex(v => v._id == data._id);
 		state.workzs.splice(workzIndex, 1, data);
 		state.workzs = [...state.workzs]
+	},
+	[types.SET_USER_WORKZ] (state, data) {
+		state.user_workz = data
+	},
+	[types.PUSH_USER_WORKZ] (state, data) {
+		state.user_workz.push(data);
 	}
 }
 

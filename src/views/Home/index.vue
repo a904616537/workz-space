@@ -47,7 +47,7 @@
 		<div v-for="(item, index) in listData" :key="index" >
 			<v-item :data="item" :index="index"/>
 			<div v-if="index == 2" class="link">
-				<p>没有时间嘛？<el-button type="text" @click="$router.push({path : 'contact'})">立即查询</el-button></p>
+				<p>{{$t('time')}}<el-button type="text" @click="$router.push({path : 'contact'})">{{$t('search')}}</el-button></p>
 			</div>
 		</div>
 		
@@ -69,63 +69,64 @@
 				`../static/imgs/banner_2_${i18n.locale}.jpg`,
 				`../static/imgs/banner_3_${i18n.locale}.jpg`
 			]
+			const langs = [{
+					label : this.$t('area.all'),
+					value : ''
+				},{
+					label : this.$t('area.huangpu'),
+					value : this.$t('area.huangpu')
+				},{
+					label : this.$t('area.xuhui'),
+					value : this.$t('area.xuhui')
+				},{
+					label : this.$t('area.changning'),
+					value : this.$t('area.changning')
+				},{
+					label : this.$t('area.jingan'),
+					value : this.$t('area.jingan')
+				},{
+					label : this.$t('area.putuo'),
+					value : this.$t('area.putuo')
+				},{
+					label : this.$t('area.hongkou'),
+					value : this.$t('area.hongkou')
+				},{
+					label : this.$t('area.yangpu'),
+					value : this.$t('area.yangpu')
+				},{
+					label : this.$t('area.minhang'),
+					value : this.$t('area.minhang')
+				},{
+					label : this.$t('area.baoshan'),
+					value : this.$t('area.baoshan')
+				},{
+					label : this.$t('area.jiading'),
+					value : this.$t('area.jiading')
+				},{
+					label : this.$t('area.pudong'),
+					value : this.$t('area.pudong')
+				},{
+					label : this.$t('area.jinshan'),
+					value : this.$t('area.jinshan')
+				},{
+					label : this.$t('area.songjiang'),
+					value : this.$t('area.songjiang')
+				},{
+					label : this.$t('area.qingpu'),
+					value : this.$t('area.qingpu')
+				},{
+					label : this.$t('area.fengxian'),
+					value : this.$t('area.fengxian')
+				},{
+					label : this.$t('area.chongming'),
+					value : this.$t('area.chongming')
+				}]
 
 			return {
 				selectValue : '',
 				banners : banners,
 				input : '',
-				restaurants : [{
-					label : 'All',
-					value : ''
-				},{
-					label : '黄浦区',
-					value : '黄浦区'
-				},{
-					label : '徐汇区',
-					value : '徐汇区'
-				},{
-					label : '长宁区',
-					value : '长宁区'
-				},{
-					label : '静安区',
-					value : '静安区'
-				},{
-					label : '普陀区',
-					value : '普陀区'
-				},{
-					label : '虹口区',
-					value : '虹口区'
-				},{
-					label : '杨浦区',
-					value : '杨浦区'
-				},{
-					label : '闵行区',
-					value : '闵行区'
-				},{
-					label : '宝山区',
-					value : '宝山区'
-				},{
-					label : '嘉定区',
-					value : '嘉定区'
-				},{
-					label : '浦东新区',
-					value : '浦东新区'
-				},{
-					label : '金山区',
-					value : '金山区'
-				},{
-					label : '松江区',
-					value : '松江区'
-				},{
-					label : '青浦区',
-					value : '青浦区'
-				},{
-					label : '奉贤区',
-					value : '奉贤区'
-				},{
-					label : '崇明县',
-					value : '崇明县'
-				}]
+				restaurants : langs
 			}
 		},
 		components : {
