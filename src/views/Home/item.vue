@@ -8,7 +8,7 @@
 				<div class="infor-title">{{data.name}}</div>
 				<div class="tworow">
 					<p><i class="el-icon-location icon-style"></i>{{`${data.area||''}${data.address_en}`}}</p>
-					<span v-if="data.recommend">Premium Workspaces</span>
+					<span v-if="data.recommend">{{$t('premium')}}</span>
 				</div>
 			</div>
 		</div>
@@ -53,14 +53,14 @@
 			</div>
 			<div class="comment-style" @click="toWorkspace">
 				<p>{{data.desc_en}}</p>
-				<span class="more-style"><strong>More...</strong></span>
+				<span class="more-style"><strong>{{$t('more')}}</strong></span>
 			</div>
 			
 			<div v-if="praiseCount > 0" class="focus">
 				<div class="img-style">
 					<div v-for="(item, index) in data.praises" :key="index" class="img-item" :style="'background-image: url('+item.user.headimgurl+')'"></div>
 				</div>
-				<div class="text-style">liked by <strong>{{lastPraise.user.nickname}}</strong> and <strong>{{praiseCount}}</strong> others.</div>
+				<div class="text-style">liked by <strong>{{lastPraise.user.nickname}}</strong> {{$t('and')}} <strong>{{praiseCount}}</strong> {{$t('others')}} </div>
 			</div>
 			<!-- <div class="dialog">
 				<div class="head-img" :style="'background-image: url('+comment_img+')'"></div>
@@ -73,10 +73,10 @@
 						<span class="title-style"><strong>{{item.name}}</strong></span>
 						<span>{{fromNow(item.createTime)}}</span>
 					</div>
-					<div class="comment-style" @click="toWorkspace">{{item.text}}<span class="more-style"><strong>More...</strong></span>
+					<div class="comment-style" @click="toWorkspace">{{item.text}}<span class="more-style"><strong>{{$t('more')}}</strong></span>
 					</div>
 				</div>
-				<div class="views" @click="toWorkspace"><strong>View all {{commentCount}} Comments</strong></div>
+				<div class="views" @click="toWorkspace"><strong>{{$t('view')}} {{commentCount}} {{$t('comments')}}</strong></div>
 			</div>
 		</div>
 	</div>
@@ -171,7 +171,7 @@ import {submitComment, submitPraise, submitWishlist} from '../../api';
 						// type: 'video/x-flv',
 					}],
 					language: 'zh-CN',
-					notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
+					notSupportedMessage: this.$t('videoErro'), //允许覆盖Video.js无法播放媒体源时显示的默认信息。
 					controlBar: {
 						timeDivider: true,
 						durationDisplay: true,

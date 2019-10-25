@@ -2,40 +2,40 @@
 	<div class="contact-page profile">
 		<div class="box">
 			<div class="card">
-				<div class="title"><strong>More Questions?<br/>Please<span> Contact Us!</span></strong></div>
+				<div class="title"><strong>{{$t('question')}}<br/>{{$t('please')}}<span> {{$t('contact')}}</span></strong></div>
 				<div class="form-box">
 					<div class="item">
 						<img src="/static/imgs/profile.png" class="icon-style" />
-						<el-input v-model="data.first_name" placeholder="First Name"></el-input>
+						<el-input v-model="data.first_name" :placeholder="$t('first')"></el-input>
 					</div>
 					<div class="item">
 						<img src="/static/imgs/profile.png" class="icon-style default-icon" />
-						<el-input v-model="data.last_name" placeholder="Last Name"></el-input>
+						<el-input v-model="data.last_name" :placeholder="$t('last')"></el-input>
 					</div>
 					<div class="item">
 						<img src="/static/imgs/company.png" class="icon-style" />
-						<el-input v-model="data.company" placeholder="Company Name"></el-input>
+						<el-input v-model="data.company" :placeholder="$t('company')"></el-input>
 					</div>
 					<div class="item">
 						<img src="/static/imgs/phone.png" class="icon-style" />
-						<el-input v-model="data.phone" placeholder="Contact Number"></el-input>
+						<el-input v-model="data.phone" :placeholder="$t('phone')"></el-input>
 					</div>
 					<div class="item">
 						<img src="/static/imgs/email.png" class="icon-style" />
-						<el-input v-model="data.email" placeholder="Email"></el-input>
+						<el-input v-model="data.email" :placeholder="$t('email')"></el-input>
 					</div>
 					<div class="item">
 						<img src="/static/imgs/users.png" class="icon-style" />
-						<el-input type="number" v-model="data.number" placeholder="Number of Seats Required"></el-input>
+						<el-input type="number" v-model="data.number" :placeholder="$t('seats')"></el-input>
 					</div>
 				</div>
-				<div class="send-btn" @click="sendEmail">Send</div>
+				<div class="send-btn" @click="sendEmail">{{$t('send')}}</div>
 			</div>
 		</div>
-		<p><strong>OR</strong></p>
+		<p><strong>{{$t('or')}}</strong></p>
 		<div class="box">
 			<div class="card">
-				<p class="title"><strong>Scan the WeChat QR code below and<br/>chat with us directly</strong></p>
+				<p class="title"><strong>{{$t('wechat.one')}}<br/>{{$t('wechat.two')}}</strong></p>
 				<img class="qr-img" />
 			</div>
 		</div>
@@ -68,15 +68,15 @@
 			sendEmail() {
 				let loadingInstance = Loading.service({
 					lock: true,
-					text: '邮件发送中',
+					text: this.$t('sendEmail'),
 					spinner: 'el-icon-loading',
 					background: 'rgba(0, 0, 0, 0.7)'});
 				contactEmail(this.data)
 				.then(data => {
-					Message.success('邮件发送成功！')
+					Message.success(this.$t('successEmail'))
 				})
 				.catch(err => {
-					Message.error('邮件发送失败！')
+					Message.error(this.$t('erroEmail'))
 				})
 				.finally(err => {
 					this.$nextTick(() => {

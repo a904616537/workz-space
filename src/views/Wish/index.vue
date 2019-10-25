@@ -7,7 +7,7 @@
 						<div class="logo-style" :style="'background-image: url('+user.headimgurl+')'"></div>
 					</div>
 					<div class="card-infor">
-						<div class="infor-title" @click="toProfile">{{name}}<span class="span-style">Edit</span></div>
+						<div class="infor-title" @click="toProfile">{{name}}<span class="span-style">{{$t('edit')}}</span></div>
 						<!-- <div class="tips">Tay Ping Hui is a Singaporean actor and director. In 2014,Tay made his directorial debut with the basketball film Meeting the Glant.</div> -->
 						<div class="desc"><img src="/static/imgs/company.png" class="desc-icon" />{{company}}</div>
 						<div class="desc"><img src="/static/imgs/phone.png" class="desc-icon" />{{phone}}</div>
@@ -20,7 +20,7 @@
 		</div>
 		<div class="footer" v-if="workzs.length>0">
 			<div>
-				<el-button class="submit" @click="submitWishlist">Submit Wishlist</el-button>
+				<el-button class="submit" @click="submitWishlist">{{$t('button.subWish')}}</el-button>
 			</div>
 		</div>
 
@@ -31,11 +31,11 @@
 		  	:before-close="handleClose">
 		  	<div v-if="!this.validation">
 		  		<span>你的个人信息不完整，请先完善<br/>Please fill in all required info first and submit again<br/></span>
-				<el-button type="primary" @click="dialogVisible = false" style="margin-top: 20px;">确 定</el-button>
+				<el-button type="primary" @click="dialogVisible = false" style="margin-top: 20px;">{{$t('button.enter')}}</el-button>
 			</div>
 			<div v-else>
 				<span>愿望清单已成功提交。我们会尽快与您联系！<br/>Wishlist successfully submitted. We'll be in touch with you shortly!<br/></span>
-				<el-button type="primary" @click="dialogVisible = false" style="margin-top: 20px;">确 定</el-button>
+				<el-button type="primary" @click="dialogVisible = false" style="margin-top: 20px;">{{$t('button.enter')}}</el-button>
 			</div>
 		</el-dialog>
 

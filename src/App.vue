@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { I18n } from './i18n';
 import { mapState, mapActions } from 'vuex'
 import { Message } from 'element-ui';
 import {getconfig, getuser, getcode} from './api';

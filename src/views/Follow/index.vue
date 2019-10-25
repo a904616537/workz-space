@@ -6,10 +6,10 @@
 					
 				</div>
 				<div class="content">
-					<p>To continue using<br/><a target="_blank" href="https://www.baidu.com" class="link-style">Workzspace.com</a>,<br/>please scan or long-press and<br/>extract our WeChat QR code below</p>
+					<p>{{$t('continue')}}<br/><a target="_blank" href="https://www.baidu.com" class="link-style">Workzspace.com</a>,<br/>{{$t('code.one')}}<br/>{{$t('code.two')}}</p>
 				</div>
 				<img class="qr-style"/>
-				<p>We look forward to connecting with you!</p>
+				<p>{{$t('forward')}}</p>
 			</div>
 		</div>
 		<v-menu />
