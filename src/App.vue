@@ -18,7 +18,6 @@ export default {
             getconfig()
             .then(result => {
                 const config = result.data;
-                console.log('jssdk config', config);
                 wx.config(config);
 
                 wx.ready(() => {

@@ -63,12 +63,7 @@
 	export default{
 		name : 'home',
 		data() {
-			console.log('banners', i18n.locale)
-			const banners = [
-				`../static/imgs/banner_1_${i18n.locale}.jpg`,
-				`../static/imgs/banner_2_${i18n.locale}.jpg`,
-				`../static/imgs/banner_3_${i18n.locale}.jpg`
-			]
+			
 			const langs = [{
 					label : this.$t('area.all'),
 					value : ''
@@ -124,7 +119,6 @@
 
 			return {
 				selectValue : '',
-				banners : banners,
 				input : '',
 				restaurants : langs
 			}
@@ -134,6 +128,16 @@
 		},
 		computed : mapState({
 			workspaces : state => state.workzspace.workzs,
+			banners : function() {
+				return [
+					`../static/imgs/banner_1_${i18n.locale}.jpg`,
+					`../static/imgs/banner_2_${i18n.locale}.jpg`,
+					`../static/imgs/banner_3_${i18n.locale}.jpg`
+				]
+			},
+			locale : function() {
+				return i18n.locale;
+			},
 			listData : function () {
 				if(this.input == '') {
 					return this.workspaces;
