@@ -7,6 +7,7 @@
 <script>
     import Vue from 'vue'
 import { mapState, mapActions } from 'vuex'
+import i18n from './i18n';
 import { Message } from 'element-ui';
 import {getconfig, getuser, getcode, getWishlist} from './api';
 
@@ -108,6 +109,9 @@ export default {
                     this.$store.dispatch('user/login', user);
                     const workspace_id = this.getUrlParam('state');
                     this.getUserWish(user._id);
+                    if(user.language == 'zh_CN') {
+                        i18n.locale = 'zh';
+                    }
                     if(workspace_id && workspace_id != '123'&& workspace_id != 'null') this.$router.push({ path: 'workspace', query : {_id : workspace_id}})
                 } else {
                     Message.error('请先关注 WorkzSpace 公众号')
