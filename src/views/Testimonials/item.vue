@@ -1,33 +1,38 @@
 <template>
 	<div class="card">
 		<div class="text-style">
-			Wprkzspace.com supported us to find a right office space that Global-Sign to start up the sales in India, May 2012.<br/>
-			Even it was a right scheduling, they have smoothlyarranged site visit planning and dealt with the business venter for better terms & conditions.<br/> We highly appreciate for Kinoshita-san's effort.
+			{{item.text}}
 			<img src="/static/imgs/left_quotes.png" class="icon-style left" />
 			<img src="/static/imgs/right_quotes.png" class="icon-style right" />
 		</div>
 		<hr />
 		<div class="bottom">
-			<div class="img"><img class="img-style"></div>
+			<div class="img"><div class="img-style" :class="{logo : !data.logo}" :style="'background-image: url('+data.logo+')'" /></div>
 			<div class="infor">
-				<div class="title"><strong>Global-Sign</strong><i>(Reiji Oishi)</i></div>
-				<div class="tips"><i class="el-icon-location icon-style"></i> <span class="tips-text">Japan</span></div>
+				<div class="title"><strong>{{item.company}}</strong><i>({{item.people}})</i></div>
+				<div class="tips"><i class="el-icon-location icon-style"></i> <span class="tips-text">{{item.address}}</span></div>
 			</div>
 		</div>
 	</div>
 
 </template>
 
-<!-- 
-<<<<<<< HEAD
-				<div class="tips"><i class="el-icon-location icons"></i>Japan</div>
-======= -->
-
 <script>
+	import i18n from '../../i18n';
 	export default {
 		data() {
 			return {
-
+			}
+		},
+		props : {
+			data : {
+				type    : Object,
+				default : () => ({})
+			}
+		},
+		computed : {
+			item : function() {
+				return this.data[i18n.locale];
 			}
 		}
 	}
