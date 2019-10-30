@@ -100,14 +100,14 @@ export default {
         },
         getUser(openid) {
 
-            // getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
+            // getuser({openid : 'oJegnv7RHROeMtkO3_E7zwN3GJh8'})
             getuser({openid})
             .then(user => {
                 if(user) {
                     this.$store.dispatch('user/login', user);
                     const workspace_id = this.getUrlParam('state');
                     this.getUserWish(user._id);
-                    if(user.language == 'zh_CN') {
+                    if(user.language.includes('zh')) {
                         i18n.locale = 'zh';
                     }
                     if(workspace_id && workspace_id != '123'&& workspace_id != 'null') this.$router.push({ path: 'workspace', query : {_id : workspace_id}})

@@ -266,12 +266,12 @@ import {submitComment, submitPraise, submitWishlist, getWishlist} from '../../ap
 						if(this.play && this.reactObj.y < 240 && this.reactObj.y > 0) {
 							this.play = false
 							console.log('加载资源, 开始播放', this.index)
-							this.player.play();
+							if(this.player.play) this.player.play();
 							
 						} else if(!this.play && ((this.reactObj.y * -1) > 240 || this.reactObj.y > window.innerHeight - this.reactObj.height)){
 							this.play = true
 							console.log('暂停播放', this.index)
-							this.player.pause();
+							if(this.player.pause) this.player.pause();
 						}	
 					}
 				})
