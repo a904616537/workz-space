@@ -36,7 +36,7 @@
 		<div class="box">
 			<div class="card">
 				<p class="title"><strong>{{$t('wechat.one')}}<br/>{{$t('wechat.two')}}</strong></p>
-				<img class="qr-img" />
+				<img class="qr-img" src="/static/imgs/qrcode.png"/>
 			</div>
 		</div>
 	</div>

@@ -35,8 +35,14 @@
 					</div>
 					<div class="ribbon" :class="{red : isWishlist}" @click="wishlist"></div>
 				</div>
+				<div v-if="praiseCount > 0" class="focus">
+					<div class="img-style">
+						<div v-for="(item, index) in data.praises" :key="index" class="img-item" :style="'background-image: url('+item.user.headimgurl+')'"></div>
+					</div>
+					<div class="text-style">liked by <strong>{{lastPraise.user.nickname}}</strong> {{$t('and')}} <strong>{{praiseCount}}</strong> {{$t('others')}} </div>
+				</div>
 			</div>
-
+			
 			<baidu-map class="map"  :zoom="15" center="上海市">
 				<bm-local-search v-show="false" :keyword="data.address_zh||'东方明珠'" :auto-viewport="true" :location="data.area||'黄浦区'"></bm-local-search>
   			</baidu-map>
@@ -177,7 +183,17 @@
 			disabled : function() {
         		if(this.input.trim() == '') return true;
         		else return false;
-			}
+			},
+			praiseCount : function() {
+				if(!this.data.praises)return 0;
+				return this.data.praises.length
+			},
+			lastPraise : function() {
+				const praise = this.data.praises.pop();
+				// console.log('last', praise)
+				this.data.praises.push(praise);
+				return praise;
+			},
 		}),
 		methods: {
 			onShare() {
@@ -329,7 +345,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .workspace {
 	.btn-style {
 		background-color : #00aeef;
@@ -341,6 +357,28 @@
 		line-height      : 40px;
 		font-weight      : bold;
 		margin           : 0 0 10px;
+	}
+	.focus{
+		margin      : 10px 0;
+		position    : relative;
+		display     : flex;
+		align-items : center;
+		font-size : 14px;
+		.text-style{
+		}
+		.img-style{
+			.img-item{
+				width               : 32px;
+				height              : 32px;
+				background-color    : #f4f4f4;
+				background-position : center;
+				background-size     : cover;
+				border-radius       : 20px;
+				border              : 3px solid #fff;
+				float               : right;
+				margin-left         : -17px;
+			}
+		}
 	}
 }
 </style>

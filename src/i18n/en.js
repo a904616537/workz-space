@@ -1,7 +1,7 @@
 export default {
 	lang : 'english',
-	time : "Don't have time?",
-	search : 'Immediately query',
+	time : "No time to search?",
+	search : 'Enquire now!',
 	premium : 'Premium Workspaces',
 	more : 'More...',
 	and : 'and',
