@@ -74,6 +74,6 @@ export default {
 	button : {
 		subWish : '提交心愿单',
 		enter : '确 定',
-		contact : '联系我们'
+		contact : '立即询问'
 	}
 }

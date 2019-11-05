@@ -74,8 +74,7 @@
 		</div>
 		<div class="card">
 			<div class="card-content">
-				<h3>{{$t('question')}}</h3>
-				<div class="btn-style" @click="$router.push({path : 'contact'})">{{$t('button.contact')}}</div>
+				<el-button type="primary" size="mini" round @click="$router.push({path : 'contact'})" style="background-color: #00aeef;">{{$t('button.contact')}}</el-button>
 			</div>
 		</div>
 		<div class="card">

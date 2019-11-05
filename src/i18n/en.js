@@ -74,6 +74,6 @@ export default {
 	button : {
 		subWish : 'Submit Wishlist',
 		enter : 'Confirm',
-		contact : 'Contact Us'
+		contact : 'Enquire about this office now'
 	}
 }

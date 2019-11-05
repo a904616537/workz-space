@@ -89,8 +89,8 @@
 		border-right  : 10px solid #00aeef;
 		border-bottom : 15px solid transparent;
 		&.red {
-			border-left   : 15px solid #D4122B;
-			border-right  : 15px solid #D4122B;
+			border-left   : 10px solid #D4122B;
+			border-right  : 10px solid #D4122B;
 		}
 	}
 	.focus{
@@ -476,7 +476,6 @@
 			width: 100px;
 			height: 100px;
 			background-color: #f4f4f4;
-			margin-bottom: 20px;
 		}
 	}
 }

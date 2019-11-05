@@ -47,7 +47,7 @@
 		<div v-for="(item, index) in listData" :key="index" >
 			<v-item :data="item" :index="index"/>
 			<div v-if="index == 2" class="link">
-				<p>{{$t('time')}}<el-button type="primary" size="mini" round @click="$router.push({path : 'contact'})">{{$t('search')}}</el-button></p>
+				<p>{{$t('time')}}<el-button type="primary" size="mini" round @click="$router.push({path : 'contact'})" style="margin-left: 1em;">{{$t('search')}}</el-button></p>
 			</div>
 		</div>
 		

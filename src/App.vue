@@ -125,9 +125,9 @@ export default {
         if(Vue.config.isWechat) {
             console.log('微信打开')
             this.onInitWechatSDK();
-            // this.getUser()
             this.onInit(); 
         }
+        // this.getUser()
     }
 }
 </script>

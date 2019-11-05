@@ -25,8 +25,9 @@
 						<el-input v-model="data.email" :placeholder="$t('email')"></el-input>
 					</div>
 					<div class="item">
-						<img src="/static/imgs/users.png" class="icon-style" />
-						<el-input type="number" v-model="data.number" :placeholder="$t('seats')"></el-input>
+						<el-input type="textarea" v-model="data.message" :placeholder="$t('requirements')"></el-input>
+						<!-- <img src="/static/imgs/users.png" class="icon-style" />
+						<el-input type="number" v-model="data.number" :placeholder="$t('seats')"></el-input> -->
 					</div>
 				</div>
 				<div class="send-btn" @click="sendEmail">{{$t('send')}}</div>
@@ -34,9 +35,12 @@
 		</div>
 		<p><strong>{{$t('or')}}</strong></p>
 		<div class="box">
-			<div class="card">
+			<div class="card"  style="padding-bottom: 10px;">
 				<p class="title"><strong>{{$t('wechat.one')}}<br/>{{$t('wechat.two')}}</strong></p>
 				<img class="qr-img" src="/static/imgs/qrcode.png"/>
+				<br />
+				<span style="color: #00aeef; font-weight: bold;">or</span>
+				<p><a href="tel:13003212488" style="color: #3E5765;">+86 130 0321 2488</a></p>
 			</div>
 		</div>
 	</div>
@@ -57,6 +61,7 @@
 					phone      : '',
 					email      : '',
 					number     : '',
+					message    : ''
 				}
 			}
 		},
