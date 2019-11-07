@@ -100,7 +100,7 @@ export default {
         },
         getUser(openid) {
 
-            // getuser({openid : 'oJegnv7RHROeMtkO3_E7zwN3GJh8'})
+            // getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
             getuser({openid})
             .then(user => {
                 if(user) {

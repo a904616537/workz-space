@@ -124,7 +124,10 @@
 					phone     : this.user.phone,
 					email     : this.user.email,
 					company   : this.user.company,
-					name      : this.user.name,
+					name      : {
+						first : this.user.first_name,
+						last : this.user.last_name
+					},
 					number    : this.user.number,
 					address    : this.user.address,
 					budget     : this.user.budget,

@@ -25,6 +25,18 @@
 						<el-input v-model="data.email" :placeholder="$t('email')"></el-input>
 					</div>
 					<div class="item">
+						<img src="/static/imgs/users.png" class="icon-style" />
+						<el-input type="number" v-model="data.number" :placeholder="$t('seats')"></el-input>
+					</div>
+					<div class="item">
+						<img src="/static/imgs/local.png" class="icon-style" />
+						<el-input v-model="data.address" :placeholder="$t('preferred')"></el-input>
+					</div>
+					<div class="item">
+						<img src="/static/imgs/money.png" class="icon-style" />
+						<el-input type="number" v-model="data.budget" :placeholder="$t('budget')"></el-input>
+					</div>
+					<div class="item">
 						<el-input type="textarea" v-model="data.message" :placeholder="$t('requirements')"></el-input>
 						<!-- <img src="/static/imgs/users.png" class="icon-style" />
 						<el-input type="number" v-model="data.number" :placeholder="$t('seats')"></el-input> -->
@@ -61,7 +73,10 @@
 					phone      : '',
 					email      : '',
 					number     : '',
-					message    : ''
+					message    : '',
+					number : '',
+					budget : '',
+					address : ''
 				}
 			}
 		},

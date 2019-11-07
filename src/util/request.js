@@ -1,8 +1,8 @@
 import axios from 'axios'
 import config from '../../config';
 
-// const baseurl = process.env.NODE_ENV === 'production'?config.build.requestUrl:config.dev.requestUrl;
-const baseurl = config.build.requestUrl;
+const baseurl = process.env.NODE_ENV === 'production'?config.build.requestUrl:config.dev.requestUrl;
+// const baseurl = config.build.requestUrl;
 
 const service = axios.create({
 	baseURL : baseurl,
