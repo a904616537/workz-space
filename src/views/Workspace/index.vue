@@ -208,7 +208,7 @@
         			wx.updateAppMessageShareData({
 						title   : workspace.name, // 分享标题
 						desc    : workspace.desc_en, // 分享描述
-						link    : `http://store.workspace.h-fish.vip?workspace=${workspace._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+						link    : `http://wechat.workzspace.cn?workspace=${workspace._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 						imgUrl  : this.logo, // 分享图标
 						type    : 'link', // 分享类型,music、video或link，不填默认为link
 						success : () => {
@@ -224,7 +224,7 @@
 					wx.updateTimelineShareData({
 						title   : workspace.name, // 分享标题
 						desc    : workspace.desc_en, // 分享描述
-						link    : `http://store.workspace.h-fish.vip?workspace=${workspace._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+						link    : `http://wechat.workzspace.cn?workspace=${workspace._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 						imgUrl  : this.logo, // 分享图标
 						success : () => {
 						},
@@ -251,7 +251,7 @@
 						message : '请先登录 WorkzSpace',
 						type    : 'error',
 						onClose : () => {
-							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdee0075c3e078ae1&redirect_uri=http%3A%2F%2Fwechat.workzspace.cn/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
 						}
 					})
 					return;
@@ -280,7 +280,7 @@
 						message : '请先关注并登录 WorkzSpace',
 						type    : 'error',
 						onClose : () => {
-							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdee0075c3e078ae1&redirect_uri=http%3A%2F%2Fwechat.workzspace.cn/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
 						}
 					})
 					return;
@@ -313,7 +313,7 @@
 						message : '请先关注并登录 WorkzSpace',
 						type    : 'error',
 						onClose : () => {
-							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdee0075c3e078ae1&redirect_uri=http%3A%2F%2Fwechat.workzspace.cn/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
 						}
 					})
 					return;

@@ -25,8 +25,8 @@ export default {
                     wx.onMenuShareAppMessage({
                         title   : 'Workz Space', // 分享标题
                         desc    : 'Workz Soace Desc', // 分享描述
-                        link    : `http://store.workspace.h-fish.vip`,
-                        imgUrl  : 'http://store.workspace.h-fish.vip/static/imgs/logo.png',
+                        link    : `http://wechat.workzspace.cn`,
+                        imgUrl  : 'http://wechat.workzspace.cn/static/imgs/logo.png',
                         success : () => {
                             this.$toast.center('分享成功！');
                         }
@@ -34,8 +34,8 @@ export default {
                     wx.onMenuShareTimeline({
                         title   : 'Workz Space', // 分享标题
                         desc    : 'Workz Soace Desc', // 分享描述
-                        link    : `http://store.workspace.h-fish.vip`,
-                        imgUrl  : 'http://store.workspace.h-fish.vip/static/imgs/logo.png',
+                        link    : `http://wechat.workzspace.cn`,
+                        imgUrl  : 'http://wechat.workzspace.cn/static/imgs/logo.png',
                         success : () => {
                             this.$toast.center('分享成功！');
                         }
@@ -69,9 +69,9 @@ export default {
                 // window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Ftest.h-fish.cn&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
             // } else {
             if(workspace_id) {
-                window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+                window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdee0075c3e078ae1&redirect_uri=http%3A%2F%2Fwechat.workzspace.cn/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
             } else {
-                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip/&response_type=code&scope=snsapi_userinfo&state=${workspace_id}#wechat_redirect`;
+                window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdee0075c3e078ae1&redirect_uri=http%3A%2F%2Fwechat.workzspace.cn/&response_type=code&scope=snsapi_userinfo&state=${workspace_id}#wechat_redirect`;
             }
             // }
         },
