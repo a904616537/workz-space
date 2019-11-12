@@ -56,7 +56,7 @@
 
 <script>
 	import Vue         from 'vue';
-	import {workspace} from '../../api';
+	import {workspace,workspace_recommend} from '../../api';
 	import Item        from './item';
 	import { mapState, mapActions } from 'vuex'
 	import i18n from '../../i18n';
@@ -65,7 +65,9 @@
 		data() {
 			return {
 				selectValue : '',
-				input : ''
+				input : '',
+				lock : false,
+				page : 0
 			}
 		},
 		components : {
@@ -159,23 +161,53 @@
 			handleSelect(item) {
 				this.selectValue = item.value;
 			},
-        	getData() {
-        		workspace()
+        	getData(page = 0) {
+        		workspace({count : page})
         		.then(workspace => {
-        			this.$store.dispatch('workzspace/setWorkz', workspace)
+        			this.$store.dispatch('workzspace/pushWorkz', workspace)
+        			if(workspace.length === 0) {
+        				this.lock = true;
+        			}
         		})
         		.catch(err => {
         			console.log('err', err);
         		})
         	},
+
+	    	getRecommend() {
+				workspace_recommend()
+				.then(workspace => {
+        			this.$store.dispatch('workzspace/setWorkz', workspace)
+        			this.getData();
+        		})
+        		.catch(err => {
+        			console.log('err', err);
+        		})
+			},
         	blur() {
         	},
         	onSwitch() {
         		i18n.locale = 'zh';
-        	}
+        	},
+        	scroll() {
+				window.onscroll = () => {
+					if(this.lock) return;
+					let bottomwindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+
+					if (bottomwindow) {
+						this.page++;
+						console.log('this.page', this.page)
+						this.getData(this.page);
+					}
+				};
+			}
+
 		},
 		beforeMount() {
-			this.getData();
+			this.getRecommend();
+		},
+		mounted() {
+			this.scroll();
 		}
 	}
 </script>

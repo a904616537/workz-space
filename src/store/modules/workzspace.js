@@ -27,6 +27,9 @@ const actions = {
 	setWorkz({commit}, data) {
 		commit(types.SET_WORK, data);
 	},
+	pushWorkz({commit}, data) {
+		commit(types.PUSH_WORK, data);
+	},
 	praise({commit}, data) {
 		return new Promise((resolve, reject) => {
             submitPraise(data)
@@ -55,6 +58,9 @@ const actions = {
 const mutations = {
 	[types.SET_WORK] (state, data) {
 		state.workzs = data;
+	},
+	[types.PUSH_WORK] (state, data) {
+		state.workzs = state.workzs.concat(data);
 	},
 	[types.PRAISE] (state, data) {
 		const workzIndex = state.workzs.findIndex(v => v._id == data._id);
