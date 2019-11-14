@@ -192,11 +192,9 @@
         	scroll() {
 				window.onscroll = () => {
 					if(this.lock) return;
-					let bottomwindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-
+					let bottomwindow = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - 50;
 					if (bottomwindow) {
 						this.page++;
-						console.log('this.page', this.page)
 						this.getData(this.page);
 					}
 				};
@@ -225,6 +223,9 @@
 			float               : right;
 			margin-left         : -17px;
 		}
+	}
+	.video-js .vjs-tech{
+		z-index: 0;
 	}
 	.vjs-custom-skin > .video-js {
 		width: 100%;

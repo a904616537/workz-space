@@ -1,5 +1,14 @@
 <template>
 	<div class="footer-menu">
+		<el-dialog :visible.sync="dialogTableVisible" :modal="false" :show-close="false" width="80%">
+			<template slot="title">
+				<p style="text-align: center;">{{$t('warning')}}</p>
+				<p style="text-align: center;">{{$t('contact')}}</p>
+			</template>
+			<div style="text-align: center;">
+				<img class="qr-img" src="/static/imgs/qrcode_wechat.jpg"/>
+			</div>
+		</el-dialog>
 		<div v-for="(item, index) in tabs" :key="index" class="select" :class="{'active' : index == current}">
 				<i v-if="index == current" class="point"></i>
 				<div v-if="item.click">
@@ -7,11 +16,12 @@
 					  placement="top"
 					  width="50"
 					  trigger="click"
-					  popper-class="popper-class">
+					  popper-class="popper-class"
+					  :visible="visible">
 					  <p class="item" @click="() => toPage(index, '/contact')">{{$t('menu.contact')}}</p>
 					  <p class="item" @click="() => toPage(index, '/testimonials')">{{$t('menu.testimonials')}}</p>
 
-					  <div class="select" slot="reference">
+					  <div class="select" slot="reference" @click="visible = true">
 							<img :src="current == index?item.selectedIconPath:item.iconPath" class="icon-style">
 							<span><strong>{{item.text}}</strong></span>
 					  </div>
@@ -24,6 +34,7 @@
         			<span><strong>{{item.text}}</strong></span>
         		</div>
 		</div>
+		
 	</div>
 </template>
 
@@ -34,22 +45,25 @@
 		name : 'footer-menu',
 		data() {
 			return {
+				visible : false,
+				dialogTableVisible : false
 			}
 		},
 		methods: {
 			toPage(index, path) {
 				this.$store.dispatch('user/setCurrent', index)
-				this.$router.push({path})
+				this.$router.push({path, query : { show : 'hidden' }})
 			},
 			toPath(index, item) {
 				if(item.islogin && !this.user._id) {
-					Message({
-						message : '请先关注并登录 WorkzSpace',
-						type    : 'error',
-						onClose : () => {
-							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdee0075c3e078ae1&redirect_uri=http%3A%2F%2Fwechat.workzspace.cn/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
-						}
-					})
+					this.dialogTableVisible=true;
+					// Message({
+					// 	message : '请先关注并登录 WorkzSpace',
+					// 	type    : 'error',
+					// 	onClose : () => {
+					// 		// window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdee0075c3e078ae1&redirect_uri=http%3A%2F%2Fwechat.workzspace.cn/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+					// 	}
+					// })
 				} else {
 					this.$store.dispatch('user/setCurrent', index)
 					this.$router.push({path : item.pagePath})
@@ -98,6 +112,7 @@
 
 <style lang="scss">
 	.footer-menu{
+		z-index: 999;
 		background-color : #fff;
 		position         : fixed;
 		bottom           : 0;
@@ -112,6 +127,12 @@
 		max-width: 720px;
 		margin-left: auto;
 		margin-right: auto;
+		.qr-img{
+			margin: 0 auto;
+			width: 100px;
+			height: 100px;
+			background-color: #f4f4f4;
+		}
 		.point {
 			width: 4px;
 			height: 4px;

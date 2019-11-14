@@ -1,5 +1,6 @@
 export default {
 	lang: '中文',
+	warning:'请使用微信打开此网页',
 	time: '没有时间嘛？',
 	search : '立即查询',
 	premium : '高级工作空间',

@@ -17,9 +17,14 @@
 				:id="`parent${index}`" 
 				v-if="data.video && showVideo"
 				class="vjs-custom-skin"
+				style="z-index:1;"
+				x5-playsinline='playsinline'
+				x5-video-player-type="h5-page"
+				x5-video-player-fullscreen=""
+				:webkit-playsinline="true" 
 				:ref="`videoPlayer${index}`"
 				:options="playerOptions"
-				:playsinline="true"
+				:playsinline="playsinline"
 				@error="onPlayerLoadeddata($event)" 
 				customEventName="changed">
 				
@@ -188,6 +193,16 @@ import {submitComment, submitPraise, submitWishlist, getWishlist} from '../../ap
 					option.poster = this.img;
 				}
 				return option
+			},
+			playsinline(){
+				var ua = navigator.userAgent.toLocaleLowerCase();
+				//x5内核
+				if (ua.match(/tencenttraveler/) != null || ua.match(/qqbrowse/) != null) {
+					return false
+				}else{
+					//ios端
+					return true
+				}
 			}
         }),
 		methods: {

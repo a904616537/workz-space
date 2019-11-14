@@ -24,15 +24,15 @@
 						<img src="/static/imgs/email.png" class="icon-style" />
 						<el-input v-model="data.email" :placeholder="$t('email')"></el-input>
 					</div>
-					<div class="item">
+					<div v-if="show" class="item">
 						<img src="/static/imgs/users.png" class="icon-style" />
 						<el-input type="number" v-model="data.number" :placeholder="$t('seats')"></el-input>
 					</div>
-					<div class="item">
+					<div v-if="show" class="item">
 						<img src="/static/imgs/local.png" class="icon-style" />
 						<el-input v-model="data.address" :placeholder="$t('preferred')"></el-input>
 					</div>
-					<div class="item">
+					<div v-if="show" class="item">
 						<img src="/static/imgs/money.png" class="icon-style" />
 						<el-input type="number" v-model="data.budget" :placeholder="$t('budget')"></el-input>
 					</div>
@@ -83,6 +83,12 @@
 
 		computed : mapState({
             user : state => state.user.user,
+            show : function() {
+            	const query = this.$route.query.show;
+            	if(query && query == 'hidden') {
+            		return false;
+            	} else return true;
+            }
         }),
         methods: {
 			sendEmail() {
