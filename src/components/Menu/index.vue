@@ -51,6 +51,7 @@
 		},
 		methods: {
 			toPage(index, path) {
+				this.dialogTableVisible = false;
 				this.$store.dispatch('user/setCurrent', index)
 				this.$router.push({path, query : { show : 'hidden' }})
 			},
