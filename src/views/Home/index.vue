@@ -189,15 +189,16 @@
         	onSwitch() {
         		i18n.locale = 'zh';
         	},
-        	scroll() {
-				window.onscroll = () => {
-					if(this.lock) return;
-					let bottomwindow = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - 50;
+        	scroll(event) {
+				if(this.lock) return;
+				var eleScrolling;
+				if(eleScrolling = event.target.scrollingElement){
+					let bottomwindow = eleScrolling.scrollTop + window.innerHeight > eleScrolling.offsetHeight - 50;
 					if (bottomwindow) {
 						this.page++;
 						this.getData(this.page);
 					}
-				};
+				}
 			}
 
 		},
@@ -205,7 +206,7 @@
 			this.getRecommend();
 		},
 		mounted() {
-			this.scroll();
+			window.addEventListener('scroll', this.scroll)
 		}
 	}
 </script>

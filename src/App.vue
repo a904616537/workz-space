@@ -95,7 +95,7 @@ export default {
                 })
                 .catch(err => {console.log('error', err)});
             } else {
-                this.onWechatLogin(workspace_id);
+                // this.onWechatLogin(workspace_id);
             }  
         },
         getUser(openid) {
