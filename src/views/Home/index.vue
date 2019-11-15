@@ -162,6 +162,7 @@
 				this.selectValue = item.value;
 			},
         	getData(page = 0) {
+        		this.lock = true;
         		workspace({count : page})
         		.then(workspace => {
         			this.$store.dispatch('workzspace/pushWorkz', workspace)
@@ -171,6 +172,9 @@
         		})
         		.catch(err => {
         			console.log('err', err);
+        		})
+        		.finally(() => {
+        			this.lock = false;
         		})
         	},
 
@@ -193,7 +197,7 @@
 				if(this.lock) return;
 				var eleScrolling;
 				if(eleScrolling = event.target.scrollingElement){
-					let bottomwindow = eleScrolling.scrollTop + window.innerHeight > eleScrolling.offsetHeight - 50;
+					let bottomwindow = eleScrolling.scrollTop + window.innerHeight == eleScrolling.offsetHeight;
 					if (bottomwindow) {
 						this.page++;
 						this.getData(this.page);
