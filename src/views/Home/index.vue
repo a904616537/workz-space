@@ -50,7 +50,7 @@
 				<p>{{$t('time')}}<el-button type="primary" size="mini" round @click="$router.push({path : 'contact'})" style="margin-left: 1em;">{{$t('search')}}</el-button></p>
 			</div>
 		</div>
-		<div style="position: fixed;top: 0;background-color: #000;">{{top}} + {{height}} == {{offset}}</div>
+
 		<div v-if="loading">
 			<p>{{$t('loading')}}</p>
 		</div>
@@ -68,9 +68,6 @@
 		name : 'home',
 		data() {
 			return {
-				top : 0,
-				offset : 0,
-				height : 0,
 				selectValue  : '',
 				input        : '',
 				lock         : false,
@@ -208,9 +205,6 @@
 				var eleScrolling;
 				if(eleScrolling = event.target.scrollingElement){
 					const bottomwindow = eleScrolling.scrollTop + window.innerHeight >= eleScrolling.offsetHeight - 5;
-					this.top = eleScrolling.scrollTop;
-					this.offset = eleScrolling.offsetHeight;
-					this.height = window.innerHeight;
 					if (bottomwindow) {
 						this.page++;
 						this.getData(this.page);
