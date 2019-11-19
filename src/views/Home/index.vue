@@ -50,6 +50,7 @@
 				<p>{{$t('time')}}<el-button type="primary" size="mini" round @click="$router.push({path : 'contact'})" style="margin-left: 1em;">{{$t('search')}}</el-button></p>
 			</div>
 		</div>
+		<div style="position: fixed;top: 0;background-color: #000;">{{top}} + {{height}} == {{offset}}</div>
 		<div v-if="loading">
 			<p>{{$t('loading')}}</p>
 		</div>
@@ -67,11 +68,14 @@
 		name : 'home',
 		data() {
 			return {
-				selectValue        : '',
-				input              : '',
-				lock               : false,
-				page               : 0,
-				loading : false
+				top : 0,
+				offset : 0,
+				height : 0,
+				selectValue  : '',
+				input        : '',
+				lock         : false,
+				page         : 0,
+				loading      : false
 			}
 		},
 		components : {
@@ -172,15 +176,15 @@
         		.then(workspace => {
         			this.$store.dispatch('workzspace/pushWorkz', workspace)
         			if(workspace.length === 0) {
+        				console.log('没有了')
         				this.lock = true;
-        			}
+        			} else this.lock = false;
         		})
         		.catch(err => {
         			console.log('err', err);
         		})
         		.finally(() => {
         			this.loading = false;
-        			this.lock = false;
         		})
         	},
 
@@ -203,7 +207,10 @@
 				if(this.lock) return;
 				var eleScrolling;
 				if(eleScrolling = event.target.scrollingElement){
-					let bottomwindow = eleScrolling.scrollTop + window.innerHeight == eleScrolling.offsetHeight;
+					const bottomwindow = eleScrolling.scrollTop + window.innerHeight >= eleScrolling.offsetHeight - 5;
+					this.top = eleScrolling.scrollTop;
+					this.offset = eleScrolling.offsetHeight;
+					this.height = window.innerHeight;
 					if (bottomwindow) {
 						this.page++;
 						this.getData(this.page);
