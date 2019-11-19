@@ -1,5 +1,6 @@
 export default {
 	lang : 'english',
+	loading : 'Loading, please wait......',
 	warning:'Please open this page within WeChat',
 	time : "No time to search?",
 	search : 'Enquire now!',

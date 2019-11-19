@@ -1,5 +1,14 @@
 <template>
 	<div class="card">
+		<el-dialog :visible.sync="dialogTableVisible" :modal="false" :show-close="false" width="80%">
+			<template slot="title">
+				<p style="text-align: center;">{{$t('warning')}}</p>
+				<p style="text-align: center;">{{$t('contact')}}</p>
+			</template>
+			<div style="text-align: center;">
+				<img class="qr-img" src="/static/imgs/qrcode_wechat.jpg"/>
+			</div>
+		</el-dialog>
 		<div class="card-title" @click="toWorkspace">
 			<div class="card-logo" :class="{vip : data.recommend}">
 				<div class="logo-style" :style="'background-image: url('+logo+')'"></div>
@@ -103,7 +112,8 @@ import {submitComment, submitPraise, submitWishlist, getWishlist} from '../../ap
 				player : null,
 				slideValue : 0,
 				input : '',
-				showVideo : true
+				showVideo : true,
+				dialogTableVisible : false
 			}
 		},
 		props : {
@@ -217,13 +227,7 @@ import {submitComment, submitPraise, submitWishlist, getWishlist} from '../../ap
         	},
 			praise() {
 				if(!this.user._id) {
-					Message({
-						message : '请先关注并登录 WorkzSpace',
-						type    : 'error',
-						onClose : () => {
-							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
-						}
-					})
+					this.dialogTableVisible=true;
 					return;
 				}
 				const model = {
@@ -238,13 +242,7 @@ import {submitComment, submitPraise, submitWishlist, getWishlist} from '../../ap
 			},
 			wishlist() {
 				if(!this.user._id) {
-					Message({
-						message : '请先关注并登录 WorkzSpace',
-						type    : 'error',
-						onClose : () => {
-							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1020286e395af06c&redirect_uri=http%3A%2F%2Fstore.workspace.h-fish.vip/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
-						}
-					})
+					this.dialogTableVisible=true;
 					return;
 				}
 				const model = {

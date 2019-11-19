@@ -50,6 +50,9 @@
 				<p>{{$t('time')}}<el-button type="primary" size="mini" round @click="$router.push({path : 'contact'})" style="margin-left: 1em;">{{$t('search')}}</el-button></p>
 			</div>
 		</div>
+		<div v-if="loading">
+			<p>{{$t('loading')}}</p>
+		</div>
 		
 	</div>
 </template>
@@ -64,10 +67,11 @@
 		name : 'home',
 		data() {
 			return {
-				selectValue : '',
-				input : '',
-				lock : false,
-				page : 0
+				selectValue        : '',
+				input              : '',
+				lock               : false,
+				page               : 0,
+				loading : false
 			}
 		},
 		components : {
@@ -163,6 +167,7 @@
 			},
         	getData(page = 0) {
         		this.lock = true;
+        		this.loading = true;
         		workspace({count : page})
         		.then(workspace => {
         			this.$store.dispatch('workzspace/pushWorkz', workspace)
@@ -174,6 +179,7 @@
         			console.log('err', err);
         		})
         		.finally(() => {
+        			this.loading = false;
         			this.lock = false;
         		})
         	},

@@ -1,5 +1,16 @@
 <template>
 	<div class="workspace">
+
+		<el-dialog :visible.sync="dialogTableVisible" :modal="false" :show-close="false" width="80%">
+			<template slot="title">
+				<p style="text-align: center;">{{$t('warning')}}</p>
+				<p style="text-align: center;">{{$t('contact')}}</p>
+			</template>
+			<div style="text-align: center;">
+				<img class="qr-img" src="/static/imgs/qrcode_wechat.jpg"/>
+			</div>
+		</el-dialog>
+
 		<div class="card">
 			<div class="card-title">
 				<div class="card-logo">
@@ -129,10 +140,11 @@
 		name : 'workspace',
 		data() {
 			return {
-				slideValue : 0,
-				input : '',
-				dialogShare : false,
-				dialogVisible: false,
+				dialogTableVisible : false,
+				slideValue         : 0,
+				input              : '',
+				dialogShare        : false,
+				dialogVisible      : false,
 				data : {
 					photos : [],
 					provider : {
@@ -247,13 +259,7 @@
         			return;
         		}
         		if(!this.user._id) {
-					Message({
-						message : '请先登录 WorkzSpace',
-						type    : 'error',
-						onClose : () => {
-							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdee0075c3e078ae1&redirect_uri=http%3A%2F%2Fwechat.workzspace.cn/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
-						}
-					})
+        			this.dialogTableVisible = true;
 					return;
 				}
 				const model = {
@@ -276,13 +282,7 @@
 			},
 			wishlist() {
 				if(!this.user._id) {
-					Message({
-						message : '请先关注并登录 WorkzSpace',
-						type    : 'error',
-						onClose : () => {
-							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdee0075c3e078ae1&redirect_uri=http%3A%2F%2Fwechat.workzspace.cn/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
-						}
-					})
+					this.dialogTableVisible = true;
 					return;
 				}
 				const model = {
@@ -309,13 +309,7 @@
 	    	},
 			praise() {
 				if(!this.user._id) {
-					Message({
-						message : '请先关注并登录 WorkzSpace',
-						type    : 'error',
-						onClose : () => {
-							window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdee0075c3e078ae1&redirect_uri=http%3A%2F%2Fwechat.workzspace.cn/&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
-						}
-					})
+					this.dialogTableVisible = true;
 					return;
 				}
 				const model = {
