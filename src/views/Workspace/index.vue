@@ -221,7 +221,7 @@
 						title   : workspace.name, // 分享标题
 						desc    : workspace.desc_en, // 分享描述
 						link    : `http://wechat.workzspace.cn?workspace=${workspace._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-						imgUrl  : this.logo, // 分享图标
+						imgUrl  : workspace.provider&&workspace.provider.avatar || 'http://wechat.workzspace.cn/static/imgs/Workz_Space_logo.png', // 分享图标
 						type    : 'link', // 分享类型,music、video或link，不填默认为link
 						success : () => {
 					    	console.log('分享给朋友成功')
@@ -237,7 +237,7 @@
 						title   : workspace.name, // 分享标题
 						desc    : workspace.desc_en, // 分享描述
 						link    : `http://wechat.workzspace.cn?workspace=${workspace._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-						imgUrl  : this.logo, // 分享图标
+						imgUrl  : workspace.provider&&workspace.provider.avatar || 'http://wechat.workzspace.cn/static/imgs/Workz_Space_logo.png', // 分享图标
 						success : () => {
 						},
 						cancel(res) {
