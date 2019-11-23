@@ -51,7 +51,7 @@
 				<p class="title"><strong>{{$t('wechat.one')}}<br/>{{$t('wechat.two')}}</strong></p>
 				<img class="qr-img" src="/static/imgs/qrcode.png"/>
 				<br />
-				<span style="color: #00aeef; font-weight: bold;">or</span>
+				<span style="color: #00aeef; font-weight: bold;">{{$t('orCall')}}</span>
 				<p><a href="tel:13003212488" style="color: #3E5765;">+86 130 0321 2488</a></p>
 			</div>
 		</div>

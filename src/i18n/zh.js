@@ -22,6 +22,7 @@ export default {
 	seats : '需求座位数',
 	send : '发送',
 	or : '或者',
+	orCall : '或者打电话给我们：',
 	sendEmail : '邮件发送中',
 	successEmail : '邮件发送成功！',
 	erroEmail : '邮件发送失败！',
