@@ -2,7 +2,7 @@
 	<div class="contact-page profile">
 		<div class="box">
 			<div class="card">
-				<div class="title"><strong>{{$t('question')}}<br/>{{$t('please')}}<span> {{$t('contact')}}</span></strong></div>
+				<div class="title"><strong>{{$t('question')}}</strong></div>
 				<div class="form-box">
 					<div class="item">
 						<img src="/static/imgs/profile.png" class="icon-style" />
@@ -37,7 +37,7 @@
 						<el-input type="number" v-model="data.budget" :placeholder="$t('budget')"></el-input>
 					</div>
 					<div class="item">
-						<el-input type="textarea" v-model="data.message" :placeholder="$t('requirements')"></el-input>
+						<el-input type="textarea" v-model="data.message" :placeholder="show?$t('requirements'):$t('requirements_short')"></el-input>
 						<!-- <img src="/static/imgs/users.png" class="icon-style" />
 						<el-input type="number" v-model="data.number" :placeholder="$t('seats')"></el-input> -->
 					</div>
