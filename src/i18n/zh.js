@@ -12,6 +12,7 @@ export default {
 	comments : '条评论',
 	videoErro : '此视频暂无法播放，请稍后再试',
 	question : '立即询问您的工作空间！',
+	more_question : '更多问题',
 	please : '请',
 	contact : '联系我们！',
 	first : '姓',

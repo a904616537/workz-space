@@ -223,6 +223,11 @@
 	padding    : 10px 0;
 	text-align : left;
 	font-size  : 12px;
+	.comment_txt{
+		margin-bottom: 10px;
+		display: flex;
+		flex-direction: row;
+	}
 	.comment-title{
 		display         : flex;
 		justify-content : space-between;

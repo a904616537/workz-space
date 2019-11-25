@@ -81,13 +81,17 @@
 				<el-input v-model="input" placeholder="Write Your Comment"></el-input>
 				<span @click="submit">Post</span>
 			</div> -->
+
 			<div class="comment" v-if="commentCount>0">
-				<div v-for="(item, index) in commentList" :key="index" style="margin-bottom: 10px;">
-					<div class="comment-title">
-						<span class="title-style"><strong>{{item.name}}</strong></span>
-						<span>{{fromNow(item.createTime)}}</span>
-					</div>
-					<div class="comment-style" @click="toWorkspace">{{item.text}}<span class="more-style"><strong>{{$t('more')}}</strong></span>
+				<div v-for="(item, index) in commentList" :key="index.vue" class="comment_txt">
+					<div class="avatar margin" :style="'background-image: url('+item.avatar+')'"></div>
+					<div style="flex : 1">
+						<div class="comment-title">
+							<span class="title-style"><strong>{{item.name}}</strong></span>
+							<span>{{fromNow(item.createTime)}}</span>
+						</div>
+						<div class="comment-style" @click="toWorkspace">{{item.text}}<span class="more-style"><strong>{{$t('more')}}</strong></span>
+						</div>
 					</div>
 				</div>
 				<div class="views" @click="toWorkspace"><strong>{{$t('view')}} {{commentCount}} {{$t('comments')}}</strong></div>
@@ -135,8 +139,8 @@ import {submitComment, submitPraise, submitWishlist, getWishlist} from '../../ap
 				return this.data.comments.length
 			},
 			commentList : function() {
-				if(this.commentCount > 0) return [];
-				return this.data.slice(0, 3);
+				if(this.commentCount > 0) return this.data.comments.slice(0, 3);
+				return [];
 			},
 			isWishlist : function() {
 				if(!this.user._id) return false;

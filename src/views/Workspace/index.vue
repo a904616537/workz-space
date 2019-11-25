@@ -116,7 +116,7 @@
 		  	width="80%"
 		  	:before-close="handleClose">
 		  	<span>Thanks for you review! Once your opinion has been reviewed it will be posted.<br/> 感谢您的评论！ 审核您的意见后，它将被发布。</span><br/>
-		    <el-button type="primary" @click="dialogVisible = false" style="margin-top: 20px;"></el-button>
+		    <el-button type="primary" @click="dialogVisible = false" style="margin-top: 20px;">{{$t('button.enter')}}</el-button>
 		</el-dialog>
 		<el-dialog
 			:show-close="false"
@@ -217,6 +217,7 @@
         		getWorkspace({_id})
         		.then(workspace => {
         			this.data = workspace
+        			console.log('getWorkspace', workspace)
         			wx.updateAppMessageShareData({
 						title   : workspace.name, // 分享标题
 						desc    : workspace.desc_en, // 分享描述

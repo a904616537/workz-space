@@ -172,6 +172,8 @@
         		workspace({count : page})
         		.then(workspace => {
         			this.$store.dispatch('workzspace/pushWorkz', workspace)
+        			const comments = workspace.filter(v => v.comments.length > 0);
+        			// this.$store.dispatch('workzspace/pushWorkz', comments)
         			if(workspace.length === 0) {
         				console.log('没有了')
         				this.lock = true;
