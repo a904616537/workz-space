@@ -100,8 +100,8 @@ export default {
         },
         getUser(openid) {
 
-            getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
-            // getuser({openid})
+            // getuser({openid : 'oJegnv-RgdwmlinNILZxWsUap8Og'})
+            getuser({openid})
             .then(user => {
                 if(user) {
                     this.$store.dispatch('user/login', user);
@@ -127,7 +127,7 @@ export default {
             this.onInitWechatSDK();
             this.onInit(); 
         }
-        this.getUser()
+        // this.getUser()
     }
 }
 </script>
