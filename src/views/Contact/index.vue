@@ -3,10 +3,11 @@
 		<div class="box">
 			<div class="card">
 				
-				<div class="title" v-if="show"><strong>{{$t('more_question')}}<br/>{{$t('please')}} <span>{{$t('contact')}}</span></strong></div>
-				<div class="title" v-else>
+				
+				<div class="title" v-if="show">
 					<strong>{{$t('question')}}</strong>
 				</div>
+				<div class="title" v-else><strong>{{$t('more_question')}}<br/>{{$t('please')}} <span>{{$t('contact')}}</span></strong></div>
 				<div class="form-box">
 					<div class="item">
 						<img src="/static/imgs/profile.png" class="icon-style" />
