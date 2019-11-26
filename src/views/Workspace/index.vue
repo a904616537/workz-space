@@ -216,7 +216,7 @@
         	async getData(_id) {
         		this.data = await getWorkspace({_id});
         		const config = await getconfig();
-        		this.onInitWechatSDK(config)
+        		await this.onInitWechatSDK(config)
         	},
         	onInitWechatSDK(config) {
                 wx.config(config);
@@ -224,20 +224,20 @@
                 wx.ready(() => {
 
                     wx.updateAppMessageShareData({
-						title   : workspace.name, // 分享标题
-						desc    : workspace.desc_en, // 分享描述
-						link    : `http://wechat.workzspace.cn?workspace=${workspace._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-						imgUrl  : workspace.provider&&workspace.provider.avatar || 'http://wechat.workzspace.cn/static/imgs/Workz_Space_logo.png', // 分享图标
+						title   : this.data.name, // 分享标题
+						desc    : this.data.desc_en, // 分享描述
+						link    : `http://wechat.workzspace.cn?workspace=${this.data._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+						imgUrl  : this.data.provider&&this.data.provider.avatar || 'http://wechat.workzspace.cn/static/imgs/Workz_Space_logo.png', // 分享图标
 						type    : 'link', // 分享类型,music、video或link，不填默认为link
 						success : () => {
 					    	console.log('分享给朋友成功')
 						}
 					});
 					wx.updateTimelineShareData({
-						title   : workspace.name, // 分享标题
-						desc    : workspace.desc_en, // 分享描述
-						link    : `http://wechat.workzspace.cn?workspace=${workspace._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-						imgUrl  : workspace.provider&&workspace.provider.avatar || 'http://wechat.workzspace.cn/static/imgs/Workz_Space_logo.png', // 分享图标
+						title   : this.data.name, // 分享标题
+						desc    : this.data.desc_en, // 分享描述
+						link    : `http://wechat.workzspace.cn?workspace=${this.data._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+						imgUrl  : this.data.provider&&this.data.provider.avatar || 'http://wechat.workzspace.cn/static/imgs/Workz_Space_logo.png', // 分享图标
 						success : () => {
 						}
 					})
