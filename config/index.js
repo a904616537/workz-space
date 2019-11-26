@@ -19,8 +19,8 @@ module.exports = {
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
-    // requestUrl : 'http://localhost:8481',
-    requestUrl : 'http://server.workzspace.cn',
+    requestUrl : 'http://localhost:8481',
+    // requestUrl : 'http://server.workzspace.cn',
     /**
      * Source Maps
      */

@@ -150,6 +150,9 @@
 				} else {
 					return this.workspaces.filter(v => v.area == this.input || v.address_zh.includes(this.input) || v.address_en.includes(this.input));
 				}
+			},
+			workspacesIds() {
+				return this.workspaces.map(v => v._id);
 			}
 		}),
 		methods: {
@@ -169,7 +172,7 @@
         	getData(page = 0) {
         		this.lock = true;
         		this.loading = true;
-        		workspace({count : page})
+        		workspace({count : page, ids : this.workspacesIds})
         		.then(workspace => {
         			this.$store.dispatch('workzspace/pushWorkz', workspace)
         			const comments = workspace.filter(v => v.comments.length > 0);
