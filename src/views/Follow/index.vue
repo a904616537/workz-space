@@ -17,12 +17,14 @@
 </template>
 
 <script>
+	import shareMixin from '../../util/share';
 	export default {
 		data() {
 			return {
 
 			}
-		}
+		},
+		mixins: [shareMixin],
 	}
 </script>
 

@@ -72,6 +72,8 @@
 	import Upload from './upload';
 	import {updateuser} from '../../api';
 	import { Message } from 'element-ui';
+	import shareMixin from '../../util/share';
+	
 	export default {
 		name : 'profile',
 		data() {
@@ -90,6 +92,7 @@
 				}
 			}
 		},
+		mixins: [shareMixin],
 		computed : mapState({
             user : state => state.user.user,
             validation : function() {

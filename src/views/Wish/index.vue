@@ -47,6 +47,8 @@
 	import { Message } from 'element-ui';
 	import Item from './item';
 	import {getWishlist, postWishlist, deleteWishlist} from '../../api';
+	import shareMixin from '../../util/share';
+	
 	export default {
 		data() {
 			return {
@@ -54,6 +56,7 @@
 				dialogVisible: false
 			}
 		},
+		mixins: [shareMixin],
 		components: {
 			'v-item' : Item,
 		},

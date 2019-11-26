@@ -67,6 +67,7 @@
 	import {mapState} from 'vuex';
 	import {Message, Loading} from 'element-ui';
 	import {contactEmail} from '../../api';
+	import shareMixin from '../../util/share';
 	export default {
 		data() {
 			return {
@@ -85,6 +86,7 @@
 				}
 			}
 		},
+		mixins: [shareMixin],
 
 		computed : mapState({
             user : state => state.user.user,

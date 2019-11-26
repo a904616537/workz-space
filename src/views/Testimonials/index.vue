@@ -9,6 +9,7 @@
 
 <script>
 	import Item from './item';
+	import shareMixin from '../../util/share';
 	export default {
 		data() {
 			return {
@@ -323,6 +324,7 @@
 				}]
 			}
 		},
+		mixins: [shareMixin],
 		components : {
 			'v-item' : Item
 		},

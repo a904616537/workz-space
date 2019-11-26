@@ -64,6 +64,8 @@
 	import Item        from './item';
 	import { mapState, mapActions } from 'vuex'
 	import i18n from '../../i18n';
+	import shareMixin from '../../util/share';
+
 	export default{
 		name : 'home',
 		data() {
@@ -78,6 +80,7 @@
 		components : {
 			'v-item' : Item
 		},
+		mixins: [shareMixin],
 		computed : mapState({
 			workspaces : state => state.workzspace.workzs,
 			banners : function() {

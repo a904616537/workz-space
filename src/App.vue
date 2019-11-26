@@ -14,41 +14,6 @@ import {getconfig, getuser, getcode, getWishlist} from './api';
 export default {
     name    : 'App',
     methods : {
-        onInitWechatSDK() {
-            getconfig()
-            .then(result => {
-                const config = result.data;
-                wx.config(config);
-
-                wx.ready(() => {
-
-                    wx.onMenuShareAppMessage({
-                        title   : 'Workz Space', // 分享标题
-                        desc    : 'Workz Soace Desc', // 分享描述
-                        link    : `http://wechat.workzspace.cn`,
-                        imgUrl  : 'http://wechat.workzspace.cn/static/imgs/logo.png',
-                        success : () => {
-                            this.$toast.center('分享成功！');
-                        }
-                    });
-                    wx.onMenuShareTimeline({
-                        title   : 'Workz Space', // 分享标题
-                        desc    : 'Workz Soace Desc', // 分享描述
-                        link    : `http://wechat.workzspace.cn`,
-                        imgUrl  : 'http://wechat.workzspace.cn/static/imgs/logo.png',
-                        success : () => {
-                            this.$toast.center('分享成功！');
-                        }
-                    })
-                });
-                wx.error((res) => {
-                    console.log('接口处理失败', res)
-                });
-          })
-          .catch(err => {
-            console.log('初始化微信SDK失败', err);
-          })
-        },
         getUserWish(_id) {
             console.log('user_id', _id);
             getWishlist({user_id : _id})
@@ -124,7 +89,6 @@ export default {
     created() {
         if(Vue.config.isWechat) {
             console.log('微信打开')
-            this.onInitWechatSDK();
             this.onInit(); 
         }
         // this.getUser()
