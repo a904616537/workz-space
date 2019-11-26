@@ -132,7 +132,7 @@
 <script>
 	import Vue                           from 'vue';
 	import {mapState}                    from 'vuex';
-	import {getWorkspace, submitComment, getWishlist} from '../../api';
+	import {getWorkspace, submitComment, getWishlist, getconfig} from '../../api';
 	import I18n from '../../i18n';
 	import { Message } from 'element-ui';
 
@@ -213,12 +213,17 @@
 			onSlide(item) {
 				console.log('slide item', item)
 			},
-        	getData(_id) {
-        		getWorkspace({_id})
-        		.then(workspace => {
-        			this.data = workspace
-        			console.log('getWorkspace', workspace)
-        			wx.updateAppMessageShareData({
+        	async getData(_id) {
+        		this.data = await getWorkspace({_id});
+        		const config = await getconfig();
+        		this.onInitWechatSDK(config)
+        	},
+        	onInitWechatSDK(config) {
+                wx.config(config);
+
+                wx.ready(() => {
+
+                    wx.updateAppMessageShareData({
 						title   : workspace.name, // 分享标题
 						desc    : workspace.desc_en, // 分享描述
 						link    : `http://wechat.workzspace.cn?workspace=${workspace._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
@@ -226,12 +231,6 @@
 						type    : 'link', // 分享类型,music、video或link，不填默认为link
 						success : () => {
 					    	console.log('分享给朋友成功')
-						},
-						cancel(res) {
-							// alert('取消分享'+JSON.stringify(res))
-						},
-						fail(res) {
-							// alert('分享失败'+JSON.stringify(res))
 						}
 					});
 					wx.updateTimelineShareData({
@@ -240,21 +239,13 @@
 						link    : `http://wechat.workzspace.cn?workspace=${workspace._id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 						imgUrl  : workspace.provider&&workspace.provider.avatar || 'http://wechat.workzspace.cn/static/imgs/Workz_Space_logo.png', // 分享图标
 						success : () => {
-						},
-						cancel(res) {
-							// alert('取消分享'+JSON.stringify(res))
-						},
-						fail(res) {
-							// alert('分享失败'+JSON.stringify(res))
 						}
 					})
-
-
-        		})
-        		.catch(err => {
-        			console.log('err', err);
-        		})
-        	},
+                });
+                wx.error((res) => {
+                    console.log('接口处理失败', res)
+                });
+	        },
         	submit() {
         		if(this.disabled) {
         			return;
