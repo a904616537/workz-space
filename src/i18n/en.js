@@ -12,7 +12,7 @@ export default {
 	comments : 'Comments',
 	videoErro : "This video can't be played for the moment, please try again later.",
 	question : 'Enquire about your workspace now!',
-	more_question : 'More Questoins',
+	more_question : 'More Questions?',
 	please : 'Please',
 	contact : 'Contact Us!',
 	first : 'First Name',

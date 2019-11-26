@@ -95,6 +95,8 @@ p {
 	width: 32px;
 	height: 32px;
 	border-radius: 50%;
+	background-size: cover;
+    background-position: center;
 	&.margin {
 		margin-right: 10px;
 	}
