@@ -48,7 +48,7 @@
 				:loop="true"
 				v-model="slideValue">
 					<slide v-for="(item, index) in data.photos" :key="index">
-						<div class="card-img img" :style="'background-image: url('+item+')'">
+						<div class="card-img img" v-lazy:background-image="item" >
 							<!--  照片数量显示  -->
 							<span class="img-number">{{slideValue + 1}} / {{data.photos.length}}</span> 
 						</div>

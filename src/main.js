@@ -8,6 +8,9 @@ import VueVideoPlayer     from 'vue-video-player'
 import VueCarousel        from 'vue-carousel';
 import VueParticles       from 'vue-particles'
 import BaiduMap from 'vue-baidu-map'
+import VueLazyload from 'vue-lazyload'
+ 
+
 import Vuex from 'vuex'
 import store from './store'
 import i18n from './i18n'
@@ -37,6 +40,7 @@ Vue.use(Popover);
 Vue.use(Select);
 Vue.use(Option);
 Vue.use(Badge);
+Vue.use(VueLazyload)
 
 
 // Vue.config.lang = 'en'
