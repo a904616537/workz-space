@@ -10,6 +10,9 @@ import VueParticles       from 'vue-particles'
 import BaiduMap from 'vue-baidu-map'
 import VueLazyload from 'vue-lazyload'
  
+ import IScrollView from 'vue-iscroll-view';
+import IScroll from 'iscroll';
+
 
 import Vuex from 'vuex'
 import store from './store'
@@ -41,7 +44,7 @@ Vue.use(Select);
 Vue.use(Option);
 Vue.use(Badge);
 Vue.use(VueLazyload)
-
+Vue.use(IScrollView, IScroll)
 
 // Vue.config.lang = 'en'
 // Vue.locale('zh-cn', zh)

@@ -29,6 +29,11 @@ module.exports = {
       '@': resolve('src'),
     }
   },
+  externals : {
+    "BMap": "BMap",
+    'vue': 'Vue',
+    'element-ui': 'ELEMENT'
+  },
   module: {
     rules: [
       {
