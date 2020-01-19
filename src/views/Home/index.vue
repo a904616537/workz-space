@@ -41,8 +41,13 @@
 						:value="item.value">
 						</el-option>
 					</el-select>
+					<div class="switch_lange" @click="setlange">
+						<img v-if="locale == 'zh'" src="/static/imgs/en.png">
+						<img v-else src="/static/imgs/zh.png">
+					</div>
 				</div>
 			</div>
+
 		</div>
 		<iscroll-view class="scroll-view">
 
@@ -73,11 +78,12 @@
 		name : 'home',
 		data() {
 			return {
-				selectValue  : '',
-				input        : '',
-				lock         : false,
-				page         : 0,
-				loading      : false
+				selectValue : '',
+				input       : '',
+				lock        : false,
+				page        : 0,
+				loading     : false,
+				locale      : i18n.locale
 			}
 		},
 		components : {
@@ -162,6 +168,16 @@
 			}
 		}),
 		methods: {
+			setlange() {
+				if(this.locale == 'zh') {
+					i18n.locale = 'en'
+					this.locale = 'en'
+				} else {
+					i18n.locale = 'zh'
+					this.locale = 'zh'
+				}
+				
+			},
 			querySearch(queryString, cb) {
 				let restaurants = this.restaurants;
 				let results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
@@ -264,5 +280,14 @@
 	}
 	.searchinput {
 		flex : 1;
+	}
+	.switch_lange {
+		display: flex;
+		justify-content: center;
+    	margin-left: 10px;
+		img {
+			width: 30px;
+			height: 30px;
+		}
 	}
 </style>

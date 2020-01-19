@@ -7,7 +7,7 @@ import zh from './zh'
 console.log('i18n 加载中')
 Vue.use(I18n)
 
-const locale    = 'en'
+const locale    = 'zh'
 const formatter = new Formatter({ locale })
 
 export default new I18n({

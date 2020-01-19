@@ -211,7 +211,7 @@
 				this.dialogShare = true;
 			},
 			onSlide(item) {
-				console.log('slide item', item)
+				// console.log('slide item', item)
 			},
         	async getData(_id) {
         		this.data = await getWorkspace({_id});
